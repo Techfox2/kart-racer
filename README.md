@@ -30,6 +30,15 @@ A 3D kart racer in a single HTML file (three.js r128). Open `index.html` in a br
 - **Karts sank into the ground on slopes** (up to 0.57 m on Spa): their height trailed the road and only used the nearest sample.
   Height and pitch now come from all four wheel contact points, so no wheel goes below the road, even in steep hairpins.
 
+### Scenery placement (checked automatically on all maps)
+- Mountains used a fixed ring (560–800 m) that the real F1 tracks are bigger than, so on Spa and Monza they reached the track.
+  Monaco's sat only 21 m away. They're now placed outside the real track extent with ≥ 150 m clearance.
+- Monaco buildings only checked their centre point, so 5 of them stuck into the road or barrier. Now the whole footprint
+  stays behind the barrier and grass strip (≥ 16 m from the centreline).
+- Terrain between track sections at different heights (Monaco up to 7.9 m, Spa 3 m) rose through the barrier line.
+  Near the road it now follows the road height and may only rise or fall gradually further out.
+- Checked: no terrain vertex inside road/barrier/grass strip, no overlapping track corridors, trees ≥ 18 m from the centreline.
+
 ### Camera
 - New 4th view **NAH (3. PERSON)**: close behind the kart (≈ 3.6 m, 1.75 m high), on all tracks.
 - Chase cameras never go below the road, and in the indoor hall they stay inside the walls and under the ceiling

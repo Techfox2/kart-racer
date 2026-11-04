@@ -237,7 +237,8 @@ for(let i=0;i<N;i++){const a=T[(i-KW+N)%N],b=T[(i+KW)%N];KAP.push(Math.atan2(a.z
 {const lim=KAP.map(k=>[k<0?.9/-k:1e9,k>0?.9/k:1e9]),MW=Math.max(1,Math.round(6/seg));
  for(let i=0;i<N;i++){let r=1e9,l=1e9;for(let d=-MW;d<=MW;d++){const q=lim[(i+d+N)%N];if(q[0]<r)r=q[0];if(q[1]<l)l=q[1]}MX.push([r,l])}}
 const co=(k,o)=>o>=0?Math.min(o,MX[k][1]):-Math.min(-o,MX[k][0]);
-const SH_IN=BW+3,SH_OUT=BW+9,SH_DROP=1; // Grasstreifen neben der Strecke (nur Gelände-Strecken)
+const SH_IN=BW+3,SH_OUT=BW+9,SH_DROP=1;
+const trackDist=(x,z,step=2)=>{let m=1e12;for(let i=0;i<N;i+=step){const q=(x-P[i].x)**2+(z-P[i].z)**2;if(q<m)m=q}return Math.sqrt(m)}; // Grasstreifen neben der Strecke (nur Gelände-Strecken)
 function strip(a,b,y,mat,vrep,colored){
   const pos=[],uv=[],col=[],ix=[];
   for(let i=0;i<=N;i++){const k=i%N,t=T[k],p=P[k],sx=t.z,sz=-t.x,ka=co(k,a),kb=co(k,b);
@@ -281,10 +282,12 @@ let lamp=null;
 // Gelände: Höhe = weich gewichteter Mittelwert der nahen Streckenpunkte (keine Stufen, wo zwei Streckenteile
 // mit unterschiedlicher Höhe nahe beieinander liegen). Nahe der Strecke liegt das Gelände etwas tiefer –
 // dort liegt der Grasstreifen (SH_IN/SH_OUT), der exakt der Fahrbahnhöhe folgt.
-function terrH(x,z){if(!MP.terrain)return 0;let bd=1e12,ws=0,wy=0;for(let i=0;i<N;i+=2){const dx=x-P[i].x,dz=z-P[i].z,q=dx*dx+dz*dz;if(q<bd)bd=q;const w=1/(q*q+1);ws+=w;wy+=w*P[i].y}
+function terrH(x,z){if(!MP.terrain)return 0;let bd=1e12,bi=0,ws=0,wy=0;for(let i=0;i<N;i+=2){const dx=x-P[i].x,dz=z-P[i].z,q=dx*dx+dz*dz;if(q<bd){bd=q;bi=i}const w=1/(q*q+1);ws+=w;wy+=w*P[i].y}
+  const t=T[bi],al=Math.max(-2*seg,Math.min(2*seg,(x-P[bi].x)*t.x+(z-P[bi].z)*t.z)),ny=trackAt(bi+al/seg).y;
   const by=wy/ws,d=Math.sqrt(bd),w=1-Math.min(1,Math.max(0,(d-SH_OUT-4)/150)),s=w*w*(3-2*w),n=(Math.sin(x*.012)+Math.cos(z*.01)+Math.sin((x+z)*.02))*(MP.tn===undefined?5:MP.tn),
    u=Math.min(1,Math.max(0,(d-SH_IN-3)/10)),dip=(SH_DROP+.2)*(1-u*u*(3-2*u));
-  return by*s+n*(1-s)-dip}
+  const raw=by*s+n*(1-s)-dip,allow=Math.max(0,d-SH_OUT-3)*.7;
+  return Math.max(ny-dip-allow,Math.min(ny-dip+allow,raw))}
 if(MP.terrain){const cx=P.reduce((s,p)=>s+p.x,0)/N,cz=P.reduce((s,p)=>s+p.z,0)/N,tg=new THREE.PlaneGeometry(1600,1600,260,260);tg.rotateX(-Math.PI/2);const pa=tg.attributes.position;
  for(let i=0;i<pa.count;i++)pa.setY(i,terrH(pa.getX(i)+cx,pa.getZ(i)+cz));tg.computeVertexNormals();
  const tm=new THREE.Mesh(tg,new THREE.MeshStandardMaterial({map:grassT,roughness:1}));tm.position.set(cx,0,cz);tm.receiveShadow=true;scene.add(tm);
@@ -296,12 +299,18 @@ if(MP.terrain){const cx=P.reduce((s,p)=>s+p.x,0)/N,cz=P.reduce((s,p)=>s+p.z,0)/N
    const m=new THREE.Mesh(g,shM);m.receiveShadow=true;scene.add(m)};
  shoulder(W/2,SH_IN,0,0);shoulder(-SH_IN,-W/2,0,0);shoulder(SH_IN,SH_OUT,0,-SH_DROP);shoulder(-SH_OUT,-SH_IN,-SH_DROP,0)}
 if(MP.city){const n=260,bm=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshStandardMaterial({roughness:.9}),n),d=new THREE.Object3D(),cc=new THREE.Color(),pal=[0xe8d9b8,0xf2e6cf,0xd9a89a,0xc9b79c,0xf0efe8,0xb8c4cf],cx0=P.reduce((s,p)=>s+p.x,0)/N,cz0=P.reduce((s,p)=>s+p.z,0)/N;
- let c=0,tries=0;while(c<n&&tries++<5000){const x=cx0+(Math.random()-.5)*800,z=cz0+(Math.random()-.5)*600;let ok=true;for(let i=0;i<N;i+=3){const dx=x-P[i].x,dz=z-P[i].z;if(dx*dx+dz*dz<(W/2+14)**2){ok=false;break}}if(!ok)continue;
-  const w=10+Math.random()*16,dp=10+Math.random()*16,h=12+Math.random()*38;d.position.set(x,terrH(x,z)+h/2-1,z);d.scale.set(w,h,dp);d.rotation.y=Math.random()*.3;d.updateMatrix();bm.setMatrixAt(c,d.matrix);bm.setColorAt(c,cc.setHex(pal[Math.floor(Math.random()*pal.length)]));c++}
+ let bx0=1e9,bx1=-1e9,bz0=1e9,bz1=-1e9;for(const p of P){bx0=Math.min(bx0,p.x);bx1=Math.max(bx1,p.x);bz0=Math.min(bz0,p.z);bz1=Math.max(bz1,p.z)}
+ let c=0,tries=0;while(c<n&&tries++<6000){const x=bx0-80+Math.random()*(bx1-bx0+160),z=bz0-80+Math.random()*(bz1-bz0+160),w=10+Math.random()*16,dp=10+Math.random()*16,h=12+Math.random()*38;
+  // ganze Grundfläche (halbe Diagonale) muss hinter Planke + Grasstreifen bleiben
+  if(trackDist(x,z)<SH_OUT+3+Math.hypot(w,dp)/2)continue;d.position.set(x,terrH(x,z)+h/2-1,z);d.scale.set(w,h,dp);d.rotation.y=Math.random()*.3;d.updateMatrix();bm.setMatrixAt(c,d.matrix);bm.setColorAt(c,cc.setHex(pal[Math.floor(Math.random()*pal.length)]));c++}
  bm.count=c;bm.castShadow=bm.receiveShadow=true;bm.frustumCulled=false;scene.add(bm)}
 // Berge, Schneefall, Flure
 if(MP.mount){const cx=P.reduce((s,p)=>s+p.x,0)/N,cz=P.reduce((s,p)=>s+p.z,0)/N,mm=new THREE.MeshStandardMaterial({color:MP.mc||0xe9f0f6,roughness:1,flatShading:true});
- for(let i=0;i<46;i++){const a=i/46*Math.PI*2+Math.random()*.1,rr=560+Math.random()*240,h=(MP.mh?60:140)+Math.random()*(MP.mh||260),m=new THREE.Mesh(new THREE.ConeGeometry(70+Math.random()*90,h,6+Math.floor(Math.random()*3)),mm);m.position.set(cx+Math.cos(a)*rr,h/2-6,cz+Math.sin(a)*rr);m.rotation.y=Math.random()*6;scene.add(m)}}
+ // Ring außerhalb der tatsächlichen Streckenausdehnung; jeder Berg hält mind. 150 m Abstand zur Strecke
+ const tR=P.reduce((s,p)=>Math.max(s,Math.hypot(p.x-cx,p.z-cz)),0);
+ for(let i=0;i<46;i++){const rad=70+Math.random()*90,h=(MP.mh?60:140)+Math.random()*(MP.mh||260);let a,rr,x,z,k=0;
+  do{a=i/46*Math.PI*2+Math.random()*.1;rr=tR+rad+160+Math.random()*240+k*40;x=cx+Math.cos(a)*rr;z=cz+Math.sin(a)*rr;k++}while(trackDist(x,z,4)-rad<150&&k<12);
+  const m=new THREE.Mesh(new THREE.ConeGeometry(rad,h,6+Math.floor(Math.random()*3)),mm);m.position.set(x,terrH(x,z)+h/2-6,z);m.rotation.y=Math.random()*6;scene.add(m)}}
 let snowP=null;
 if(MP.snow){const g=new THREE.BufferGeometry(),arr=new Float32Array(1800*3);for(let i=0;i<arr.length;i+=3){arr[i]=(Math.random()-.5)*120;arr[i+1]=Math.random()*34;arr[i+2]=(Math.random()-.5)*120}
  g.setAttribute('position',new THREE.BufferAttribute(arr,3));snowP=new THREE.Points(g,new THREE.PointsMaterial({color:0xffffff,size:.35,transparent:true,opacity:.85,depthWrite:false}));snowP.frustumCulled=false;scene.add(snowP)}
