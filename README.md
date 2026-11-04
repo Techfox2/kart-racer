@@ -8,6 +8,25 @@ A 3D kart racer in a single HTML file (three.js r128). Open `index.html` in a br
 - **E** item, **C** camera (chase, hood, cockpit, close 3rd person), **Esc / ⚙** key bindings, **M / ⌂** menu, **1–4** engine-failure quick-time event
 - Touch: on-screen buttons, including a **DRIFT** button
 
+## Lobby (homepage)
+Arcade lobby following the UI/UX brief: a live 3D showroom with your kart on a podium, plus a shared button system
+(primary / mode / tile / icon buttons with hover, focus, pressed and disabled states), duotone SVG pictograms,
+glossy reward icons and comic stickers. Fonts: Lilita One + Nunito (Google Fonts, with system fallbacks).
+
+Every element is functional and uses real data. Progress is saved locally in the browser (`localStorage`, key `kart-save`):
+- **Spielen** starts a race right away with your last settings. **Eigenes Rennen**: track, mode (fun/competitive), 1/3/5 laps.
+- **Mehrspieler / Freunde**: online lobby (create a server, join by code, public lobbies).
+- **Garage**: paint and steering wheel. Your paint is also shown to online opponents. **Shop**: unlock paints with coins (some need a minimum level).
+- **Coins & XP** come only from finished races: 20 + 15 per beaten opponent + 5 per lap; XP 40 + 25 per opponent + 10 per lap.
+  Level = every 250 XP. There's no premium currency, since the game has nothing to spend it on.
+- **Missionen** with real progress (races, podiums, wins, stage-III turbos, Lucky Blocks, slipstream time, F1 tour).
+- **Bestzeiten**: local best laps per track (clearly not an online leaderboard).
+- **Strecke der Woche**: rotates weekly, double coins, with a real countdown to Monday 00:00. **Tagesbonus**: 50 coins once per day.
+  **Rang-Pfad**: coins for every new level.
+- Results screen after the race: place, total time, best lap, coins, XP, new best time, level-up. **Nochmal** restarts the same track.
+- Responsive: desktop 16:9, tablet, and mobile (vertical, PLAY at the top, navigation as a bottom bar, panels as bottom sheets).
+- Accessibility: semantic buttons, visible focus ring, Esc closes panels, labels on icon buttons, `prefers-reduced-motion` respected.
+
 ## Tracks
 - **Spa-Francorchamps, Monaco, Monza**: real F1 layouts from GPS data
   ([bacinger/f1-circuits](https://github.com/bacinger/f1-circuits), MIT), scaled down
