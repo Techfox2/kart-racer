@@ -489,8 +489,9 @@ function tireFx(dt,brake){const ud=playerMesh.userData,sp=Math.hypot(pl.vx,pl.vz
   if(sg)sg.gain.value+=((state==='race'?slide*.05:0)-sg.gain.value)*Math.min(1,10*dt)}
 // Drei Perspektiven: Verfolger, Motorhaube und Cockpit
 let cameraMode=0;
-const cameraNames=['VERFOLGER','MOTORHAUBE','COCKPIT'];
-function nextCamera(){cameraMode=(cameraMode+1)%cameraNames.length;$('camlabel').textContent='KAMERA: '+cameraNames[cameraMode];$('camera').textContent='CAM · '+(cameraMode+1)+'/3';playerMesh.userData.fpHide.forEach(m=>m.visible=cameraMode===0)}
+// Vier Perspektiven: Verfolger, Motorhaube, Cockpit und naher Verfolger (3. Person, dicht am Kart)
+const cameraNames=['VERFOLGER','MOTORHAUBE','COCKPIT','NAH (3. PERSON)'],chaseCam=()=>cameraMode===0||cameraMode===3;
+function nextCamera(){cameraMode=(cameraMode+1)%cameraNames.length;$('camlabel').textContent='KAMERA: '+cameraNames[cameraMode];$('camera').textContent='CAM · '+(cameraMode+1)+'/'+cameraNames.length;playerMesh.userData.fpHide.forEach(m=>m.visible=chaseCam())}
 
 // Spielzustand
 const LAPS=NET?NET.laps:3,COMP=NET?!!NET.comp:OFFCOMP,keys={};
@@ -792,6 +793,10 @@ function update(dt){
   if(cameraMode===0){
     want=new THREE.Vector3(pl.x-cf.x*dist,pl.y+3.1+sp*.012,pl.z-cf.z*dist);
     look=new THREE.Vector3(pl.x+cf.x*5,pl.y+1.1,pl.z+cf.z*5);
+  }else if(cameraMode===3){
+    const dn=3.6+sp*.02;
+    want=new THREE.Vector3(pl.x-cf.x*dn,pl.y+1.75+sp*.006,pl.z-cf.z*dn);
+    look=new THREE.Vector3(pl.x+cf.x*6,pl.y+.9,pl.z+cf.z*6);
   }else if(cameraMode===1){
     playerMesh.updateMatrixWorld(true);want=playerMesh.localToWorld(new THREE.Vector3(0,1.12,.55));
     look=playerMesh.localToWorld(new THREE.Vector3(0,.2,18));
@@ -799,7 +804,13 @@ function update(dt){
     playerMesh.updateMatrixWorld(true);want=playerMesh.localToWorld(new THREE.Vector3(0,1.33,-.26));
     look=playerMesh.localToWorld(new THREE.Vector3(0,-.1,18));
   }
-  if(cameraMode===0){cam.position.lerp(want,1-Math.exp(-9*dt));cam.position.y=Math.max(cam.position.y,pl.y+1.6)}else cam.position.copy(want);cam.near=cameraMode===0?1:.2;
+  if(chaseCam()){cam.position.lerp(want,1-Math.exp(-(cameraMode===3?14:9)*dt));
+    // Kamera-Schutz: nicht unter die Fahrbahn, in der Halle nicht durch Wände oder Decke
+    const ci=nearest(cam.position.x,cam.position.z,pl.idx),cp=P[ci],ct=T[ci];cam.position.y=Math.max(cam.position.y,cp.y+1.1,pl.y+(cameraMode===3?1.2:1.6));
+    if(MP.indoor){const lat=(cam.position.x-cp.x)*ct.z+(cam.position.z-cp.z)*-ct.x,sg=Math.sign(lat)||1,lim=Math.abs(co(ci,sg*BW))-.3;
+      if(Math.abs(lat)>lim){const ex=Math.abs(lat)-lim;cam.position.x-=ct.z*sg*ex;cam.position.z+=ct.x*sg*ex}
+      cam.position.y=Math.min(cam.position.y,cp.y+4.6-.45)}
+  }else cam.position.copy(want);cam.near=cameraMode===0?1:cameraMode===3?.3:.2;
   cam.lookAt(look);
   cam.fov+=((60+sp*.45+pl.draft*5+(pl.bT>0?8:0))-cam.fov)*Math.min(1,4*dt);cam.updateProjectionMatrix();
   sun.position.set(pl.x+60,pl.y+90,pl.z+40);sun.target.position.set(pl.x,pl.y,pl.z);if(lamp)lamp.position.set(pl.x,pl.y+3.2,pl.z);

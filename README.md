@@ -5,7 +5,7 @@ A 3D kart racer in a single HTML file (three.js r128). Open `index.html` in a br
 ## Controls
 - **W / ↑** gas, **S / ↓** brake / reverse, **A D / ← →** steer
 - **Space (hold) + steer** = drift. Release for a mini-turbo (3 tiers: blue → orange → purple)
-- **E** item, **C** camera, **Esc / ⚙** key bindings, **M / ⌂** menu, **1–4** engine-failure quick-time event
+- **E** item, **C** camera (chase, hood, cockpit, close 3rd person), **Esc / ⚙** key bindings, **M / ⌂** menu, **1–4** engine-failure quick-time event
 - Touch: on-screen buttons, including a **DRIFT** button
 
 ## Tracks
@@ -29,6 +29,11 @@ A 3D kart racer in a single HTML file (three.js r128). Open `index.html` in a br
 - Slopes act with real gravity (9.8 · gradient).
 - **Karts sank into the ground on slopes** (up to 0.57 m on Spa): their height trailed the road and only used the nearest sample.
   Height and pitch now come from all four wheel contact points, so no wheel goes below the road, even in steep hairpins.
+
+### Camera
+- New 4th view **NAH (3. PERSON)**: close behind the kart (≈ 3.6 m, 1.75 m high), on all tracks.
+- Chase cameras never go below the road, and in the indoor hall they stay inside the walls and under the ceiling
+  (before, they clipped through the walls in tight corners).
 
 ### Tire effects
 - Skid marks on the road while drifting, braking and sliding
