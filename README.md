@@ -20,13 +20,27 @@ A 3D kart racer in a single HTML file (three.js r128). Open `index.html` in a br
 
 ### Driving physics (rewritten)
 - **Drifting didn't work.** Drift *lowered* the grip limit and the kart had no real slip.
-  It now uses a world-velocity model: a hop on button press, drift direction from steering,
-  a stable slip angle, steering widens or tightens the line, a charge depending on steering, and a mini-turbo on release.
+  It now uses a world-velocity model: no hop, the rear slides out sideways (≈ 25–40° slip angle),
+  drift direction from steering, steering widens or tightens the line, a charge depending on steering, and a mini-turbo on release.
 - **Too much understeer.** The grip limit was 22 m/s² and steering was capped heavily. It's now 30 m/s² (× track grip)
   with direct, speed-dependent steering and trail-braking.
 - Random "spin from slipping" removed. The kart only spins on hard crashes, oil, or rockets.
 - Physics substeps at high speed, so there's no tunnelling.
-- Slopes act with real gravity (9.8 · gradient), and karts pitch with the slope.
+- Slopes act with real gravity (9.8 · gradient).
+- **Karts sank into the ground on slopes** (up to 0.57 m on Spa): their height trailed the road and only used the nearest sample.
+  Height and pitch now come from all four wheel contact points, so no wheel goes below the road, even in steep hairpins.
+
+### Tire effects
+- Skid marks on the road while drifting, braking and sliding
+- Tire smoke, plus sparks while drifting in the turbo-stage color
+- Rear wheels lock when braking (karts only brake at the rear) and spin faster while drifting
+- Tire-squeal sound
+
+### Ground around elevation changes
+- Terrain height used to come from the single nearest track point, which made steps and cliffs where two track sections at
+  different heights are close. It's now a smooth weighted average of nearby track points, on a finer grid.
+- Next to the road there's a grass shoulder that follows the road height exactly (flat to behind the barrier, then an embankment),
+  so the terrain can't poke through the road or kerbs.
 
 ### Barriers (hitboxes + physics)
 - The hitbox was a lateral distance to the nearest centerline point, ~1 m in front of the visible barrier.

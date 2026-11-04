@@ -237,6 +237,7 @@ for(let i=0;i<N;i++){const a=T[(i-KW+N)%N],b=T[(i+KW)%N];KAP.push(Math.atan2(a.z
 {const lim=KAP.map(k=>[k<0?.9/-k:1e9,k>0?.9/k:1e9]),MW=Math.max(1,Math.round(6/seg));
  for(let i=0;i<N;i++){let r=1e9,l=1e9;for(let d=-MW;d<=MW;d++){const q=lim[(i+d+N)%N];if(q[0]<r)r=q[0];if(q[1]<l)l=q[1]}MX.push([r,l])}}
 const co=(k,o)=>o>=0?Math.min(o,MX[k][1]):-Math.min(-o,MX[k][0]);
+const SH_IN=BW+3,SH_OUT=BW+9,SH_DROP=1; // Grasstreifen neben der Strecke (nur Gelände-Strecken)
 function strip(a,b,y,mat,vrep,colored){
   const pos=[],uv=[],col=[],ix=[];
   for(let i=0;i<=N;i++){const k=i%N,t=T[k],p=P[k],sx=t.z,sz=-t.x,ka=co(k,a),kb=co(k,b);
@@ -277,12 +278,23 @@ if(MP.trees){const n=320,tr=new THREE.InstancedMesh(new THREE.CylinderGeometry(.
 
 // Kart
 let lamp=null;
-function terrH(x,z){if(!MP.terrain)return 0;let bd=1e12,by=0;for(let i=0;i<N;i+=2){const dx=x-P[i].x,dz=z-P[i].z,q=dx*dx+dz*dz;if(q<bd){bd=q;by=P[i].y}}
-  const d=Math.sqrt(bd),w=1-Math.min(1,Math.max(0,(d-16)/150)),s=w*w*(3-2*w),n=(Math.sin(x*.012)+Math.cos(z*.01)+Math.sin((x+z)*.02))*(MP.tn===undefined?5:MP.tn);
-  return by*s+n*(1-s)-.4*Math.min(1,Math.max(0,(W/2+K+4-d)/4))}
-if(MP.terrain){const cx=P.reduce((s,p)=>s+p.x,0)/N,cz=P.reduce((s,p)=>s+p.z,0)/N,tg=new THREE.PlaneGeometry(1600,1600,200,200);tg.rotateX(-Math.PI/2);const pa=tg.attributes.position;
+// Gelände: Höhe = weich gewichteter Mittelwert der nahen Streckenpunkte (keine Stufen, wo zwei Streckenteile
+// mit unterschiedlicher Höhe nahe beieinander liegen). Nahe der Strecke liegt das Gelände etwas tiefer –
+// dort liegt der Grasstreifen (SH_IN/SH_OUT), der exakt der Fahrbahnhöhe folgt.
+function terrH(x,z){if(!MP.terrain)return 0;let bd=1e12,ws=0,wy=0;for(let i=0;i<N;i+=2){const dx=x-P[i].x,dz=z-P[i].z,q=dx*dx+dz*dz;if(q<bd)bd=q;const w=1/(q*q+1);ws+=w;wy+=w*P[i].y}
+  const by=wy/ws,d=Math.sqrt(bd),w=1-Math.min(1,Math.max(0,(d-SH_OUT-4)/150)),s=w*w*(3-2*w),n=(Math.sin(x*.012)+Math.cos(z*.01)+Math.sin((x+z)*.02))*(MP.tn===undefined?5:MP.tn),
+   u=Math.min(1,Math.max(0,(d-SH_IN-3)/10)),dip=(SH_DROP+.2)*(1-u*u*(3-2*u));
+  return by*s+n*(1-s)-dip}
+if(MP.terrain){const cx=P.reduce((s,p)=>s+p.x,0)/N,cz=P.reduce((s,p)=>s+p.z,0)/N,tg=new THREE.PlaneGeometry(1600,1600,260,260);tg.rotateX(-Math.PI/2);const pa=tg.attributes.position;
  for(let i=0;i<pa.count;i++)pa.setY(i,terrH(pa.getX(i)+cx,pa.getZ(i)+cz));tg.computeVertexNormals();
- const tm=new THREE.Mesh(tg,new THREE.MeshStandardMaterial({map:grassT,roughness:1}));tm.position.set(cx,0,cz);tm.receiveShadow=true;scene.add(tm)}
+ const tm=new THREE.Mesh(tg,new THREE.MeshStandardMaterial({map:grassT,roughness:1}));tm.position.set(cx,0,cz);tm.receiveShadow=true;scene.add(tm);
+ // Grasstreifen neben der Fahrbahn: eben bis hinter die Planke, dann Böschung hinunter ins Gelände
+ const shT=grassT.clone();shT.repeat.set(1,1);shT.needsUpdate=true;const shM=new THREE.MeshStandardMaterial({map:shT,roughness:1,side:THREE.DoubleSide});
+ const shoulder=(a,b,ya,yb)=>{const pos=[],uv=[],ix=[];for(let i=0;i<=N;i++){const k=i%N,t=T[k],p=P[k],ka=co(k,a),kb=co(k,b);
+   pos.push(p.x+t.z*ka,p.y+ya,p.z-t.x*ka,p.x+t.z*kb,p.y+yb,p.z-t.x*kb);uv.push(0,i*seg/8,Math.abs(b-a)/8,i*seg/8);if(i<N){const j=i*2;ix.push(j,j+1,j+2,j+1,j+3,j+2)}}
+   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();
+   const m=new THREE.Mesh(g,shM);m.receiveShadow=true;scene.add(m)};
+ shoulder(W/2,SH_IN,0,0);shoulder(-SH_IN,-W/2,0,0);shoulder(SH_IN,SH_OUT,0,-SH_DROP);shoulder(-SH_OUT,-SH_IN,-SH_DROP,0)}
 if(MP.city){const n=260,bm=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshStandardMaterial({roughness:.9}),n),d=new THREE.Object3D(),cc=new THREE.Color(),pal=[0xe8d9b8,0xf2e6cf,0xd9a89a,0xc9b79c,0xf0efe8,0xb8c4cf],cx0=P.reduce((s,p)=>s+p.x,0)/N,cz0=P.reduce((s,p)=>s+p.z,0)/N;
  let c=0,tries=0;while(c<n&&tries++<5000){const x=cx0+(Math.random()-.5)*800,z=cz0+(Math.random()-.5)*600;let ok=true;for(let i=0;i<N;i+=3){const dx=x-P[i].x,dz=z-P[i].z;if(dx*dx+dz*dz<(W/2+14)**2){ok=false;break}}if(!ok)continue;
   const w=10+Math.random()*16,dp=10+Math.random()*16,h=12+Math.random()*38;d.position.set(x,terrH(x,z)+h/2-1,z);d.scale.set(w,h,dp);d.rotation.y=Math.random()*.3;d.updateMatrix();bm.setMatrixAt(c,d.matrix);bm.setColorAt(c,cc.setHex(pal[Math.floor(Math.random()*pal.length)]));c++}
@@ -439,6 +451,42 @@ function makeKartOld(color){
   g.userData={body,wheels,pivots,tl:tlm};scene.add(g);return g}
 const colors=[0x4f7d96,0xa8402f,0xc89a2a,0x4f8a55,0x8a5fb0,0xd0712c,0x3a9aa8,0xb04f7a];
 const playerMesh=makeKart(colors[NET?NET.slot%8:0],WSTYLE);
+// ===== Reifen-Effekte: Bremsspuren, Reifenrauch, Drift-Funken =====
+const SKQ=1400,skPos=new Float32Array(SKQ*12),skG=new THREE.BufferGeometry();
+{const ix=[];for(let q=0;q<SKQ;q++){const j=q*4;ix.push(j,j+1,j+2,j+1,j+3,j+2)}skG.setIndex(ix);skG.setAttribute('position',new THREE.BufferAttribute(skPos,3))}
+const skMesh=new THREE.Mesh(skG,new THREE.MeshBasicMaterial({color:MP.snow?0x8796a4:0x0c0c0c,transparent:true,opacity:.5,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2,side:THREE.DoubleSide}));
+skMesh.frustumCulled=false;skMesh.renderOrder=1;scene.add(skMesh);
+let skI=0;const skPrev=[null,null];
+function skid(w,p,rx,rz,on){if(!on){skPrev[w]=null;return}
+  const hw=.15,a={lx:p.x-rx*hw,lz:p.z-rz*hw,rx:p.x+rx*hw,rz:p.z+rz*hw,y:p.y+.09},b=skPrev[w];
+  if(b&&Math.hypot(a.lx-b.lx,a.lz-b.lz)<.35)return;skPrev[w]=a;if(!b)return;
+  skPos.set([b.lx,b.y,b.lz,b.rx,b.y,b.rz,a.lx,a.y,a.lz,a.rx,a.y,a.rz],skI*12);skI=(skI+1)%SKQ;skG.attributes.position.needsUpdate=true}
+const softT=(c0,c1)=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,c0);gr.addColorStop(1,c1);g.fillStyle=gr;g.fillRect(0,0,64,64);const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;return t};
+const smokeT=softT('rgba(255,255,255,.9)','rgba(255,255,255,0)'),sparkT=softT('rgba(255,255,255,1)','rgba(255,255,255,0)');
+const mkPool=(n,map,add)=>Array.from({length:n},()=>{const m=new THREE.Sprite(new THREE.SpriteMaterial({map,transparent:true,depthWrite:false,opacity:0,blending:add?THREE.AdditiveBlending:THREE.NormalBlending}));m.visible=false;scene.add(m);return{m,t:0,life:0,vx:0,vy:0,vz:0,s0:1,s1:1,a:1}});
+const puffs=mkPool(80,smokeT,false),sparks=mkPool(50,sparkT,true);let puffI=0,sparkI=0;
+function emit(pool,i,p,v,life,s0,s1,a,col){const q=pool[i];q.t=0;q.life=life;q.m.position.copy(p);q.vx=v[0];q.vy=v[1];q.vz=v[2];q.s0=s0;q.s1=s1;q.a=a;q.m.material.color.setHex(col);q.m.visible=true}
+function stepPool(pool,dt){for(const q of pool){if(!q.m.visible)continue;q.t+=dt;if(q.t>=q.life){q.m.visible=false;continue}const f=q.t/q.life;
+  q.m.position.x+=q.vx*dt;q.m.position.y+=q.vy*dt;q.m.position.z+=q.vz*dt;q.vx*=1-1.5*dt;q.vz*=1-1.5*dt;q.m.scale.setScalar(q.s0+(q.s1-q.s0)*f);q.m.material.opacity=q.a*(1-f)}}
+const wv=new THREE.Vector3();let smA=0,spA=0;
+function tireFx(dt,brake){const ud=playerMesh.userData,sp=Math.hypot(pl.vx,pl.vz),onRoad=Math.abs(pl.lat||0)<W/2+K+.5,
+  locked=brake&&pl.vF>4&&!(pl.spin>0),slideL=Math.abs(pl.vL),
+  // Rutsch-Intensität 0..1: Drift, blockierende Hinterräder, seitliches Rutschen oder Dreher
+  slide=sp<4?0:Math.min(1,pl.drift?.55+slideL*.03:locked?.45+pl.vF*.01:pl.spin>0?.8:Math.max(0,(slideL-2.5)*.12));
+  pl.slide=slide;
+  // Räder: vorne rollen, hinten blockieren beim Bremsen (Kart = nur Hinterradbremse) bzw. drehen beim Driften durch
+  ud.wheels.forEach((w,i)=>{const r=i<2?pl.vF:locked?0:pl.drift?pl.vF*1.45:pl.vF;w.rotation.x+=r*dt/.3});
+  const rx=-Math.cos(pl.h),rz=Math.sin(pl.h);playerMesh.updateMatrixWorld(true);
+  const pts=[-1,1].map(sx=>playerMesh.localToWorld(new THREE.Vector3(sx*.97,0,-.9)));
+  pts.forEach((p,w)=>skid(w,p,rx,rz,slide>.3&&onRoad));
+  smA+=dt*slide*45;
+  while(smA>1){smA--;const p=pts[puffI&1];wv.copy(p);wv.y+=.25;const k=.4+Math.random()*.6;
+    emit(puffs,puffI,wv,[-Math.sin(pl.h)*sp*.15+(Math.random()-.5)*1.5,.8+Math.random()*.9,-Math.cos(pl.h)*sp*.15+(Math.random()-.5)*1.5],.8+Math.random()*.5,.6,2.2+slide*2,(MP.snow?.75:.6)*k*(onRoad?1:.6),onRoad?(MP.snow?0xffffff:0xe2ded6):0x9a8a6a);puffI=(puffI+1)%puffs.length}
+  const tier=pl.dc>2.8?3:pl.dc>1.7?2:pl.dc>.8?1:0;spA+=pl.drift&&tier?dt*36:0;
+  while(spA>1){spA--;const p=pts[sparkI&1];wv.copy(p);wv.y+=.12;
+    emit(sparks,sparkI,wv,[-Math.sin(pl.h)*6+(Math.random()-.5)*4,2+Math.random()*3,-Math.cos(pl.h)*6+(Math.random()-.5)*4],.22+Math.random()*.15,.35,.12,1,[0,0x5ee1ff,0xff9b3d,0xd77bff][tier]);sparkI=(sparkI+1)%sparks.length}
+  stepPool(puffs,dt);stepPool(sparks,dt);for(const q of sparks)if(q.m.visible)q.vy-=12*dt;
+  if(sg)sg.gain.value+=((state==='race'?slide*.05:0)-sg.gain.value)*Math.min(1,10*dt)}
 // Drei Perspektiven: Verfolger, Motorhaube und Cockpit
 let cameraMode=0;
 const cameraNames=['VERFOLGER','MOTORHAUBE','COCKPIT'];
@@ -449,7 +497,16 @@ const LAPS=NET?NET.laps:3,COMP=NET?!!NET.comp:OFFCOMP,keys={};
 function trackAt(s){s=((s%N)+N)%N;const i=Math.floor(s),f=s-i,a=P[i],b=P[(i+1)%N],ta=T[i],tb=T[(i+1)%N];
   return{y:a.y+(b.y-a.y)*f,x:a.x+(b.x-a.x)*f,z:a.z+(b.z-a.z)*f,tx:ta.x+(tb.x-ta.x)*f,tz:ta.z+(tb.z-ta.z)*f}}
 // Weltgeschwindigkeit (vx,vz) statt kartfester Werte: so entsteht echter Schräglauf beim Driften
-const pl={x:0,z:0,h:0,vx:0,vz:0,vF:0,vL:0,steer:0,idx:N-6,total:-6,camH:0,lapT:0,best:0,fin:null,drift:0,dc:0,bT:0,bTier:0,hop:0,dWin:0,dPrev:false,slope:0,lat:0};
+// Exakte Fahrbahnhöhe unter einem Kart: Höhe an allen vier Radaufstandspunkten -> Höhe + Neigung,
+// ohne Nachziehen; kein Rad darf unter der Fahrbahn liegen (auch nicht in steilen Haarnadeln).
+const WHL=[[-.95,.9],[.95,.9],[-.95,-.9],[.95,-.9]],GW=Math.max(4,Math.round(6/seg));
+function roadY(x,z,idx){let bi=idx,bq=1e12;for(let d=-GW;d<=GW;d++){const i=(idx+d+N)%N,q=(x-P[i].x)**2+(z-P[i].z)**2;if(q<bq){bq=q;bi=i}}
+  const t=T[bi],p=P[bi],al=Math.max(-seg,Math.min(seg,(x-p.x)*t.x+(z-p.z)*t.z));return trackAt(bi+al/seg).y}
+function groundAt(x,z,idx,h){const fx=Math.sin(h),fz=Math.cos(h),ys=WHL.map(([a,b])=>roadY(x+fx*b-fz*a,z+fz*b+fx*a,idx)),
+  yF=(ys[0]+ys[1])/2,yR=(ys[2]+ys[3])/2,base=(yF+yR)/2;let lift=0;
+  for(let i=0;i<4;i++)lift=Math.max(lift,ys[i]-(base+(i<2?.5:-.5)*(yF-yR)));
+  return{y:base+lift,pitch:Math.atan((yF-yR)/1.8)}}
+const pl={x:0,z:0,h:0,vx:0,vz:0,vF:0,vL:0,steer:0,idx:N-6,total:-6,camH:0,lapT:0,best:0,fin:null,drift:0,dc:0,bT:0,bTier:0,dWin:0,dPrev:false,slope:0,pitch:0,lat:0,slide:0};
 const GS=Math.max(4,Math.round(12/seg)); // Startplatz-Abstand ~12 m
 {const sl=NET?NET.slot:0,row=Math.floor(sl/2),sd=sl%2?-2.8:2.8,gi=GS+GS*row,t=trackAt(N-gi),sx=t.tz,sz=-t.tx;pl.idx=N-gi;pl.total=-gi;pl.x=t.x+sx*sd;pl.z=t.z+sz*sd;pl.h=Math.atan2(t.tx,t.tz);pl.camH=pl.h}
 // Streckenprofil für Bots: Kurvenkrümmung -> Maximaltempo, dann rückwärts Bremspunkte, vorwärts Beschleunigung
@@ -493,9 +550,11 @@ document.querySelectorAll('#touch button').forEach(b=>{const k=b.dataset.k;
 addEventListener('pointerdown',()=>{if(pl.fin)location.reload()});
 
 // Sound
-let ac,osc,gn;
+let ac,osc,gn,sg=null;
 function startAudio(){if(ac)return;try{ac=new(window.AudioContext||window.webkitAudioContext)();osc=ac.createOscillator();osc.type='sawtooth';
-  const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=700;gn=ac.createGain();gn.gain.value=.03;osc.connect(f);f.connect(gn);gn.connect(ac.destination);osc.start()}catch(e){}}
+  const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=700;gn=ac.createGain();gn.gain.value=.03;osc.connect(f);f.connect(gn);gn.connect(ac.destination);osc.start();
+  const nb=ac.createBuffer(1,ac.sampleRate,ac.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+  const ns=ac.createBufferSource();ns.buffer=nb;ns.loop=true;const bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1500;bp.Q.value=3;sg=ac.createGain();sg.gain.value=0;ns.connect(bp);bp.connect(sg);sg.connect(ac.destination);ns.start()}catch(e){}}
 
 const NW=Math.max(25,Math.round(50/seg));
 function nearest(x,z,prev){let best=prev,bd=1e12;for(let d=-NW;d<=NW;d++){const i=(prev+d+N)%N,dx=x-P[i].x,dz=z-P[i].z,q=dx*dx+dz*dz;if(q<bd){bd=q;best=i}}return best}
@@ -563,7 +622,7 @@ function netTick(dt){
     const dh=((d.h-q.h+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;q.h+=dh*k;
     q.v=d.v||0;q.tt=d.tt||0;q.fin=d.fin||0;q.ft=d.ft||0;q.nm=String(d.nm||'Fahrer').slice(0,14);q.mesh.position.set(q.x,q.y,q.z);q.mesh.rotation.y=q.h;
     if(q.idx===undefined){let bi=0,bq=1e12;for(let i=0;i<N;i++){const ex=q.x-P[i].x,ez=q.z-P[i].z,qq=ex*ex+ez*ez;if(qq<bq){bq=qq;bi=i}}q.idx=bi}else q.idx=nearest(q.x,q.z,q.idx);
-    {const i=q.idx,tt=T[i];q.mesh.rotation.x=-Math.atan((P[(i+4)%N].y-P[i].y)/(4*seg)*(Math.sin(q.h)*tt.x+Math.cos(q.h)*tt.z))}
+    {const gr=groundAt(q.x,q.z,q.idx,q.h);q.mesh.position.y=gr.y;q.mesh.rotation.x=-gr.pitch}
     const u=q.mesh.userData,st=d.st||0;u.wheels.forEach(w=>w.rotation.x+=q.v*dt/.3);u.steerG.rotation.z=-st*1.6;u.pivots.forEach(pp=>pp.rotation.y=st*.45);u.tl.emissive.setHex(d.br?0xff1010:0);
     if((d.sp|0)>q.sp){q.sp=d.sp|0;spinSelf(1.8)}
     if(d.hit&&d.hit.to===NET.me&&(d.hit.n|0)>(q.hn|0)){q.hn=d.hit.n|0;spinSelf(1.8);toast('Getroffen von '+q.nm,'#ff6b6b')}
@@ -629,10 +688,10 @@ function update(dt){
   pl.draft=draft(pl.x,pl.z,pl.h,pl);
   const gb=pl.buff&&pl.buff.k,db=pl.debuff&&pl.debuff.k,gripM=(gb==='grip'?1.3:1)*(db==='grip'?.7:1),accM=(gb==='acc'?1.9:1)*(db==='speed'?.7:1),topA=gb==='top'?8:0,topM=db==='speed'?.78:1;
   let sp=Math.hypot(pl.vx,pl.vz);
-  // Drift: Taste drücken = kleiner Hüpfer; Richtung = Lenkrichtung (kurz danach noch wählbar).
+  // Drift: Taste drücken, Richtung = Lenkrichtung (kurz danach noch wählbar), Heck rutscht seitlich weg.
   // Halten + Lenken lädt den Mini-Turbo (3 Stufen), Loslassen zündet ihn.
-  if(dKey&&!pl.dPrev&&sp>8){pl.hop=.28;pl.dWin=.3;pl.drift=0;pl.dc=0}
-  pl.dPrev=dKey;if(pl.hop>0)pl.hop-=dt;
+  if(dKey&&!pl.dPrev&&sp>8){pl.dWin=.3;pl.drift=0;pl.dc=0}
+  pl.dPrev=dKey;
   if(dKey&&!pl.drift&&pl.dWin>0){pl.dWin-=dt;if(Math.abs(pl.steer)>.3&&pl.vF>8){pl.drift=Math.sign(pl.steer);pl.dc=0}}
   if(pl.drift&&(!dKey||pl.vF<6)){const tier=pl.dc>2.8?3:pl.dc>1.7?2:pl.dc>.8?1:0;
     if(tier&&ctl){pl.bT=[0,.7,1.2,1.9][tier];pl.bTier=tier}pl.drift=0;pl.dc=0}
@@ -657,13 +716,13 @@ function update(dt){
     let yaw,latF;
     if(pl.spin>0){yaw=pl.spinDir*(4*Math.PI/pl.spinT0)*clamp(pl.spin/pl.spinT0,.15,1);latF=latG*.3}
     else if(pl.drift){const sl=pl.steer*pl.drift,beta=Math.atan2(vL,Math.max(vF,1));latF=latG*(.8+.35*sl);
-      yaw=pl.drift*latF/Math.max(sp,6)+4.5*(pl.drift*(.3+.15*sl)-beta)}
+      yaw=pl.drift*latF/Math.max(sp,6)+4*(pl.drift*(.48+.2*sl)-beta)}
     else{yaw=pl.steer*Math.min(2.3,latG/Math.max(sp,1))*clamp(sp/4,0,1)*(vF<-.5?-1:1);if(brake&&sp>12)yaw*=1.15;latF=latG*1.05}
     const wx=fx*vF-fz*vL,wz=fz*vF+fx*vL;
     pl.h+=yaw*h;fx=Math.sin(pl.h);fz=Math.cos(pl.h);
     vF=wx*fx+wz*fz;vL=wx*-fz+wz*fx;
     vL-=Math.sign(vL)*Math.min(Math.abs(vL),latF*h); // Seitenführung richtet die Bahn am Kart aus
-    vF-=Math.sign(vF)*Math.min(Math.abs(vF),Math.abs(vL)*.25*h); // Rutschen kostet Tempo
+    vF-=Math.sign(vF)*Math.min(Math.abs(vF),Math.abs(vL)*(pl.drift?.15:.25)*h); // Rutschen kostet Tempo
     if(pl.spin>0){const k=Math.exp(-1.5*h);vF*=k;vL*=k}
     pl.vx=fx*vF-fz*vL;pl.vz=fz*vF+fx*vL;
     pl.x+=pl.vx*h;pl.z+=pl.vz*h;
@@ -678,7 +737,7 @@ function update(dt){
     if(Math.abs(pl.lat)>lim+.5){const ex=Math.abs(pl.lat)-(lim-KR),nx=-t.z*sg,nz=t.x*sg;pl.x+=nx*ex;pl.z+=nz*ex;pl.lat=sg*(lim-KR);const vn=pl.vx*nx+pl.vz*nz;if(vn<0){pl.vx-=vn*nx;pl.vz-=vn*nz}}
   }
   {const fx=Math.sin(pl.h),fz=Math.cos(pl.h);pl.vF=pl.vx*fx+pl.vz*fz;pl.vL=pl.vx*-fz+pl.vz*fx;sp=Math.hypot(pl.vx,pl.vz);
-   const ni=pl.idx,c=P[ni],t=T[ni];pl.y=pl.y===undefined?c.y:pl.y+(c.y-pl.y)*Math.min(1,14*dt);
+   const ni=pl.idx,c=P[ni],t=T[ni],gr=groundAt(pl.x,pl.z,ni,pl.h);pl.y=gr.y;pl.pitch=gr.pitch;
    pl.slope=(P[(ni+4)%N].y-c.y)/(4*seg)*(fx*t.x+fz*t.z)}
   const lap=Math.floor(pl.total/N);
   if(go){pl.lapT+=dt;if(lap>prevLap&&lap>=1){if(!pl.best||pl.lapT<pl.best)pl.best=pl.lapT;pl.lapT=0}}
@@ -703,9 +762,9 @@ function update(dt){
     // KI bleibt innerhalb der Planken (auch auf der Innenseite enger Haarnadeln)
     {const j=((Math.floor(a.s)%N)+N)%N,oL=co(j,BW)-KR-.1,oR=co(j,-BW)+KR+.1;a.o+=a.ov*dt;if(a.o>oL||a.o<oR){a.o=clamp(a.o,oR,oL);a.ov=0}}
     a.ov*=Math.exp(-2.2*dt);a.kick*=Math.exp(-3*dt);
-    const q=trackAt(a.s),x=q.x+q.tz*a.o,z=q.z-q.tx*a.o,qa=trackAt(a.s+3);
+    const q=trackAt(a.s),x=q.x+q.tz*a.o,z=q.z-q.tx*a.o,ag=groundAt(x,z,((Math.round(a.s)%N)+N)%N,Math.atan2(q.tx,q.tz)),ay=ag.y;
     a.h=Math.atan2(q.tx,q.tz);
-    a.y=q.y;a.mesh.position.set(x,q.y,z);a.mesh.rotation.y=a.h+a.sp+a.kick;a.mesh.rotation.x=-Math.atan((qa.y-q.y)/(3*seg));a.x=x;a.z=z;
+    a.y=ay;a.mesh.position.set(x,ay,z);a.mesh.rotation.y=a.h+a.sp+a.kick;a.mesh.rotation.x=-ag.pitch;a.x=x;a.z=z;
     const bu=a.mesh.userData;bu.wheels.forEach(w=>w.rotation.x+=a.v*dt/.3);bu.tl.emissive.setHex(a.brk?0xff1010:0);bu.steerG.rotation.z=-clamp(k*6,-1,1)*1.6;
     const dx=pl.x-x,dz=pl.z-z,dd=Math.hypot(dx,dz);
     if(dd<2.2&&dd>.01&&Math.abs(a.y-pl.y)<2.5){const nx=dx/dd,nz=dz/dd,sx=q.tz,sz=-q.tx,fx=Math.sin(pl.h),fz=Math.cos(pl.h),pvx=pl.vx,pvz=pl.vz,bvx=q.tx*a.v+sx*a.ov,bvz=q.tz*a.v+sz*a.ov,vr=(pvx-bvx)*nx+(pvz-bvz)*nz;
@@ -719,12 +778,11 @@ function update(dt){
     const dO=B.o-A.o;if(Math.abs(ds)<2.6&&Math.abs(dO)<2){const push=(2-Math.abs(dO))*.5*(dO>=0?1:-1);A.o-=push*.5;B.o+=push*.5;
       if(ds>0&&A.v>B.v)A.v=B.v*.98+A.v*.02;else if(ds<0&&B.v>A.v)B.v=A.v*.98+B.v*.02}}
   // Mesh Spieler
-  const hopY=pl.hop>0?Math.sin((1-pl.hop/.28)*Math.PI)*.35:0;
-  playerMesh.position.set(pl.x,(pl.y||0)+hopY,pl.z);playerMesh.rotation.y=pl.h;playerMesh.rotation.x=-Math.atan(pl.slope);
+  playerMesh.position.set(pl.x,pl.y||0,pl.z);playerMesh.rotation.y=pl.h;playerMesh.rotation.x=-pl.pitch;
   const ud=playerMesh.userData;ud.body.rotation.z=clamp(-pl.vL*.008-pl.steer*sp*.001,-.1,.1);ud.body.rotation.y=0;
   // beim Driften zeigen die Vorderräder leicht gegen (Gegenlenken)
   const wSt=pl.drift?clamp(pl.steer*.3-pl.drift*.35,-1,1):pl.steer;
-  ud.tl.emissive.setHex(brake?0xff1010:0);ud.steerG.rotation.z=-wSt*1.6;ud.pivots.forEach(p=>p.rotation.y=wSt*.45);ud.wheels.forEach(w=>w.rotation.x+=pl.vF*dt/.3);
+  ud.tl.emissive.setHex(brake?0xff1010:0);ud.steerG.rotation.z=-wSt*1.6;ud.pivots.forEach(p=>p.rotation.y=wSt*.45);tireFx(dt,brake);
   // Kamera
   // Kamera schaut zwischen Kart-Richtung und Fahrtrichtung -> Drift-Winkel bleibt sichtbar
   const slip=sp>3&&!(pl.spin>0)?Math.atan2(pl.vL,Math.max(Math.abs(pl.vF),1)):0,camT=pl.h-slip*.6;
