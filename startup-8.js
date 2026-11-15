@@ -1,0 +1,1 @@
+KartTuning.install();

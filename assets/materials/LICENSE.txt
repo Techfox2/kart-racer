@@ -1,0 +1,15 @@
+Material source: ambientCG, by Lennart Demes.
+License: Creative Commons CC0 1.0 Universal (public domain dedication).
+https://docs.ambientcg.com/license/
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Asphalt012: https://ambientcg.com/view?id=Asphalt012
+Grass001: https://ambientcg.com/view?id=Grass001
+Concrete034: https://ambientcg.com/view?id=Concrete034
+Metal012: https://ambientcg.com/view?id=Metal012
+Snow001: https://ambientcg.com/view?id=Snow001
+
+Downloaded as 2K-JPG packages on 2026-11-06.
+Color, NormalGL and Roughness maps resized/recompressed into 2048px and
+512px JPEG tiers, embedded as data URLs in textures.js for offline file opening.
+Road paint markings are composited at runtime; original source maps unchanged.

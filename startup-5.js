@@ -1,0 +1,1 @@
+KartMapVote.install();

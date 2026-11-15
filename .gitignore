@@ -1,0 +1,14 @@
+﻿# Private and generated local files never belong in Git.
+.work/
+__pycache__/
+*.pyc
+.env
+.env.*
+*.sqlite3
+*.sqlite3-*
+*.htpasswd
+*.pem
+*.key
+id_ed25519
+id_rsa
+node_modules/

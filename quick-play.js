@@ -1,0 +1,11 @@
+window.KartQuick=(()=>{
+ const tracks=['circuit','snow','indoor','spa','monaco','monza','nurburgring','shanghai','switchback','hairpin'],cars=KartGT3.cars.map(c=>c[0]),levels=['easy','normal','hard'];
+ const keys=['track','laps','comp','upgradesEnabled','category','botCount','botDifficulty','botItems','botCars','botDifficulties'];
+ function normalize(input={}){input=input||{};return {track:tracks.includes(input.track)?input.track:'circuit',laps:[1,3,5].includes(input.laps)?input.laps:3,comp:!!input.comp,upgradesEnabled:input.upgradesEnabled!==false,category:input.category==='gt3'?'gt3':'kart',botCount:Number.isInteger(input.botCount)&&input.botCount>=0&&input.botCount<=6?input.botCount:3,botDifficulty:levels.includes(input.botDifficulty)?input.botDifficulty:'normal',botItems:!!input.botItems,botCars:Array.from({length:6},(_,i)=>cars.includes(input.botCars?.[i])?input.botCars[i]:cars[i%3]),botDifficulties:Array.from({length:6},(_,i)=>levels.includes(input.botDifficulties?.[i])?input.botDifficulties[i]:levels.includes(input.botDifficulty)?input.botDifficulty:'normal'),useDaily:!!input.useDaily}}
+ function random(seed){return()=>{seed=(seed+0x6D2B79F5)|0;let t=Math.imul(seed^seed>>>15,1|seed);t^=t+Math.imul(t^t>>>7,61|t);return((t^t>>>14)>>>0)/4294967296}}
+ function chosen(period,salt){const cycle=Math.floor(period/tracks.length),r=random(cycle^salt),bag=[...tracks];for(let i=bag.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[bag[i],bag[j]]=[bag[j],bag[i]]}return bag[((period%tracks.length)+tracks.length)%tracks.length]}
+ const day=now=>Math.floor(now/864e5),daily=(now=Date.now())=>chosen(day(now),0x27ad39);
+ function week(now=Date.now()){const n=Math.floor((now-4*864e5)/6048e5),r=random(n^0x6f2a54),pick=a=>a[Math.floor(r()*a.length)],difficulty=pick(levels),settings=normalize({track:chosen(n,0x43a79),laps:pick([1,3,5]),comp:r()>.5,category:pick(['kart','gt3']),botCount:1+Math.floor(r()*6),botDifficulty:difficulty,botItems:r()>.5,botCars:Array.from({length:6},()=>pick(cars)),botDifficulties:Array.from({length:6},()=>pick(levels))});return {track:settings.track,settings,left:4*864e5+(n+1)*6048e5-now}}
+ const settings=s=>{const q=normalize(s);if(q.useDaily)q.track=daily();return q};
+ return {normalize,keys,daily,week,settings};
+})();

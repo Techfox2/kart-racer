@@ -1,0 +1,10 @@
+/* Optional, High-only post-processing. No external libraries or textures. */
+window.KartExperimental={
+ render(renderer,scene,camera){
+  let fx=renderer._kartExperimental;
+  if(!fx){const target=new THREE.WebGLRenderTarget(1,1,{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,depthBuffer:true});const material=new THREE.ShaderMaterial({toneMapped:false,depthTest:false,depthWrite:false,uniforms:{tDiffuse:{value:target.texture},texel:{value:new THREE.Vector2()}},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',fragmentShader:`uniform sampler2D tDiffuse;uniform vec2 texel;varying vec2 vUv;
+   void main(){vec3 c=texture2D(tDiffuse,vUv).rgb;vec3 glow=vec3(0.);glow+=max(texture2D(tDiffuse,vUv+texel*vec2(2.,0.)).rgb-.72,0.);glow+=max(texture2D(tDiffuse,vUv-texel*vec2(2.,0.)).rgb-.72,0.);glow+=max(texture2D(tDiffuse,vUv+texel*vec2(0.,2.)).rgb-.72,0.);glow+=max(texture2D(tDiffuse,vUv-texel*vec2(0.,2.)).rgb-.72,0.);c+=glow*.045;float l=dot(c,vec3(.2126,.7152,.0722));c=mix(vec3(l),c,1.045);c=(c-.18)*1.025+.18;c*=vec3(1.015,1.005,.985);gl_FragColor=vec4(pow(max(c,vec3(0.)),vec3(1./2.2)),1.);}`});const postScene=new THREE.Scene(),quad=new THREE.Mesh(new THREE.PlaneGeometry(2,2),material);postScene.add(quad);fx=renderer._kartExperimental={target,material,scene:postScene,camera:new THREE.Camera(),quad,size:new THREE.Vector2()}}
+  renderer.getDrawingBufferSize(fx.size);const width=fx.size.x,height=fx.size.y;if(fx.target.width!==width||fx.target.height!==height){fx.target.setSize(width,height);fx.material.uniforms.texel.value.set(1/width,1/height)}const previous=renderer.getRenderTarget();try{renderer.setRenderTarget(fx.target);renderer.render(scene,camera);renderer.setRenderTarget(previous);renderer.render(fx.scene,fx.camera)}finally{renderer.setRenderTarget(previous)}
+ },
+ dispose(renderer){const fx=renderer._kartExperimental;if(!fx)return;fx.target.dispose();fx.material.dispose();fx.quad.geometry.dispose();delete renderer._kartExperimental}
+};

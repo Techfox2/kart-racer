@@ -1,0 +1,1082 @@
+{
+  "missions": [
+    {
+      "id": "first",
+      "stat": "races",
+      "goal": 1,
+      "reward": 50,
+      "icon": "flag",
+      "title": [
+        "Erstes Rennen",
+        "First race",
+        "Première course"
+      ],
+      "description": [
+        "Beende ein Rennen",
+        "Finish a race",
+        "Termine une course"
+      ]
+    },
+    {
+      "id": "podium",
+      "stat": "podiums",
+      "goal": 1,
+      "reward": 80,
+      "icon": "trophy",
+      "title": [
+        "Aufs Treppchen",
+        "On the podium",
+        "Sur le podium"
+      ],
+      "description": [
+        "Erreiche ein Podium",
+        "Reach the podium",
+        "Monte sur le podium"
+      ]
+    },
+    {
+      "id": "win",
+      "stat": "wins",
+      "goal": 1,
+      "reward": 120,
+      "icon": "crown",
+      "title": [
+        "Sieger",
+        "Winner",
+        "Vainqueur"
+      ],
+      "description": [
+        "Gewinne ein Rennen",
+        "Win a race",
+        "Gagne une course"
+      ]
+    },
+    {
+      "id": "t3",
+      "stat": "t3",
+      "goal": 10,
+      "reward": 100,
+      "icon": "bolt",
+      "title": [
+        "Drift-König",
+        "Drift king",
+        "Roi du drift"
+      ],
+      "description": [
+        "Zünde 10 Turbos der Stufe III",
+        "Trigger 10 tier III boosts",
+        "Déclenche 10 turbos de niveau III"
+      ]
+    },
+    {
+      "id": "boxes",
+      "stat": "boxes",
+      "goal": 15,
+      "reward": 80,
+      "icon": "gift",
+      "title": [
+        "Glückspilz",
+        "Lucky racer",
+        "Pilote chanceux"
+      ],
+      "description": [
+        "Sammle 15 Lucky Blocks",
+        "Collect 15 Lucky Blocks",
+        "Collecte 15 Lucky Blocks"
+      ]
+    },
+    {
+      "id": "draft",
+      "stat": "draftT",
+      "goal": 60,
+      "reward": 60,
+      "icon": "globe",
+      "title": [
+        "Windschattenjäger",
+        "Slipstream hunter",
+        "Chasseur d’aspiration"
+      ],
+      "description": [
+        "Fahre 60 Sekunden im Windschatten",
+        "Slipstream for 60 seconds",
+        "Roule 60 secondes dans l’aspiration"
+      ]
+    },
+    {
+      "id": "f1",
+      "stat": "f1",
+      "goal": 3,
+      "reward": 200,
+      "icon": "track",
+      "title": [
+        "F1-Tour",
+        "F1 tour",
+        "Tournée F1"
+      ],
+      "description": [
+        "Beende Spa, Monaco und Monza",
+        "Finish Spa, Monaco and Monza",
+        "Termine Spa, Monaco et Monza"
+      ]
+    },
+    {
+      "id": "races10",
+      "stat": "races",
+      "goal": 10,
+      "reward": 150,
+      "icon": "star",
+      "title": [
+        "Dauerbrenner",
+        "Regular racer",
+        "Pilote régulier"
+      ],
+      "description": [
+        "Beende 10 Rennen",
+        "Finish 10 races",
+        "Termine 10 courses"
+      ]
+    },
+    {
+      "id": "races25",
+      "stat": "races",
+      "goal": 25,
+      "reward": 200,
+      "icon": "flag",
+      "title": [
+        "Rennfahrer 1",
+        "Racer 1",
+        "Pilote 1"
+      ],
+      "description": [
+        "Beende 25 Rennen",
+        "Finish 25 races",
+        "Termine 25 courses"
+      ]
+    },
+    {
+      "id": "races50",
+      "stat": "races",
+      "goal": 50,
+      "reward": 400,
+      "icon": "flag",
+      "title": [
+        "Rennfahrer 2",
+        "Racer 2",
+        "Pilote 2"
+      ],
+      "description": [
+        "Beende 50 Rennen",
+        "Finish 50 races",
+        "Termine 50 courses"
+      ]
+    },
+    {
+      "id": "races100",
+      "stat": "races",
+      "goal": 100,
+      "reward": 600,
+      "icon": "flag",
+      "title": [
+        "Rennfahrer 3",
+        "Racer 3",
+        "Pilote 3"
+      ],
+      "description": [
+        "Beende 100 Rennen",
+        "Finish 100 races",
+        "Termine 100 courses"
+      ]
+    },
+    {
+      "id": "races250",
+      "stat": "races",
+      "goal": 250,
+      "reward": 800,
+      "icon": "flag",
+      "title": [
+        "Rennfahrer 4",
+        "Racer 4",
+        "Pilote 4"
+      ],
+      "description": [
+        "Beende 250 Rennen",
+        "Finish 250 races",
+        "Termine 250 courses"
+      ]
+    },
+    {
+      "id": "races500",
+      "stat": "races",
+      "goal": 500,
+      "reward": 1000,
+      "icon": "flag",
+      "title": [
+        "Rennfahrer 5",
+        "Racer 5",
+        "Pilote 5"
+      ],
+      "description": [
+        "Beende 500 Rennen",
+        "Finish 500 races",
+        "Termine 500 courses"
+      ]
+    },
+    {
+      "id": "races1000",
+      "stat": "races",
+      "goal": 1000,
+      "reward": 1200,
+      "icon": "flag",
+      "title": [
+        "Rennfahrer 6",
+        "Racer 6",
+        "Pilote 6"
+      ],
+      "description": [
+        "Beende 1000 Rennen",
+        "Finish 1000 races",
+        "Termine 1000 courses"
+      ]
+    },
+    {
+      "id": "wins10",
+      "stat": "wins",
+      "goal": 10,
+      "reward": 200,
+      "icon": "crown",
+      "title": [
+        "Champion 1",
+        "Champion 1",
+        "Champion 1"
+      ],
+      "description": [
+        "Gewinne 10 Rennen",
+        "Win 10 races",
+        "Gagne 10 courses"
+      ]
+    },
+    {
+      "id": "wins25",
+      "stat": "wins",
+      "goal": 25,
+      "reward": 400,
+      "icon": "crown",
+      "title": [
+        "Champion 2",
+        "Champion 2",
+        "Champion 2"
+      ],
+      "description": [
+        "Gewinne 25 Rennen",
+        "Win 25 races",
+        "Gagne 25 courses"
+      ]
+    },
+    {
+      "id": "wins50",
+      "stat": "wins",
+      "goal": 50,
+      "reward": 600,
+      "icon": "crown",
+      "title": [
+        "Champion 3",
+        "Champion 3",
+        "Champion 3"
+      ],
+      "description": [
+        "Gewinne 50 Rennen",
+        "Win 50 races",
+        "Gagne 50 courses"
+      ]
+    },
+    {
+      "id": "wins100",
+      "stat": "wins",
+      "goal": 100,
+      "reward": 800,
+      "icon": "crown",
+      "title": [
+        "Champion 4",
+        "Champion 4",
+        "Champion 4"
+      ],
+      "description": [
+        "Gewinne 100 Rennen",
+        "Win 100 races",
+        "Gagne 100 courses"
+      ]
+    },
+    {
+      "id": "wins250",
+      "stat": "wins",
+      "goal": 250,
+      "reward": 1000,
+      "icon": "crown",
+      "title": [
+        "Champion 5",
+        "Champion 5",
+        "Champion 5"
+      ],
+      "description": [
+        "Gewinne 250 Rennen",
+        "Win 250 races",
+        "Gagne 250 courses"
+      ]
+    },
+    {
+      "id": "podiums10",
+      "stat": "podiums",
+      "goal": 10,
+      "reward": 200,
+      "icon": "trophy",
+      "title": [
+        "Podium-Serie 1",
+        "Podium series 1",
+        "Série de podiums 1"
+      ],
+      "description": [
+        "Erreiche 10 Podien",
+        "Reach 10 podiums",
+        "Atteins 10 podiums"
+      ]
+    },
+    {
+      "id": "podiums50",
+      "stat": "podiums",
+      "goal": 50,
+      "reward": 400,
+      "icon": "trophy",
+      "title": [
+        "Podium-Serie 2",
+        "Podium series 2",
+        "Série de podiums 2"
+      ],
+      "description": [
+        "Erreiche 50 Podien",
+        "Reach 50 podiums",
+        "Atteins 50 podiums"
+      ]
+    },
+    {
+      "id": "podiums100",
+      "stat": "podiums",
+      "goal": 100,
+      "reward": 600,
+      "icon": "trophy",
+      "title": [
+        "Podium-Serie 3",
+        "Podium series 3",
+        "Série de podiums 3"
+      ],
+      "description": [
+        "Erreiche 100 Podien",
+        "Reach 100 podiums",
+        "Atteins 100 podiums"
+      ]
+    },
+    {
+      "id": "podiums250",
+      "stat": "podiums",
+      "goal": 250,
+      "reward": 800,
+      "icon": "trophy",
+      "title": [
+        "Podium-Serie 4",
+        "Podium series 4",
+        "Série de podiums 4"
+      ],
+      "description": [
+        "Erreiche 250 Podien",
+        "Reach 250 podiums",
+        "Atteins 250 podiums"
+      ]
+    },
+    {
+      "id": "t350",
+      "stat": "t3",
+      "goal": 50,
+      "reward": 200,
+      "icon": "bolt",
+      "title": [
+        "Drift-Meister 1",
+        "Drift master 1",
+        "Maître du drift 1"
+      ],
+      "description": [
+        "Zünde 50 Turbos der Stufe III",
+        "Trigger 50 tier III boosts",
+        "Déclenche 50 turbos de niveau III"
+      ]
+    },
+    {
+      "id": "t3100",
+      "stat": "t3",
+      "goal": 100,
+      "reward": 400,
+      "icon": "bolt",
+      "title": [
+        "Drift-Meister 2",
+        "Drift master 2",
+        "Maître du drift 2"
+      ],
+      "description": [
+        "Zünde 100 Turbos der Stufe III",
+        "Trigger 100 tier III boosts",
+        "Déclenche 100 turbos de niveau III"
+      ]
+    },
+    {
+      "id": "t3250",
+      "stat": "t3",
+      "goal": 250,
+      "reward": 600,
+      "icon": "bolt",
+      "title": [
+        "Drift-Meister 3",
+        "Drift master 3",
+        "Maître du drift 3"
+      ],
+      "description": [
+        "Zünde 250 Turbos der Stufe III",
+        "Trigger 250 tier III boosts",
+        "Déclenche 250 turbos de niveau III"
+      ]
+    },
+    {
+      "id": "t3500",
+      "stat": "t3",
+      "goal": 500,
+      "reward": 800,
+      "icon": "bolt",
+      "title": [
+        "Drift-Meister 4",
+        "Drift master 4",
+        "Maître du drift 4"
+      ],
+      "description": [
+        "Zünde 500 Turbos der Stufe III",
+        "Trigger 500 tier III boosts",
+        "Déclenche 500 turbos de niveau III"
+      ]
+    },
+    {
+      "id": "t31000",
+      "stat": "t3",
+      "goal": 1000,
+      "reward": 1000,
+      "icon": "bolt",
+      "title": [
+        "Drift-Meister 5",
+        "Drift master 5",
+        "Maître du drift 5"
+      ],
+      "description": [
+        "Zünde 1000 Turbos der Stufe III",
+        "Trigger 1000 tier III boosts",
+        "Déclenche 1000 turbos de niveau III"
+      ]
+    },
+    {
+      "id": "boxes50",
+      "stat": "boxes",
+      "goal": 50,
+      "reward": 200,
+      "icon": "gift",
+      "title": [
+        "Block-Sammler 1",
+        "Block collector 1",
+        "Collectionneur 1"
+      ],
+      "description": [
+        "Sammle 50 Lucky Blocks",
+        "Collect 50 Lucky Blocks",
+        "Collecte 50 Lucky Blocks"
+      ]
+    },
+    {
+      "id": "boxes100",
+      "stat": "boxes",
+      "goal": 100,
+      "reward": 400,
+      "icon": "gift",
+      "title": [
+        "Block-Sammler 2",
+        "Block collector 2",
+        "Collectionneur 2"
+      ],
+      "description": [
+        "Sammle 100 Lucky Blocks",
+        "Collect 100 Lucky Blocks",
+        "Collecte 100 Lucky Blocks"
+      ]
+    },
+    {
+      "id": "boxes250",
+      "stat": "boxes",
+      "goal": 250,
+      "reward": 600,
+      "icon": "gift",
+      "title": [
+        "Block-Sammler 3",
+        "Block collector 3",
+        "Collectionneur 3"
+      ],
+      "description": [
+        "Sammle 250 Lucky Blocks",
+        "Collect 250 Lucky Blocks",
+        "Collecte 250 Lucky Blocks"
+      ]
+    },
+    {
+      "id": "boxes500",
+      "stat": "boxes",
+      "goal": 500,
+      "reward": 800,
+      "icon": "gift",
+      "title": [
+        "Block-Sammler 4",
+        "Block collector 4",
+        "Collectionneur 4"
+      ],
+      "description": [
+        "Sammle 500 Lucky Blocks",
+        "Collect 500 Lucky Blocks",
+        "Collecte 500 Lucky Blocks"
+      ]
+    },
+    {
+      "id": "boxes1000",
+      "stat": "boxes",
+      "goal": 1000,
+      "reward": 1000,
+      "icon": "gift",
+      "title": [
+        "Block-Sammler 5",
+        "Block collector 5",
+        "Collectionneur 5"
+      ],
+      "description": [
+        "Sammle 1000 Lucky Blocks",
+        "Collect 1000 Lucky Blocks",
+        "Collecte 1000 Lucky Blocks"
+      ]
+    },
+    {
+      "id": "draftT300",
+      "stat": "draftT",
+      "goal": 300,
+      "reward": 200,
+      "icon": "globe",
+      "title": [
+        "Windschatten-Profi 1",
+        "Slipstream pro 1",
+        "Pro de l’aspiration 1"
+      ],
+      "description": [
+        "Fahre 300 Sekunden im Windschatten",
+        "Slipstream for 300 seconds",
+        "Roule 300 secondes dans l’aspiration"
+      ]
+    },
+    {
+      "id": "draftT900",
+      "stat": "draftT",
+      "goal": 900,
+      "reward": 400,
+      "icon": "globe",
+      "title": [
+        "Windschatten-Profi 2",
+        "Slipstream pro 2",
+        "Pro de l’aspiration 2"
+      ],
+      "description": [
+        "Fahre 900 Sekunden im Windschatten",
+        "Slipstream for 900 seconds",
+        "Roule 900 secondes dans l’aspiration"
+      ]
+    },
+    {
+      "id": "draftT1800",
+      "stat": "draftT",
+      "goal": 1800,
+      "reward": 600,
+      "icon": "globe",
+      "title": [
+        "Windschatten-Profi 3",
+        "Slipstream pro 3",
+        "Pro de l’aspiration 3"
+      ],
+      "description": [
+        "Fahre 1800 Sekunden im Windschatten",
+        "Slipstream for 1800 seconds",
+        "Roule 1800 secondes dans l’aspiration"
+      ]
+    },
+    {
+      "id": "draftT3600",
+      "stat": "draftT",
+      "goal": 3600,
+      "reward": 800,
+      "icon": "globe",
+      "title": [
+        "Windschatten-Profi 4",
+        "Slipstream pro 4",
+        "Pro de l’aspiration 4"
+      ],
+      "description": [
+        "Fahre 3600 Sekunden im Windschatten",
+        "Slipstream for 3600 seconds",
+        "Roule 3600 secondes dans l’aspiration"
+      ]
+    },
+    {
+      "id": "draftT7200",
+      "stat": "draftT",
+      "goal": 7200,
+      "reward": 1000,
+      "icon": "globe",
+      "title": [
+        "Windschatten-Profi 5",
+        "Slipstream pro 5",
+        "Pro de l’aspiration 5"
+      ],
+      "description": [
+        "Fahre 7200 Sekunden im Windschatten",
+        "Slipstream for 7200 seconds",
+        "Roule 7200 secondes dans l’aspiration"
+      ]
+    },
+    {
+      "id": "gpTour",
+      "stat": "gpTour",
+      "goal": 5,
+      "reward": 800,
+      "icon": "track",
+      "title": [
+        "GP-Weltreise",
+        "GP world tour",
+        "Tour du monde GP"
+      ],
+      "description": [
+        "Beende alle fünf GP-Strecken",
+        "Finish all five GP circuits",
+        "Termine les cinq circuits GP"
+      ]
+    },
+    {
+      "id": "kartTour",
+      "stat": "kartTour",
+      "goal": 2,
+      "reward": 400,
+      "icon": "track",
+      "title": [
+        "Karting-Tour",
+        "Karting tour",
+        "Tournée karting"
+      ],
+      "description": [
+        "Beende beide neuen Kartstrecken",
+        "Finish both new kart tracks",
+        "Termine les deux nouveaux circuits de kart"
+      ]
+    }
+  ],
+  "levels": [
+    {
+      "level": 2,
+      "reward": 70
+    },
+    {
+      "level": 3,
+      "reward": 85
+    },
+    {
+      "level": 4,
+      "reward": 100
+    },
+    {
+      "level": 5,
+      "reward": 115
+    },
+    {
+      "level": 6,
+      "reward": 130
+    },
+    {
+      "level": 7,
+      "reward": 145
+    },
+    {
+      "level": 8,
+      "reward": 160
+    },
+    {
+      "level": 9,
+      "reward": 175
+    },
+    {
+      "level": 10,
+      "reward": 190
+    },
+    {
+      "level": 11,
+      "reward": 205
+    },
+    {
+      "level": 12,
+      "reward": 220
+    },
+    {
+      "level": 13,
+      "reward": 235
+    },
+    {
+      "level": 14,
+      "reward": 250
+    },
+    {
+      "level": 15,
+      "reward": 265
+    },
+    {
+      "level": 16,
+      "reward": 265
+    },
+    {
+      "level": 17,
+      "reward": 265
+    },
+    {
+      "level": 18,
+      "reward": 265
+    },
+    {
+      "level": 19,
+      "reward": 265
+    },
+    {
+      "level": 20,
+      "reward": 800
+    },
+    {
+      "level": 21,
+      "reward": 300
+    },
+    {
+      "level": 22,
+      "reward": 300
+    },
+    {
+      "level": 23,
+      "reward": 300
+    },
+    {
+      "level": 24,
+      "reward": 300
+    },
+    {
+      "level": 25,
+      "reward": 335
+    },
+    {
+      "level": 26,
+      "reward": 335
+    },
+    {
+      "level": 27,
+      "reward": 335
+    },
+    {
+      "level": 28,
+      "reward": 335
+    },
+    {
+      "level": 29,
+      "reward": 335
+    },
+    {
+      "level": 30,
+      "reward": 870
+    },
+    {
+      "level": 31,
+      "reward": 370
+    },
+    {
+      "level": 32,
+      "reward": 370
+    },
+    {
+      "level": 33,
+      "reward": 370
+    },
+    {
+      "level": 34,
+      "reward": 370
+    },
+    {
+      "level": 35,
+      "reward": 405
+    },
+    {
+      "level": 36,
+      "reward": 405
+    },
+    {
+      "level": 37,
+      "reward": 405
+    },
+    {
+      "level": 38,
+      "reward": 405
+    },
+    {
+      "level": 39,
+      "reward": 405
+    },
+    {
+      "level": 40,
+      "reward": 940
+    },
+    {
+      "level": 41,
+      "reward": 440
+    },
+    {
+      "level": 42,
+      "reward": 440
+    },
+    {
+      "level": 43,
+      "reward": 440
+    },
+    {
+      "level": 44,
+      "reward": 440
+    },
+    {
+      "level": 45,
+      "reward": 475
+    },
+    {
+      "level": 46,
+      "reward": 475
+    },
+    {
+      "level": 47,
+      "reward": 475
+    },
+    {
+      "level": 48,
+      "reward": 475
+    },
+    {
+      "level": 49,
+      "reward": 475
+    },
+    {
+      "level": 50,
+      "reward": 1010
+    },
+    {
+      "level": 51,
+      "reward": 510
+    },
+    {
+      "level": 52,
+      "reward": 510
+    },
+    {
+      "level": 53,
+      "reward": 510
+    },
+    {
+      "level": 54,
+      "reward": 510
+    },
+    {
+      "level": 55,
+      "reward": 545
+    },
+    {
+      "level": 56,
+      "reward": 545
+    },
+    {
+      "level": 57,
+      "reward": 545
+    },
+    {
+      "level": 58,
+      "reward": 545
+    },
+    {
+      "level": 59,
+      "reward": 545
+    },
+    {
+      "level": 60,
+      "reward": 1080
+    },
+    {
+      "level": 61,
+      "reward": 580
+    },
+    {
+      "level": 62,
+      "reward": 580
+    },
+    {
+      "level": 63,
+      "reward": 580
+    },
+    {
+      "level": 64,
+      "reward": 580
+    },
+    {
+      "level": 65,
+      "reward": 615
+    },
+    {
+      "level": 66,
+      "reward": 615
+    },
+    {
+      "level": 67,
+      "reward": 615
+    },
+    {
+      "level": 68,
+      "reward": 615
+    },
+    {
+      "level": 69,
+      "reward": 615
+    },
+    {
+      "level": 70,
+      "reward": 1150
+    },
+    {
+      "level": 71,
+      "reward": 650
+    },
+    {
+      "level": 72,
+      "reward": 650
+    },
+    {
+      "level": 73,
+      "reward": 650
+    },
+    {
+      "level": 74,
+      "reward": 650
+    },
+    {
+      "level": 75,
+      "reward": 685
+    },
+    {
+      "level": 76,
+      "reward": 685
+    },
+    {
+      "level": 77,
+      "reward": 685
+    },
+    {
+      "level": 78,
+      "reward": 685
+    },
+    {
+      "level": 79,
+      "reward": 685
+    },
+    {
+      "level": 80,
+      "reward": 1220
+    },
+    {
+      "level": 81,
+      "reward": 720
+    },
+    {
+      "level": 82,
+      "reward": 720
+    },
+    {
+      "level": 83,
+      "reward": 720
+    },
+    {
+      "level": 84,
+      "reward": 720
+    },
+    {
+      "level": 85,
+      "reward": 755
+    },
+    {
+      "level": 86,
+      "reward": 755
+    },
+    {
+      "level": 87,
+      "reward": 755
+    },
+    {
+      "level": 88,
+      "reward": 755
+    },
+    {
+      "level": 89,
+      "reward": 755
+    },
+    {
+      "level": 90,
+      "reward": 1290
+    },
+    {
+      "level": 91,
+      "reward": 790
+    },
+    {
+      "level": 92,
+      "reward": 790
+    },
+    {
+      "level": 93,
+      "reward": 790
+    },
+    {
+      "level": 94,
+      "reward": 790
+    },
+    {
+      "level": 95,
+      "reward": 825
+    },
+    {
+      "level": 96,
+      "reward": 825
+    },
+    {
+      "level": 97,
+      "reward": 825
+    },
+    {
+      "level": 98,
+      "reward": 825
+    },
+    {
+      "level": 99,
+      "reward": 825
+    },
+    {
+      "level": 100,
+      "reward": 1360
+    }
+  ]
+}

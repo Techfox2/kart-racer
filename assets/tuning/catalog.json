@@ -1,0 +1,2819 @@
+{
+  "version": 1,
+  "parts": {
+    "engine": {
+      "name": {
+        "de": "Motor",
+        "en": "Engine",
+        "fr": "Moteur"
+      }
+    },
+    "induction": {
+      "name": {
+        "de": "Ansaugung / Turbo",
+        "en": "Intake / turbo",
+        "fr": "Admission / turbo"
+      }
+    },
+    "gearbox": {
+      "name": {
+        "de": "Getriebe",
+        "en": "Gearbox",
+        "fr": "Boîte"
+      }
+    },
+    "tyres": {
+      "name": {
+        "de": "Reifen",
+        "en": "Tyres",
+        "fr": "Pneus"
+      }
+    },
+    "suspension": {
+      "name": {
+        "de": "Fahrwerk",
+        "en": "Suspension",
+        "fr": "Suspension"
+      }
+    },
+    "brakes": {
+      "name": {
+        "de": "Bremsen",
+        "en": "Brakes",
+        "fr": "Freins"
+      }
+    },
+    "aero": {
+      "name": {
+        "de": "Aerodynamik",
+        "en": "Aerodynamics",
+        "fr": "Aérodynamique"
+      }
+    },
+    "weight": {
+      "name": {
+        "de": "Leichtbau",
+        "en": "Weight reduction",
+        "fr": "Allègement"
+      }
+    }
+  },
+  "cars": {
+    "kart": {
+      "category": "kart",
+      "engine": "single",
+      "layout": "rear",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 140,
+            "effects": {
+              "acceleration": 0.04675
+            }
+          },
+          {
+            "level": 2,
+            "price": 290,
+            "effects": {
+              "acceleration": 0.0935
+            }
+          },
+          {
+            "level": 3,
+            "price": 480,
+            "effects": {
+              "acceleration": 0.14025
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 160,
+            "effects": {
+              "weight": -0.02875,
+              "acceleration": 0.0207,
+              "steering": 0.0161,
+              "damage": 0.05175
+            }
+          },
+          {
+            "level": 2,
+            "price": 310,
+            "effects": {
+              "weight": -0.0575,
+              "acceleration": 0.0414,
+              "steering": 0.0322,
+              "damage": 0.1035
+            }
+          },
+          {
+            "level": 3,
+            "price": 520,
+            "effects": {
+              "weight": -0.08625,
+              "acceleration": 0.0621,
+              "steering": 0.0483,
+              "damage": 0.15525
+            }
+          }
+        ]
+      }
+    },
+    "kart-apex": {
+      "category": "kart",
+      "engine": "single",
+      "layout": "rear",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 160,
+            "effects": {
+              "highAcceleration": 0.078
+            }
+          },
+          {
+            "level": 2,
+            "price": 320,
+            "effects": {
+              "highAcceleration": 0.156
+            }
+          },
+          {
+            "level": 3,
+            "price": 530,
+            "effects": {
+              "highAcceleration": 0.234
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 160,
+            "effects": {
+              "steering": 0.05175,
+              "stability": 0.04025
+            }
+          },
+          {
+            "level": 2,
+            "price": 310,
+            "effects": {
+              "steering": 0.1035,
+              "stability": 0.0805
+            }
+          },
+          {
+            "level": 3,
+            "price": 520,
+            "effects": {
+              "steering": 0.15525,
+              "stability": 0.12075
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "kart-rally": {
+      "category": "kart",
+      "engine": "single",
+      "layout": "rear",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 170,
+            "effects": {
+              "grip": 0.04725,
+              "terrainGrip": 0.0675
+            }
+          },
+          {
+            "level": 2,
+            "price": 330,
+            "effects": {
+              "grip": 0.0945,
+              "terrainGrip": 0.135
+            }
+          },
+          {
+            "level": 3,
+            "price": 550,
+            "effects": {
+              "grip": 0.14175,
+              "terrainGrip": 0.2025
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "braking": 0.0715
+            }
+          },
+          {
+            "level": 2,
+            "price": 310,
+            "effects": {
+              "braking": 0.143
+            }
+          },
+          {
+            "level": 3,
+            "price": 520,
+            "effects": {
+              "braking": 0.2145
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "kart-vector": {
+      "category": "kart",
+      "engine": "twin",
+      "layout": "rear",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 160,
+            "effects": {
+              "topSpeed": 0.03,
+              "response": 0.03125
+            }
+          },
+          {
+            "level": 2,
+            "price": 320,
+            "effects": {
+              "topSpeed": 0.06,
+              "response": 0.0625
+            }
+          },
+          {
+            "level": 3,
+            "price": 540,
+            "effects": {
+              "topSpeed": 0.09,
+              "response": 0.09375
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 160,
+            "effects": {
+              "downforce": 0.046,
+              "drag": 0.0069
+            }
+          },
+          {
+            "level": 2,
+            "price": 310,
+            "effects": {
+              "downforce": 0.092,
+              "drag": 0.0138
+            }
+          },
+          {
+            "level": 3,
+            "price": 520,
+            "effects": {
+              "downforce": 0.138,
+              "drag": 0.0207
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "kart-christmas": {
+      "category": "kart",
+      "engine": "twin",
+      "layout": "rear",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 160,
+            "effects": {
+              "grip": 0.042,
+              "terrainGrip": 0.06
+            }
+          },
+          {
+            "level": 2,
+            "price": 320,
+            "effects": {
+              "grip": 0.084,
+              "terrainGrip": 0.12
+            }
+          },
+          {
+            "level": 3,
+            "price": 530,
+            "effects": {
+              "grip": 0.126,
+              "terrainGrip": 0.18
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 300,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 500,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 150,
+            "effects": {
+              "weight": -0.0275,
+              "acceleration": 0.0198,
+              "steering": 0.0154,
+              "damage": 0.0495
+            }
+          },
+          {
+            "level": 2,
+            "price": 310,
+            "effects": {
+              "weight": -0.055,
+              "acceleration": 0.0396,
+              "steering": 0.0308,
+              "damage": 0.099
+            }
+          },
+          {
+            "level": 3,
+            "price": 520,
+            "effects": {
+              "weight": -0.0825,
+              "acceleration": 0.0594,
+              "steering": 0.0462,
+              "damage": 0.1485
+            }
+          }
+        ]
+      }
+    },
+    "porsche": {
+      "category": "gt3",
+      "engine": "boxer",
+      "layout": "rear",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 290,
+            "effects": {
+              "acceleration": 0.0495
+            }
+          },
+          {
+            "level": 2,
+            "price": 530,
+            "effects": {
+              "acceleration": 0.099
+            }
+          },
+          {
+            "level": 3,
+            "price": 820,
+            "effects": {
+              "acceleration": 0.1485
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 330,
+            "effects": {
+              "grip": 0.0455,
+              "terrainGrip": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 600,
+            "effects": {
+              "grip": 0.091,
+              "terrainGrip": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 930,
+            "effects": {
+              "grip": 0.1365,
+              "terrainGrip": 0.195
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "weight": -0.03,
+              "acceleration": 0.0216,
+              "steering": 0.0168,
+              "damage": 0.054
+            }
+          },
+          {
+            "level": 2,
+            "price": 580,
+            "effects": {
+              "weight": -0.06,
+              "acceleration": 0.0432,
+              "steering": 0.0336,
+              "damage": 0.108
+            }
+          },
+          {
+            "level": 3,
+            "price": 900,
+            "effects": {
+              "weight": -0.09,
+              "acceleration": 0.0648,
+              "steering": 0.0504,
+              "damage": 0.162
+            }
+          }
+        ]
+      }
+    },
+    "amg": {
+      "category": "gt3",
+      "engine": "v8",
+      "layout": "front",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "acceleration": 0.06875
+            }
+          },
+          {
+            "level": 2,
+            "price": 590,
+            "effects": {
+              "acceleration": 0.1375
+            }
+          },
+          {
+            "level": 3,
+            "price": 910,
+            "effects": {
+              "acceleration": 0.20625
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "highAcceleration": 0.078
+            }
+          },
+          {
+            "level": 2,
+            "price": 580,
+            "effects": {
+              "highAcceleration": 0.156
+            }
+          },
+          {
+            "level": 3,
+            "price": 900,
+            "effects": {
+              "highAcceleration": 0.234
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 290,
+            "effects": {
+              "weight": -0.0225,
+              "acceleration": 0.0162,
+              "steering": 0.0126,
+              "damage": 0.0405
+            }
+          },
+          {
+            "level": 2,
+            "price": 530,
+            "effects": {
+              "weight": -0.045,
+              "acceleration": 0.0324,
+              "steering": 0.0252,
+              "damage": 0.081
+            }
+          },
+          {
+            "level": 3,
+            "price": 820,
+            "effects": {
+              "weight": -0.0675,
+              "acceleration": 0.0486,
+              "steering": 0.0378,
+              "damage": 0.1215
+            }
+          }
+        ]
+      }
+    },
+    "ferrari": {
+      "category": "gt3",
+      "engine": "v6",
+      "layout": "middle",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 290,
+            "effects": {
+              "acceleration": 0.0495
+            }
+          },
+          {
+            "level": 2,
+            "price": 530,
+            "effects": {
+              "acceleration": 0.099
+            }
+          },
+          {
+            "level": 3,
+            "price": 820,
+            "effects": {
+              "acceleration": 0.1485
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 330,
+            "effects": {
+              "topSpeed": 0.0312,
+              "response": 0.0325
+            }
+          },
+          {
+            "level": 2,
+            "price": 600,
+            "effects": {
+              "topSpeed": 0.0624,
+              "response": 0.065
+            }
+          },
+          {
+            "level": 3,
+            "price": 930,
+            "effects": {
+              "topSpeed": 0.0936,
+              "response": 0.0975
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "downforce": 0.05,
+              "drag": 0.0075
+            }
+          },
+          {
+            "level": 2,
+            "price": 590,
+            "effects": {
+              "downforce": 0.1,
+              "drag": 0.015
+            }
+          },
+          {
+            "level": 3,
+            "price": 910,
+            "effects": {
+              "downforce": 0.15,
+              "drag": 0.0225
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "bmw": {
+      "category": "gt3",
+      "engine": "inline6",
+      "layout": "front",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "highAcceleration": 0.08125
+            }
+          },
+          {
+            "level": 2,
+            "price": 590,
+            "effects": {
+              "highAcceleration": 0.1625
+            }
+          },
+          {
+            "level": 3,
+            "price": 910,
+            "effects": {
+              "highAcceleration": 0.24375
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 310,
+            "effects": {
+              "braking": 0.07475
+            }
+          },
+          {
+            "level": 2,
+            "price": 570,
+            "effects": {
+              "braking": 0.1495
+            }
+          },
+          {
+            "level": 3,
+            "price": 890,
+            "effects": {
+              "braking": 0.22425
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "aston": {
+      "category": "gt3",
+      "engine": "v8",
+      "layout": "front",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 310,
+            "effects": {
+              "acceleration": 0.06325
+            }
+          },
+          {
+            "level": 2,
+            "price": 570,
+            "effects": {
+              "acceleration": 0.1265
+            }
+          },
+          {
+            "level": 3,
+            "price": 890,
+            "effects": {
+              "acceleration": 0.18975
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "steering": 0.05625,
+              "stability": 0.04375
+            }
+          },
+          {
+            "level": 2,
+            "price": 590,
+            "effects": {
+              "steering": 0.1125,
+              "stability": 0.0875
+            }
+          },
+          {
+            "level": 3,
+            "price": 910,
+            "effects": {
+              "steering": 0.16875,
+              "stability": 0.13125
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "audi": {
+      "category": "gt3",
+      "engine": "v10",
+      "layout": "middle",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 310,
+            "effects": {
+              "highAcceleration": 0.07475
+            }
+          },
+          {
+            "level": 2,
+            "price": 570,
+            "effects": {
+              "highAcceleration": 0.1495
+            }
+          },
+          {
+            "level": 3,
+            "price": 890,
+            "effects": {
+              "highAcceleration": 0.22425
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "grip": 0.042,
+              "terrainGrip": 0.06
+            }
+          },
+          {
+            "level": 2,
+            "price": 580,
+            "effects": {
+              "grip": 0.084,
+              "terrainGrip": 0.12
+            }
+          },
+          {
+            "level": 3,
+            "price": 900,
+            "effects": {
+              "grip": 0.126,
+              "terrainGrip": 0.18
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "downforce": 0.04,
+              "drag": 0.006
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "downforce": 0.08,
+              "drag": 0.012
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "downforce": 0.12,
+              "drag": 0.018
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "lambo": {
+      "category": "gt3",
+      "engine": "v10",
+      "layout": "middle",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 310,
+            "effects": {
+              "topSpeed": 0.0276,
+              "response": 0.02875
+            }
+          },
+          {
+            "level": 2,
+            "price": 570,
+            "effects": {
+              "topSpeed": 0.0552,
+              "response": 0.0575
+            }
+          },
+          {
+            "level": 3,
+            "price": 890,
+            "effects": {
+              "topSpeed": 0.0828,
+              "response": 0.08625
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "downforce": 0.048,
+              "drag": 0.0072
+            }
+          },
+          {
+            "level": 2,
+            "price": 580,
+            "effects": {
+              "downforce": 0.096,
+              "drag": 0.0144
+            }
+          },
+          {
+            "level": 3,
+            "price": 900,
+            "effects": {
+              "downforce": 0.144,
+              "drag": 0.0216
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "weight": -0.025,
+              "acceleration": 0.018,
+              "steering": 0.014,
+              "damage": 0.045
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "weight": -0.05,
+              "acceleration": 0.036,
+              "steering": 0.028,
+              "damage": 0.09
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "weight": -0.075,
+              "acceleration": 0.054,
+              "steering": 0.042,
+              "damage": 0.135
+            }
+          }
+        ]
+      }
+    },
+    "mclaren": {
+      "category": "gt3",
+      "engine": "v8",
+      "layout": "middle",
+      "parts": {
+        "engine": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "acceleration": 0.055
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "acceleration": 0.11
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "acceleration": 0.165
+            }
+          }
+        ],
+        "induction": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "topSpeed": 0.024,
+              "response": 0.025
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "topSpeed": 0.048,
+              "response": 0.05
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "topSpeed": 0.072,
+              "response": 0.075
+            }
+          }
+        ],
+        "gearbox": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "highAcceleration": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "highAcceleration": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "highAcceleration": 0.195
+            }
+          }
+        ],
+        "tyres": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "grip": 0.035,
+              "terrainGrip": 0.05
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "grip": 0.07,
+              "terrainGrip": 0.1
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "grip": 0.105,
+              "terrainGrip": 0.15
+            }
+          }
+        ],
+        "suspension": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "steering": 0.045,
+              "stability": 0.035
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "steering": 0.09,
+              "stability": 0.07
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "steering": 0.135,
+              "stability": 0.105
+            }
+          }
+        ],
+        "brakes": [
+          {
+            "level": 1,
+            "price": 300,
+            "effects": {
+              "braking": 0.065
+            }
+          },
+          {
+            "level": 2,
+            "price": 550,
+            "effects": {
+              "braking": 0.13
+            }
+          },
+          {
+            "level": 3,
+            "price": 850,
+            "effects": {
+              "braking": 0.195
+            }
+          }
+        ],
+        "aero": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "downforce": 0.05,
+              "drag": 0.0075
+            }
+          },
+          {
+            "level": 2,
+            "price": 590,
+            "effects": {
+              "downforce": 0.1,
+              "drag": 0.015
+            }
+          },
+          {
+            "level": 3,
+            "price": 910,
+            "effects": {
+              "downforce": 0.15,
+              "drag": 0.0225
+            }
+          }
+        ],
+        "weight": [
+          {
+            "level": 1,
+            "price": 320,
+            "effects": {
+              "weight": -0.03,
+              "acceleration": 0.0216,
+              "steering": 0.0168,
+              "damage": 0.054
+            }
+          },
+          {
+            "level": 2,
+            "price": 580,
+            "effects": {
+              "weight": -0.06,
+              "acceleration": 0.0432,
+              "steering": 0.0336,
+              "damage": 0.108
+            }
+          },
+          {
+            "level": 3,
+            "price": 900,
+            "effects": {
+              "weight": -0.09,
+              "acceleration": 0.0648,
+              "steering": 0.0504,
+              "damage": 0.162
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# Track surfaces v2
+
+Generated with the built-in ChatGPT image generator, 2026-11-12. Reference: assets/backgrounds/singleplayer-pitlane-v2.png. PNG source and compact WebP runtime atlas retained. Tiles: road, neutral barrier, neutral curb, muted grass. Red/white alternation is supplied by the mesh. Previous textures remain available for rollback.
+
+## Exact prompt
+
+Use attached lobby illustration ONLY as art-style reference. NEW square 2x2 equal-tile game texture atlas, edge-to-edge tiles, no margins, no borders. Top left: smooth muted blue-gray violet asphalt exactly in the clean animated-game style of the reference road; barely perceptible broad soft polygon facets, no grainy photographic pebbles, no road markings. Top right: neutral ivory-white painted safety barrier material, smooth soft sculpted toy-like finish, minimal broad tonal variation, NO red stripes, seams or shadows. Bottom left: ivory-white painted curb concrete material, subtle finish, almost plain and uniform. Bottom right: darker natural grass ground, attractive mix of muted olive, medium forest green and moss green broad low-poly patches, very subtle tiny grass strokes, NOT lime yellow, NOT neon, NOT photorealistic. All four tiles flat top-down albedo scans with even light; no objects, no text, no shadows or highlights, no perspective. Very clean, low contrast and charming, color patches meet all edges for repeating. 2048x2048.

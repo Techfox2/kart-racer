@@ -1,0 +1,7 @@
+# Kart-Christmas / Santa sleigh — v1.2.6
+
+Generated with ChatGPT built-in image generation on 2026-11-13. Source PNG retained; runtime uses christmas-sleigh-v2.webp. The original christmas-v1 assets remain rollback-only. The sleigh-shaped kart, gold runners, raised side panels, gifts and Santa hat are original game geometry in kart-models.js. Same kart physics, separate kart-christmas ranking category.
+
+## Exact generation prompt
+
+Use case: stylized-concept. Create a production-ready seamless square albedo texture for the body panels of a cheerful low-poly racing kart inspired by Santa Claus's traditional sleigh. This is a FLAT ORTHOGRAPHIC MATERIAL SWATCH, not an illustration of a vehicle or sleigh. Fill the entire square edge to edge with rich warm lacquered cranberry-red painted wood, very subtle broad polygonal red facets, restrained elegant curling golden scrollwork and small ivory stars. Sleigh-like flowing gold ornamental curves should be sparse, readable at small size, evenly distributed with ample red negative space. Tiny pine-green holly accents with red berries can accompany a few gold scrolls. The look is polished stylized game art, soft rounded shapes, only slightly realistic, festive premium toy finish. No lettering, no logos, no numbers, no perspective, no scenery, no objects, no baked directional highlights or cast shadows, no photorealistic grain. Seamlessly tileable on all four edges; motifs small enough to wrap around kart bumpers and side panels. 1024x1024 square, opaque.

@@ -1,0 +1,4 @@
+Tool: ChatGPT built-in Image Generation, edit mode, 2026-11-07.
+Applied separately to multiplayer-garage-v1.png and singleplayer-pitlane-v1.png.
+
+Restyle this background for a cheerful low-poly arcade kart game. Keep scene layout, viewpoint and wide 16:9 framing, empty foreground floor and no vehicles/people/text. Make it MUCH LESS REALISTIC: clean simplified chunky geometry, broad soft color gradients, subtly faceted surfaces, matte toy-like painted materials, pastel teal/navy/yellow, gentle ambient shadows, no photoreal scratches, no photographic reflections, no dense texture noise, no cinematic realism. Only slightly more detailed than a basic Three.js low-poly kart game. Beautiful polished stylized game render, not flat vector. Preserve the empty staging area for interactive karts. Keep all signage blank.

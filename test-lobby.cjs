@@ -1,0 +1,9 @@
+const assert=require('node:assert/strict'),ready=require('./race-ready.js'),votes=require('./lobby-vote.js');
+let now=1000;const r=ready.coordinator(()=>now);r.begin(10,['host','slow']);
+assert.equal(r.mark('host',10,'ready'),null);assert.equal(r.mark('outsider',10,'loaded'),null);assert.equal(r.mark('host',9,'loaded'),null);
+r.mark('host',10,'loaded');r.mark('host',10,'ready');now=90000;assert.equal(r.startAt,0);r.mark('slow',10,'loaded');assert.equal(r.startAt,0);r.mark('slow',10,'ready');assert.equal(r.startAt,94000);assert.equal(r.mark('slow',10,'ready'),null);
+r.cancel();assert.equal(r.startAt,0);r.begin(11,['host']);assert.equal(r.mark('host',10,'ready'),null);r.mark('host',11,'loaded');r.mark('host',11,'ready');assert.equal(r.startAt,94000);
+const v=votes.coordinator(m=>['a','b','c'].includes(m),()=>.99);assert(!v.begin(['a'],['h']));assert(!v.begin(['a','a'],['h']));assert(!v.begin(['a','x'],['h']));assert(!v.begin(['a','b','c','a'],['h']));
+assert(v.begin(['a','b','c'],['h','g']));let token=v.snapshot().id;assert(!v.cast('outsider',token,'a'));assert(!v.cast('h',token-1,'a'));assert(!v.cast('h',token,'x'));assert(v.cast('g',token,'a'));assert(!v.snapshot().done);assert(v.cast('h',token,'b'));assert(v.snapshot().done);assert.equal(v.snapshot().winner,'b');assert(!v.cast('g',token,'c'));
+v.begin(['a','b'],['h','g']);token=v.snapshot().id;v.cast('h',token,'a');v.roster(['h','g','new']);v.cast('g',token,'a');assert(!v.snapshot().done);v.roster(['h','g']);assert(v.snapshot().done);assert.equal(v.snapshot().winner,'a');v.cancel();assert.equal(v.snapshot(),null);
+console.log('PASS ready barrier: delayed loading, explicit confirmation, outsiders, stale rounds, duplicates, reset, host plus bots. PASS map voting: 2–3 valid choices, host vote, roster changes, tie resolution, stale votes and cancellation.');

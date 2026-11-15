@@ -1,0 +1,2555 @@
+{
+  "method": "Straight: actual KartRace.speed at 120 Hz for 200 seconds. Track: offline speed envelope, not a driven browser race.",
+  "rows": [
+    {
+      "car": "kart",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 1.792,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 1.65,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 1.517,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 1.783,
+      "top": 158.4
+    },
+    {
+      "car": "kart",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 1.642,
+      "top": 172.8
+    },
+    {
+      "car": "kart",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 1.525,
+      "top": 187.2
+    },
+    {
+      "car": "kart",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.9,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.825,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 1.767,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.983,
+      "top": 143.136
+    },
+    {
+      "car": "kart",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 2,
+      "top": 142.272
+    },
+    {
+      "car": "kart",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 2.008,
+      "top": 141.408
+    },
+    {
+      "car": "kart",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.917,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 1.867,
+      "top": 144
+    },
+    {
+      "car": "kart",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 1.808,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 1.792,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 1.65,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 1.517,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 1.783,
+      "top": 158.4
+    },
+    {
+      "car": "kart-apex",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 1.642,
+      "top": 172.8
+    },
+    {
+      "car": "kart-apex",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 1.525,
+      "top": 187.2
+    },
+    {
+      "car": "kart-apex",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.9,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.825,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 1.767,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.983,
+      "top": 143.136
+    },
+    {
+      "car": "kart-apex",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 2,
+      "top": 142.272
+    },
+    {
+      "car": "kart-apex",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 2.008,
+      "top": 141.408
+    },
+    {
+      "car": "kart-apex",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.917,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 1.867,
+      "top": 144
+    },
+    {
+      "car": "kart-apex",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 1.808,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 1.792,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 1.65,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 1.517,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 1.783,
+      "top": 158.4
+    },
+    {
+      "car": "kart-rally",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 1.642,
+      "top": 172.8
+    },
+    {
+      "car": "kart-rally",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 1.525,
+      "top": 187.2
+    },
+    {
+      "car": "kart-rally",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.9,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.825,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 1.767,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.983,
+      "top": 143.136
+    },
+    {
+      "car": "kart-rally",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 2,
+      "top": 142.272
+    },
+    {
+      "car": "kart-rally",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 2.008,
+      "top": 141.408
+    },
+    {
+      "car": "kart-rally",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.917,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 1.867,
+      "top": 144
+    },
+    {
+      "car": "kart-rally",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 1.808,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 1.792,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 1.65,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 1.517,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 1.783,
+      "top": 158.4
+    },
+    {
+      "car": "kart-vector",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 1.642,
+      "top": 172.8
+    },
+    {
+      "car": "kart-vector",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 1.525,
+      "top": 187.2
+    },
+    {
+      "car": "kart-vector",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.9,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.825,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 1.767,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.983,
+      "top": 143.136
+    },
+    {
+      "car": "kart-vector",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 2,
+      "top": 142.272
+    },
+    {
+      "car": "kart-vector",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 2.008,
+      "top": 141.408
+    },
+    {
+      "car": "kart-vector",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.917,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 1.867,
+      "top": 144
+    },
+    {
+      "car": "kart-vector",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 1.808,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 1.792,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 1.65,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 1.517,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 1.783,
+      "top": 158.4
+    },
+    {
+      "car": "kart-christmas",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 1.642,
+      "top": 172.8
+    },
+    {
+      "car": "kart-christmas",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 1.525,
+      "top": 187.2
+    },
+    {
+      "car": "kart-christmas",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.9,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.825,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 1.767,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.975,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.983,
+      "top": 143.136
+    },
+    {
+      "car": "kart-christmas",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 2,
+      "top": 142.272
+    },
+    {
+      "car": "kart-christmas",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 2.008,
+      "top": 141.408
+    },
+    {
+      "car": "kart-christmas",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.917,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 1.867,
+      "top": 144
+    },
+    {
+      "car": "kart-christmas",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 1.808,
+      "top": 144
+    },
+    {
+      "car": "porsche",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "porsche",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "porsche",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "porsche",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "porsche",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "porsche",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "porsche",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "porsche",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "amg",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "amg",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "amg",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "amg",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "amg",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "amg",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "amg",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "ferrari",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "ferrari",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "ferrari",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "ferrari",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "ferrari",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "ferrari",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "ferrari",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "bmw",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "bmw",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "bmw",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "bmw",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "bmw",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "bmw",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "bmw",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "aston",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "aston",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "aston",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "aston",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "aston",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "aston",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "aston",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "audi",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "audi",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "audi",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "audi",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "audi",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "audi",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "audi",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "lambo",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "lambo",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "lambo",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "lambo",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "lambo",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "lambo",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "lambo",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "stock",
+      "stage": 0,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "engine",
+      "stage": 1,
+      "zero100": 0.958,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "engine",
+      "stage": 2,
+      "zero100": 0.875,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "engine",
+      "stage": 3,
+      "zero100": 0.808,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "induction",
+      "stage": 1,
+      "zero100": 0.992,
+      "top": 269.28
+    },
+    {
+      "car": "mclaren",
+      "part": "induction",
+      "stage": 2,
+      "zero100": 0.942,
+      "top": 293.76
+    },
+    {
+      "car": "mclaren",
+      "part": "induction",
+      "stage": 3,
+      "zero100": 0.892,
+      "top": 318.24
+    },
+    {
+      "car": "mclaren",
+      "part": "gearbox",
+      "stage": 1,
+      "zero100": 1.033,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "gearbox",
+      "stage": 2,
+      "zero100": 1.008,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "gearbox",
+      "stage": 3,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "tyres",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "tyres",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "tyres",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "suspension",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "suspension",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "suspension",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "brakes",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "brakes",
+      "stage": 2,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "brakes",
+      "stage": 3,
+      "zero100": 1.05,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "aero",
+      "stage": 1,
+      "zero100": 1.05,
+      "top": 243.331
+    },
+    {
+      "car": "mclaren",
+      "part": "aero",
+      "stage": 2,
+      "zero100": 1.058,
+      "top": 241.862
+    },
+    {
+      "car": "mclaren",
+      "part": "aero",
+      "stage": 3,
+      "zero100": 1.058,
+      "top": 240.394
+    },
+    {
+      "car": "mclaren",
+      "part": "weight",
+      "stage": 1,
+      "zero100": 1.025,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "weight",
+      "stage": 2,
+      "zero100": 0.992,
+      "top": 244.8
+    },
+    {
+      "car": "mclaren",
+      "part": "weight",
+      "stage": 3,
+      "zero100": 0.967,
+      "top": 244.8
+    }
+  ],
+  "balance": [
+    {
+      "track": "spa",
+      "car": "kart",
+      "stock": 77.59,
+      "tuned": 60.11,
+      "gainPercent": 22.53
+    },
+    {
+      "track": "spa",
+      "car": "kart-apex",
+      "stock": 77.59,
+      "tuned": 60.11,
+      "gainPercent": 22.53
+    },
+    {
+      "track": "spa",
+      "car": "kart-rally",
+      "stock": 77.59,
+      "tuned": 60.11,
+      "gainPercent": 22.53
+    },
+    {
+      "track": "spa",
+      "car": "kart-vector",
+      "stock": 77.59,
+      "tuned": 60.11,
+      "gainPercent": 22.53
+    },
+    {
+      "track": "spa",
+      "car": "kart-christmas",
+      "stock": 77.59,
+      "tuned": 60.11,
+      "gainPercent": 22.53
+    },
+    {
+      "track": "spa",
+      "car": "porsche",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "spa",
+      "car": "amg",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "spa",
+      "car": "ferrari",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "spa",
+      "car": "bmw",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "spa",
+      "car": "aston",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "spa",
+      "car": "audi",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "spa",
+      "car": "lambo",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "spa",
+      "car": "mclaren",
+      "stock": 58.64,
+      "tuned": 45.52,
+      "gainPercent": 22.37
+    },
+    {
+      "track": "monza",
+      "car": "kart",
+      "stock": 61.96,
+      "tuned": 48.15,
+      "gainPercent": 22.3
+    },
+    {
+      "track": "monza",
+      "car": "kart-apex",
+      "stock": 61.96,
+      "tuned": 48.15,
+      "gainPercent": 22.3
+    },
+    {
+      "track": "monza",
+      "car": "kart-rally",
+      "stock": 61.96,
+      "tuned": 48.15,
+      "gainPercent": 22.3
+    },
+    {
+      "track": "monza",
+      "car": "kart-vector",
+      "stock": 61.96,
+      "tuned": 48.15,
+      "gainPercent": 22.3
+    },
+    {
+      "track": "monza",
+      "car": "kart-christmas",
+      "stock": 61.96,
+      "tuned": 48.15,
+      "gainPercent": 22.3
+    },
+    {
+      "track": "monza",
+      "car": "porsche",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monza",
+      "car": "amg",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monza",
+      "car": "ferrari",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monza",
+      "car": "bmw",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monza",
+      "car": "aston",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monza",
+      "car": "audi",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monza",
+      "car": "lambo",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monza",
+      "car": "mclaren",
+      "stock": 43.68,
+      "tuned": 34,
+      "gainPercent": 22.16
+    },
+    {
+      "track": "monaco",
+      "car": "kart",
+      "stock": 80.48,
+      "tuned": 62.39,
+      "gainPercent": 22.48
+    },
+    {
+      "track": "monaco",
+      "car": "kart-apex",
+      "stock": 80.48,
+      "tuned": 62.39,
+      "gainPercent": 22.48
+    },
+    {
+      "track": "monaco",
+      "car": "kart-rally",
+      "stock": 80.48,
+      "tuned": 62.39,
+      "gainPercent": 22.48
+    },
+    {
+      "track": "monaco",
+      "car": "kart-vector",
+      "stock": 80.48,
+      "tuned": 62.39,
+      "gainPercent": 22.48
+    },
+    {
+      "track": "monaco",
+      "car": "kart-christmas",
+      "stock": 80.48,
+      "tuned": 62.39,
+      "gainPercent": 22.48
+    },
+    {
+      "track": "monaco",
+      "car": "porsche",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    },
+    {
+      "track": "monaco",
+      "car": "amg",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    },
+    {
+      "track": "monaco",
+      "car": "ferrari",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    },
+    {
+      "track": "monaco",
+      "car": "bmw",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    },
+    {
+      "track": "monaco",
+      "car": "aston",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    },
+    {
+      "track": "monaco",
+      "car": "audi",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    },
+    {
+      "track": "monaco",
+      "car": "lambo",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    },
+    {
+      "track": "monaco",
+      "car": "mclaren",
+      "stock": 61.68,
+      "tuned": 47.95,
+      "gainPercent": 22.27
+    }
+  ]
+}

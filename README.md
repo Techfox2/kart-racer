@@ -1,94 +1,40 @@
-# Kart Racer 3D
+﻿# Grand Poly · 1.2.10
 
-A 3D kart racer in a single HTML file (three.js r128). Open `index.html` in a browser.
+Dieser Ordner Main ist das vollständige aktuelle Projekt und die Git-Repositorywurzel. Backups und Rest liegen außerhalb des Repositories.
 
-## Controls
-- **W / ↑** gas, **S / ↓** brake / reverse, **A D / ← →** steer
-- **Space (hold) + steer** = drift. Release for a mini-turbo (3 tiers: blue → orange → purple)
-- **E** item, **C** camera (chase, hood, cockpit, close 3rd person), **Esc / ⚙** key bindings, **M / ⌂** menu, **1–4** engine-failure quick-time event
-- Touch: on-screen buttons, including a **DRIFT** button
+## Build und Tests
 
-## Lobby (homepage)
-Arcade lobby following the UI/UX brief: a live 3D showroom with your kart on a podium, plus a shared button system
-(primary / mode / tile / icon buttons with hover, focus, pressed and disabled states), duotone SVG pictograms,
-glossy reward icons and comic stickers. Fonts: Lilita One + Nunito (Google Fonts, with system fallbacks).
+- `node build-client.cjs` erstellt die Browserpakete und kart_racer.html.
+- `py server/run_unit_tests.py` führt die Modultests aus (Linux: python3).
+- `py test-performance.py` prüft das Spiel in Edge mit Playwright, einem lokalen Testserver und einer isolierten temporären Datenbank. PLAYWRIGHT_MODULE kann den lokalen Pfad zu Playwright setzen.
 
-Every element is functional and uses real data. Progress is saved locally in the browser (`localStorage`, key `kart-save`):
-- **Spielen** starts a race right away with your last settings. **Eigenes Rennen**: track, mode (fun/competitive), 1/3/5 laps.
-- **Mehrspieler / Freunde**: online lobby (create a server, join by code, public lobbies).
-- **Garage**: paint and steering wheel. Your paint is also shown to online opponents. **Shop**: unlock paints with coins (some need a minimum level).
-- **Coins & XP** come only from finished races: 20 + 15 per beaten opponent + 5 per lap; XP 40 + 25 per opponent + 10 per lap.
-  Level = every 250 XP. There's no premium currency, since the game has nothing to spend it on.
-- **Missionen** with real progress (races, podiums, wins, stage-III turbos, Lucky Blocks, slipstream time, F1 tour).
-- **Bestzeiten**: local best laps per track (clearly not an online leaderboard).
-- **Strecke der Woche**: rotates weekly, double coins, with a real countdown to Monday 00:00. **Tagesbonus**: 50 coins once per day.
-  **Rang-Pfad**: coins for every new level.
-- Results screen after the race: place, total time, best lap, coins, XP, new best time, level-up. **Nochmal** restarts the same track.
-- Responsive: desktop 16:9, tablet, and mobile (vertical, PLAY at the top, navigation as a bottom bar, panels as bottom sheets).
-- Accessibility: semantic buttons, visible focus ring, Esc closes panels, labels on icon buttons, `prefers-reduced-motion` respected.
+## Server
 
-## Tracks
-- **Spa-Francorchamps, Monaco, Monza**: real F1 layouts from GPS data
-  ([bacinger/f1-circuits](https://github.com/bacinger/f1-circuits), MIT), scaled down
-  (Spa 1:2.6, Monaco 1:1.3, Monza 1:2.6), with real elevation profiles at the same scale
-  (Spa ≈ 100 m real → Eau Rouge/Raidillon, Kemmel climbing to Les Combes, descent to Stavelot;
-  Monaco: climb from Sainte Dévote to Casino, down to the tunnel). The HUD shows the corner name and height.
-- Rennstrecke, Schneeberge, Indoor-Kartbahn (original tracks)
+Nur den Inhalt von Main in ein neues Release-Verzeichnis kopieren. Alle benötigten normalen und saisonalen Texturen, Fahrzeugvorschauen, Modelle, Skripte, Kataloge, Lizenzen und Python-Servermodule sind enthalten. Buildquellen und Tests bleiben zur Wartung dabei. deployment-manifest.json enthält die geprüfte Dateiliste mit Prüfsummen.
 
-## Changes in this version
+Das Spiel benötigt den Python-Backenddienst und den bestehenden HTTPS-Reverse-Proxy. Rein statisches Hosting genügt nicht für Konten und Multiplayer. server/start.sh verwendet die vorhandene Serverstruktur:
 
-### Driving physics (rewritten)
-- **Drifting didn't work.** Drift *lowered* the grip limit and the kart had no real slip.
-  It now uses a world-velocity model: no hop, the rear slides out sideways (≈ 25–40° slip angle),
-  drift direction from steering, steering widens or tightens the line, a charge depending on steering, and a mini-turbo on release.
-- **Too much understeer.** The grip limit was 22 m/s² and steering was capped heavily. It's now 30 m/s² (× track grip)
-  with direct, speed-dependent steering and trail-braking.
-- Random "spin from slipping" removed. The kart only spins on hard crashes, oil, or rockets.
-- Physics substeps at high speed, so there's no tunnelling.
-- Slopes act with real gravity (9.8 · gradient).
-- **Karts sank into the ground on slopes** (up to 0.57 m on Spa): their height trailed the road and only used the nearest sample.
-  Height and pitch now come from all four wheel contact points, so no wheel goes below the road, even in steep hairpins.
+- GAME_ROOT: /var/www/kartracer/public
+- ACCOUNT_DATA: /var/www/kartracer/data
+- PUBLIC_ORIGIN: Inhalt von /var/www/kartracer/account-origin
 
-### Scenery placement (checked automatically on all maps)
-- Mountains used a fixed ring (560–800 m) that the real F1 tracks are bigger than, so on Spa and Monza they reached the track.
-  Monaco's sat only 21 m away. They're now placed outside the real track extent with ≥ 150 m clearance.
-- Monaco buildings only checked their centre point, so 5 of them stuck into the road or barrier. Now the whole footprint
-  stays behind the barrier and grass strip (≥ 16 m from the centreline).
-- Terrain between track sections at different heights (Monaco up to 7.9 m, Spa 3 m) rose through the barrier line.
-  Near the road it now follows the road height and may only rise or fall gradually further out.
-- Checked: no terrain vertex inside road/barrier/grass strip, no overlapping track corridors, trees ≥ 18 m from the centreline.
+Private Kontodaten, Datenbank samt WAL/SHM, Rollen-Seeds, Zugangsschutz und nginx-Konfiguration bleiben außerhalb des Webrelease erhalten. Sie dürfen beim Ersetzen der Spiel-Dateien nicht gelöscht oder durch Main überschrieben werden.
 
-### Camera
-- New 4th view **NAH (3. PERSON)**: close behind the kart (≈ 3.6 m, 1.75 m high), on all tracks.
-- Chase cameras never go below the road, and in the indoor hall they stay inside the walls and under the ceiling
-  (before, they clipped through the walls in tight corners).
+.git, .work, __pycache__, .env-Dateien, lokale Abhängigkeiten und private Daten niemals hochladen. Die .gitignore sorgt dafür, dass diese lokalen Dateien nicht in Git aufgenommen werden.
 
-### Tire effects
-- Skid marks on the road while drifting, braking and sliding
-- Tire smoke, plus sparks while drifting in the turbo-stage color
-- Rear wheels lock when braking (karts only brake at the rear) and spin faster while drifting
-- Tire-squeal sound
+## GitHub Desktop
 
-### Ground around elevation changes
-- Terrain height used to come from the single nearest track point, which made steps and cliffs where two track sections at
-  different heights are close. It's now a smooth weighted average of nearby track points, on a finer grid.
-- Next to the road there's a grass shoulder that follows the road height exactly (flat to behind the barrier, then an embankment),
-  so the terrain can't poke through the road or kerbs.
+File → Add Local Repository → diesen Main-Ordner auswählen. Kein neues Repository erstellen oder klonen: Die vorhandene .git enthält den bisherigen Verlauf und die GitHub-Verbindung. Alternativ bei „Can't find“ den Button Locate benutzen und Main auswählen.
 
-### Barriers (hitboxes + physics)
-- The hitbox was a lateral distance to the nearest centerline point, ~1 m in front of the visible barrier.
-  Now it's exact: two circles (front/rear of the kart) against the visible barrier line.
-- Barriers broke at light touches (vn > 4) and then let the kart drive off into nothing (invisible wall 30 m away).
-  Now they only break on hard hits, purely visually. The wall stays solid and the pieces come back after 3.5 s.
-- Impact response: little bounce, friction along the wall, and on glancing hits the kart turns parallel instead of sticking.
-- In tight hairpins, road edges, kerbs, barriers and walls folded over each other. They're now limited on the inside by the curve radius.
+Der nächste Commit zeigt ältere, unbenutzte Asset-Dateien als gelöscht. Diese Löschungen gehören zur Aufräumung; die lokalen Archive stehen außerhalb des Repositories in Backups bzw. Rest. Es wurde noch nichts committed oder gepusht.
 
-### Other bugs fixed
-- Minimap sat top-left over the lap/time display (`canvas{inset:0}`), and the player arrow pointed the wrong way (mirrored).
-- Bots drove through the barriers on narrow tracks (Monaco/indoor). Their lateral offset is now limited by the barriers, and bots no longer drive into each other.
-- Bot speed profile was computed from too coarse a curvature (too fast in hairpins).
-- Trees were placed off-centre from the track, and the placement loop could hang forever.
-- C/M shortcuts overrode custom key bindings.
-- The pit-stop zone sat right in La Source on Spa. It's now just before the finish line on the straight. Its "missed" logic is now independent of track length.
-- Index-based constants (grid, lookahead, pit lane) were converted to metres, because the F1 tracks are sampled more finely.
-- No drift button on touch devices.
+## Backups und Rest
+
+Backups bewahrt alle vorhandenen vollständigen Versionen, einschließlich der ausdrücklich zurückgezogenen Versionen 1.2.9/1.2.10. Das neue Release-Backup 1.2.10-upgrades-racing enthält Upgrades & Fair Racing. Historische Kandidaten bleiben unverändert. Keine Beschränkung auf die letzten drei Versionen mehr.
+
+Rest enthält unbenutzte Original-Assets, Entwürfe, alte Arbeitsdateien und den unveränderten Zwischenstand mit der früher irrtümlichen Bezeichnung 1.2.11. Rest gehört nicht zum aktuellen Spiel und nicht zu Git.
+
+## Aktueller Release-Auftrag
+1.2.10 – Upgrades & Fair Racing: wirksame Upgrades mit unabhängigem Schalter, Live-Fahrwerte, Gras-Rundenzeiten, Abstandsindikatoren, Klassenregeln und synchronisierte Fahrzeughöhe. Serververöffentlichung über HTTPS und zwei Clients bestätigt, kein GitHub-Push. Aktuellen geprüften Stand und Grenzen in changelog.md beachten. Private Zugänge/Uploadregeln liegen unter ../../Server Access.
+
+Neue Regressionen: node test-upgrades1210.cjs, node test-classes1210.cjs, node test-host-classes1210.cjs. Browserprüfungen mit py test-ui129.py und UI_TEST_SCRIPT=test-upgrades1210-browser.cjs, test-grass1210-browser.cjs oder test-multiplayer1210.cjs verwenden jeweils eine isolierte Datenbank.

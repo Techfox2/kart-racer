@@ -1,0 +1,1 @@
+addEventListener('kart-season-change',()=>{for(const m of artMaterials)refreshArt(m);if(typeof SR!=='undefined'&&SR.scene){showroomKart();renderLobby()}if(typeof cur!=='undefined'&&cur)cur.room.presence({skin:KartSeason.skin(SAVE.kartSkin)}).catch(()=>{})});

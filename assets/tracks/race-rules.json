@@ -1,0 +1,45 @@
+{
+  "distanceMargin": 0.9,
+  "maxSpeed": {
+    "competitive": {
+      "kart": 60,
+      "gt3": 90
+    },
+    "luckyblock": {
+      "kart": 70,
+      "gt3": 100
+    }
+  },
+  "tracks": {
+    "circuit": {
+      "length": 1441.53
+    },
+    "snow": {
+      "length": 1584.17
+    },
+    "indoor": {
+      "length": 718.72
+    },
+    "spa": {
+      "length": 2628.16
+    },
+    "monaco": {
+      "length": 2532.53
+    },
+    "monza": {
+      "length": 2202.62
+    },
+    "nurburgring": {
+      "length": 3602.92
+    },
+    "shanghai": {
+      "length": 3821.33
+    },
+    "switchback": {
+      "length": 584.3
+    },
+    "hairpin": {
+      "length": 573.76
+    }
+  }
+}

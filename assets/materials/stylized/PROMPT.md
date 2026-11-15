@@ -1,0 +1,9 @@
+# Stylized racing materials v1
+
+Generated with the built-in ChatGPT image generation tool on 2026-11-11.
+Reference: assets/backgrounds/singleplayer-pitlane-v2.png (style only).
+Source output: surfaces-v1.png. One 4 × 4 texture atlas; no third-party downloaded textures.
+
+## Prompt
+
+Use case: stylized-concept. Asset type: one square 2048x2048 game material texture atlas, exactly four columns and four rows, sixteen equally sized square tiles, no gutters or labels. Input image is only a STYLE REFERENCE, do not reproduce the scene. Match its charming polished low-poly toy racing aesthetic, saturated harmonious colors, gentle broad facets, soft clean materials, slightly realistic but distinctly stylized. Produce flat orthographic material swatches, evenly lit diffuse base colors, no directional light, shadows, objects, perspective, text, markings, logos or borders. Row 1 from left: smooth muted violet-grey road asphalt without lines; lush bright meadow grass with broad gentle color patches; cool light grey workshop concrete with broad subtle facets; navy blue painted metal. Row 2: warm red painted curb concrete; warm ivory white curb concrete; turquoise painted metal; sunny golden yellow painted metal. Row 3: leafy apple-green canopy surface with broad gentle facets, no distinct trees; blue-grey stone with subtle polygon planes; warm brown tree bark with soft broad vertical grain; softly varying powder blue-white snow without footprints. Row 4: pale sandy cream building stucco; desaturated blue-grey glazing without window frames or reflections of objects; warm grey roof panels texture without strong seams; charcoal rubber subtle facets without tire silhouettes. Every tile fills its exact square completely and works as a repeating texture; keep edges compatible, no cross-panel bleeding. This is a production texture atlas consumed by a 3D kart racing game, not a showcase of spheres or cubes.
