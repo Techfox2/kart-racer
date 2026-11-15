@@ -7,11 +7,13 @@ const click=sel=>async p=>{await jsclick(p,sel);await wait(p,600)};
 // Returns the page to the plain lobby (closes sheets, dialogs, panel, results, room lobby).
 async function reset(page){
  const close=()=>page.evaluate(()=>{
+  // the automatic "What's new" dialog is re-offered every 15s until it is dismissed with its own button
+  const up=document.querySelector('#updatesDialog[open] header button');if(up)up.click();
   document.querySelectorAll('dialog[open]').forEach(d=>d.close());
   if(!document.getElementById('sheetWrap').hidden)document.getElementById('sheetClose').click();
   if(document.getElementById('panel').classList.contains('on'))document.getElementById('close').click();
   const r=document.getElementById('results');if(r)r.hidden=true;
-  const pd=document.getElementById('paddock');if(pd&&!pd.hidden)document.getElementById('rleave').click();
+  const pd=document.getElementById('paddock');if(pd&&!pd.hidden){document.getElementById('rleave').click();pd.hidden=true}
   const l=document.getElementById('lobby');if(l&&getComputedStyle(l).display!=='none')document.getElementById('lback').click();
  });
  for(let i=0;i<3;i++){await close();await wait(page,250)}

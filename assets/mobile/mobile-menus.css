@@ -53,23 +53,20 @@
  html.km-on .lb-foot .short svg.ic{display:none}                              /* no room for icon + label in 3 shortcuts at 667px */
 }
 
-/* ===== Touch scrolling =====
-   html,body are touch-action:none; nested scrollers still need to say they pan. */
-html.km-on :where(#menu,.sheet-body,.kr-body,.tw-panel,.tw-layout,.paddock-actions){touch-action:pan-y;overscroll-behavior:contain}
-html.km-on #settingsTabs{touch-action:pan-x;overscroll-behavior-x:contain}
-
 /* ===== Tap targets under 40px ===== */
 html.km-on #coinInfo{width:40px;height:40px}                       /* lobby "+" beside the coin counter was 32px */
 html.km-on .tw-view-tools button{min-width:44px;min-height:40px}   /* tuning workshop view buttons (+, -, camera) were 22-30px wide */
+
+/* ===== Room paddock ===== */
+html.km-on .paddock-actions .seg button{height:40px}                /* Luckyblock / Kompetitiv switch was 32px high on phones */
+html.km-on .paddock-actions{padding-inline:4px}                      /* the skewed Starten / Freunde einladen buttons poked 3px out and made the panel scroll sideways */
 
 /* ===== Narrow phones (<=480px wide) ===== */
 @media (max-width:480px){
  /* Tab strips: "✓ " + label wrapped to two lines and spilled out of the pill ("1-20" in Rang-Pfad, "Meine Zeiten" in Times).
     The game already drops the tick for race setup and shop tabs; the pressed colour still shows the state. */
  html.km-on .seg button[aria-pressed=true]::before{content:none}
- html.km-on :is(.sheet,.kr-dialog) .seg button{padding-inline:4px;min-width:0;font-size:15px}   /* not the paddock strip: it already has its own 10px rule */
- /* Mission and Rang-Pfad rows: the claim button had flex:1 and took half the row, leaving 1-2 words per line for the text. */
- html.km-on .rowi>.btn{flex:none}
+ html.km-on .kr-dialog .seg button{padding-inline:4px;font-size:15px}   /* Times tabs: "Meine Zeiten" still wrapped at 360px without the tick */
  /* Online room form: Runden and Modus selects were ~110px wide and cut "3 Runden" / "Luckyblock". */
  html.km-on #lobby .two{grid-template-columns:minmax(0,1fr)}
 }
