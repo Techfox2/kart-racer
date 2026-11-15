@@ -1,14 +1,14 @@
 // Menu layout checks on phone viewports: no sideways overflow, primary actions reachable and
 // big enough, tall sheets scrollable by a real touch gesture. Desktop must be unaffected.
 //   node mobile/tests/menus.cjs [surface-prefix,...]        exit code = number of failures
-//   KM_PROBE=1 prints every measurement instead of only failures.
+//   KM_PROBE=1 prints every measurement instead of only failures; KM_NOCSS=1 blanks mobile-menus.css to show the stock layout's failures.
 const lib=require('./lib.cjs'),{SURFACES,reset,wait}=require('./menus-surfaces.cjs');
 const VIEWPORTS={'390x844':{width:390,height:844},'360x640':{width:360,height:640},'844x390':{width:844,height:390},'667x375':{width:667,height:375}};
 const only=process.argv[2]?process.argv[2].split(','):null;
 const MIN=40;
 
 // Runs inside the page. Measures one surface.
-function measure({root,actions,hscroll=[],MIN}){
+function measure({root,actions,hscroll=[],controls,MIN}){
  const vw=document.documentElement.clientWidth,vh=innerHeight,out={vw,vh,problems:[]};
  const rootEl=document.querySelector(root);
  if(!rootEl||!rootEl.checkVisibility())return{...out,missing:true};
@@ -33,6 +33,10 @@ function measure({root,actions,hscroll=[],MIN}){
   if(r.x<-1||r.r>vw+1){out.problems.push('outside viewport x: '+(e.id?'#'+e.id:e.tagName+'.'+e.className)+' '+Math.round(r.x)+'..'+Math.round(r.r));break}
  }
  for(const e of [rootEl,...scrollers]){if(hs.includes(e))continue;if(e.scrollWidth>e.clientWidth+1&&getComputedStyle(e).overflowX!=='visible'&&!/hidden/.test(getComputedStyle(e).overflowX))out.problems.push('sideways overflow in '+(e.id||e.className)+' '+e.scrollWidth+'>'+e.clientWidth)}
+ // labels spilling out of their button (wrapped tab text, clipped captions)
+ out.spill=[...rootEl.querySelectorAll('button,.btn,.tile,.short,.event')].filter(vis).filter(b=>b.scrollHeight>b.clientHeight+2||b.scrollWidth>b.clientWidth+2).map(b=>(b.id?'#'+b.id:b.className.toString().split(' ')[0])+'['+b.textContent.trim().slice(0,16)+'] '+b.scrollWidth+'x'+b.scrollHeight+' in '+b.clientWidth+'x'+b.clientHeight);
+ // form controls that must stay wide enough to read their value ("3 Runden", "Luckyblock")
+ out.narrow=controls?[...document.querySelectorAll(controls)].filter(vis).map(e=>({id:e.id,w:Math.round(e.getBoundingClientRect().width)})).filter(x=>x.w<130):[];
  // horizontal scrollers (tab strips): must be able to scroll sideways with touch
  out.hscrollers=hs.filter(vis).map(e=>({sel:'#'+e.id,sw:e.scrollWidth,cw:e.clientWidth,ta:getComputedStyle(e).touchAction}));
  // actions: fully inside viewport after scrolling into view, not covered, >=MIN in the smaller dimension
@@ -73,6 +77,7 @@ async function run(){
    const cdp=await context.newCDPSession(page);
    t.ok(await page.evaluate(()=>KartMobile.active&&document.documentElement.classList.contains('km-on')),vn+' mobile layer active');
    await page.waitForFunction(()=>document.querySelector('style[data-km*="mobile-menus"]')?.textContent.length>100,null,{timeout:20000}).catch(()=>{});
+   if(process.env.KM_NOCSS)await page.evaluate(()=>{document.querySelector('style[data-km*="mobile-menus"]').textContent=''});   // baseline: stock game layout
    for(const s of SURFACES){
     if(only&&!only.some(o=>s.name.startsWith(o)))continue;
     const tag=vn+' '+s.name;
@@ -80,10 +85,12 @@ async function run(){
      await reset(page);await s.open(page);
      await page.waitForFunction(r=>{const e=document.querySelector(r);return e&&e.checkVisibility()&&!e.getAnimations({subtree:true}).some(a=>a.effect.getComputedTiming().iterations!==Infinity&&a.playState==='running')},s.root,{timeout:6000}).catch(()=>{});
     }catch(e){if(s.optional){skipped.push(tag+' (could not open: '+e.message.split('\n')[0]+')');continue}t.ok(false,tag+' opens',e.message.split('\n')[0]);continue}
-    const m=await page.evaluate(measure,{root:s.root,actions:s.actions,hscroll:s.hscroll||[],MIN});
+    const m=await page.evaluate(measure,{root:s.root,actions:s.actions,hscroll:s.hscroll||[],controls:s.controls,MIN});
     if(m.missing){if(s.optional){skipped.push(tag+' (not shown)');continue}t.ok(false,tag+' is shown');continue}
     if(probe)console.log(JSON.stringify(m));
     t.ok(m.docOverflow<=0,tag+' no horizontal page overflow',m.docOverflow+'px');
+    t.ok(m.spill.length===0,tag+' button labels fit',m.spill.slice(0,4).join('; '));
+    t.ok(m.narrow.length===0,tag+' form controls wide enough',JSON.stringify(m.narrow));
     t.ok(m.problems.length===0,tag+' layout inside viewport',m.problems.join('; '));
     for(const b of m.buttons){
      t.ok(b.inside&&!b.covered,tag+' '+b.sel+' reachable',`inside=${b.inside} covered=${b.covered}`);

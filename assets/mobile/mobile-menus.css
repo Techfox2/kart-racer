@@ -67,7 +67,7 @@ html.km-on .tw-view-tools button{min-width:44px;min-height:40px}   /* tuning wor
  /* Tab strips: "✓ " + label wrapped to two lines and spilled out of the pill ("1-20" in Rang-Pfad, "Meine Zeiten" in Times).
     The game already drops the tick for race setup and shop tabs; the pressed colour still shows the state. */
  html.km-on .seg button[aria-pressed=true]::before{content:none}
- html.km-on .seg button{padding-inline:4px;min-width:0;font-size:15px}
+ html.km-on :is(.sheet,.kr-dialog) .seg button{padding-inline:4px;min-width:0;font-size:15px}   /* not the paddock strip: it already has its own 10px rule */
  /* Mission and Rang-Pfad rows: the claim button had flex:1 and took half the row, leaving 1-2 words per line for the text. */
  html.km-on .rowi>.btn{flex:none}
  /* Online room form: Runden and Modus selects were ~110px wide and cut "3 Runden" / "Luckyblock". */

@@ -31,7 +31,7 @@ const SURFACES=[
  {name:'updates',open:click('[data-open=news]'),root:'#updatesDialog',actions:['#updatesDialog header button']},
  {name:'friends',open:async p=>{await jsclick(p,'[data-open=friends]');await wait(p,1000)},root:'#friendsDialog',actions:['#friendsDialog header button']},
  {name:'room-home',open:click('#mpBtn'),root:'#lobby .sheet',actions:['#lback','#lcreate','#ljoin']},
- {name:'room-create',open:async p=>{await jsclick(p,'#mpBtn');await wait(p,400);await jsclick(p,'#lcreate');await wait(p,500)},root:'#lobby .sheet',actions:['#lback','#mk']},
+ {name:'room-create',open:async p=>{await jsclick(p,'#mpBtn');await wait(p,400);await jsclick(p,'#lcreate');await wait(p,500)},root:'#lobby .sheet',actions:['#lback','#mk'],controls:'#lobby select'},
  {name:'room-join',open:async p=>{await jsclick(p,'#mpBtn');await wait(p,400);await jsclick(p,'#ljoin');await wait(p,500)},root:'#lobby .sheet',actions:['#lback','#jn']},
  // Creating a room needs the online service, which the sandbox does not have ("Onlinedienst nicht erreichbar"), so the
  // paddock is un-hidden with host controls for layout purposes only (no peers, no 3D scene).
