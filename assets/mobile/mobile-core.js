@@ -38,7 +38,10 @@
  function readState(){
   if(document.body.classList.contains('lobby')||!window.kartActiveTrack)return'lobby';
   const results=document.getElementById('results');if(results&&!results.hidden)return'results';
-  if(document.getElementById('panel')?.classList.contains('on')||document.querySelector('dialog[open]'))return'paused';
+  // game.js shows a modal #raceLoading dialog while a track loads; kartActiveTrack is already
+  // set by then, so that dialog means "not playable yet", not "paused".
+  if(document.getElementById('raceLoading')?.open)return'lobby';
+  if(document.getElementById('panel')?.classList.contains('on')||document.querySelector('dialog[open]:not(#raceLoading)'))return'paused';
   return'race';
  }
  function syncState(){const next=readState();if(next===state)return;const previous=state;state=next;root.dataset.kmState=state;emit('state',{state,previous})}

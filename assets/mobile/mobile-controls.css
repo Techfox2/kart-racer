@@ -1,0 +1,399 @@
+/* Grand Poly mobile layer · in-race touch controls and HUD arrangement.
+   Everything is scoped under html.km-on (set by mobile-core.js), so desktop is unaffected.
+   Core provides --km-size, --km-opacity, html.km-mirror, html[data-km-scheme], html[data-km-state]. */
+
+/* ---------- layout tokens ---------- */
+html.km-on {
+  --km-gap: 12px;
+  --km-el: max(20px, calc(env(safe-area-inset-left, 0px) + 12px));
+  --km-er: max(20px, calc(env(safe-area-inset-right, 0px) + 12px));
+  --km-eb: max(14px, calc(env(safe-area-inset-bottom, 0px) + 8px));
+  --km-et: calc(12px + env(safe-area-inset-top, 0px));
+  /* Sizes scale with the setting but are capped by the viewport so nothing leaves the screen. */
+  --km-steer: min(calc(80px * var(--km-size, 1)), 21vw, 25vh);
+  --km-big: min(calc(92px * var(--km-size, 1)), 23vw, 27vh);
+  --km-small: min(calc(64px * var(--km-size, 1)), 16vw, 18vh);
+  --km-pedal: min(calc(84px * var(--km-size, 1)), 21vw, 25vh);
+  /* Height of the right cluster; the minimap (landscape) and the HUD stack (portrait) keep above it. */
+  --km-stack: max(var(--km-big), calc(var(--km-small) * 2 + var(--km-gap)));
+  --km-sp-h: 62px;
+  /* Minimap: stock size, shrunk on short landscape screens so it stays above the right cluster. */
+  --km-map-top: calc(76px + env(safe-area-inset-top, 0px));
+  --km-map-max: 170px;
+  --km-map: max(88px, min(var(--km-map-max), calc(100vh - var(--km-map-top) - var(--km-stack) - var(--km-eb) - 12px)));
+}
+html.km-on[data-km-gas=pedal] { --km-stack: calc(var(--km-small) + var(--km-gap) + max(var(--km-big), var(--km-pedal))); }
+@media (max-width: 760px) { html.km-on { --km-map-max: 124px; } }
+@media (orientation: portrait) and (max-width: 480px) {
+  html.km-on {
+    --km-gap: 10px;
+    --km-steer: min(calc(80px * var(--km-size, 1)), 19vw);
+    --km-big: min(calc(92px * var(--km-size, 1)), 21vw);
+    --km-small: min(calc(64px * var(--km-size, 1)), 16vw);
+    --km-pedal: min(calc(84px * var(--km-size, 1)), 19vw);
+  }
+}
+
+/* ---------- the stock row stays in the DOM as the event target, but is never seen or hit ---------- */
+html.km-on #touch { visibility: hidden !important; pointer-events: none !important; }
+
+/* ---------- overlay ---------- */
+#kmControls { display: none; }
+html.km-on[data-km-state=race] #kmControls,
+html.km-on[data-km-state=paused] #kmControls {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 7; /* above HUD (2-3) and #touch, below #raceTelemetry (8, kept clear), sheets (30+) and dialogs */
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+#kmControls [hidden] { display: none !important; }
+
+#kmControls .km-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  border: var(--bw-l, 4px) solid var(--navy, #171329);
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(64, 54, 112, .95), rgba(36, 29, 64, .95));
+  /* Navy edge + drop for bright scenes, thin light ring for dark ones. */
+  box-shadow: 0 5px 0 var(--navy, #171329), 0 0 0 2px rgba(255, 255, 255, .5), inset 0 3px 0 rgba(255, 255, 255, .22);
+  font-family: var(--font-d, 'Lilita One', Impact, sans-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 var(--navy, #171329);
+  opacity: var(--km-opacity, .7);
+  cursor: pointer;
+  transition: transform .05s ease-out, opacity .12s, box-shadow .05s, filter .05s;
+}
+#kmControls .km-btn svg { width: 46%; height: 46%; filter: drop-shadow(0 2px 0 var(--navy, #171329)); pointer-events: none; }
+#kmControls .km-btn span { pointer-events: none; }
+#kmControls .km-btn.is-down {
+  opacity: 1;
+  transform: translateY(4px);
+  filter: brightness(1.18) saturate(1.1);
+  box-shadow: 0 1px 0 var(--navy, #171329), 0 0 0 3px #fff, inset 0 3px 0 rgba(255, 255, 255, .3);
+}
+#kmControls .km-btn:focus-visible { outline: 3px solid var(--yellow, #FFCB05); outline-offset: 4px; }
+
+/* ---------- left cluster: steer buttons ---------- */
+#kmControls .km-steer,
+#kmControls .km-tilt {
+  position: absolute;
+  left: var(--km-el);
+  bottom: var(--km-eb);
+  display: flex;
+  gap: var(--km-gap);
+  align-items: flex-end;
+}
+#kmControls .km-steer .km-btn {
+  width: var(--km-steer);
+  height: var(--km-steer);
+  border-radius: 26%;
+}
+#kmControls .km-steer .km-btn svg { width: 54%; height: 54%; }
+#kmControls .km-steer .km-btn.is-down {
+  color: var(--navy, #171329);
+  background: linear-gradient(180deg, var(--yellow-2, #FFE46B), var(--yellow, #FFCB05));
+  text-shadow: none;
+}
+#kmControls .km-steer .km-btn.is-down svg { filter: none; }
+
+/* ---------- right cluster: item / brake / drift (/ gas) on a grid ---------- */
+#kmControls .km-actions {
+  position: absolute;
+  right: var(--km-er);
+  bottom: var(--km-eb);
+  display: grid;
+  gap: var(--km-gap);
+  /* Arc: drift in the corner, brake beside it, item above brake. */
+  grid-template-columns: var(--km-small) var(--km-big);
+  grid-template-rows: var(--km-small) var(--km-small);
+  grid-template-areas: "item drift" "brake drift";
+  align-items: end;
+  justify-items: center;
+}
+#kmControls .km-actions > * { direction: ltr; }
+#kmControls .km-item { grid-area: item; width: var(--km-small); height: var(--km-small); background: linear-gradient(180deg, #b884ff, var(--purple, #8C42F5)); }
+#kmControls .km-brake { grid-area: brake; width: var(--km-small); height: var(--km-small); background: linear-gradient(180deg, #ff8077, #d8332a); font-size: calc(var(--km-small) * .2); }
+#kmControls .km-drift { grid-area: drift; width: var(--km-big); height: var(--km-big); background: linear-gradient(180deg, #5cc8ff, var(--blue, #12A8FF)); font-size: calc(var(--km-big) * .22); }
+#kmControls .km-gas { grid-area: gas; display: none; width: var(--km-pedal); height: var(--km-pedal); color: var(--navy, #171329); text-shadow: 0 1px 0 rgba(255, 255, 255, .5); background: linear-gradient(180deg, var(--yellow-2, #FFE46B), var(--yellow, #FFCB05)); font-size: calc(var(--km-pedal) * .26); }
+#kmControls .km-item svg { width: 50%; height: 50%; }
+
+/* Gas pedal shown (auto-accelerate off): gas takes the corner, drift beside it, brake above gas. */
+#kmControls[data-gas=pedal] .km-actions {
+  grid-template-columns: var(--km-big) var(--km-pedal);
+  grid-template-rows: var(--km-small) max(var(--km-big), var(--km-pedal));
+  grid-template-areas: "item brake" "drift gas";
+}
+#kmControls[data-gas=pedal] .km-gas { display: grid; }
+
+/* Left-handed: clusters swap sides; the action grid mirrors so drift/gas stay at the outer corner. */
+html.km-mirror #kmControls .km-steer,
+html.km-mirror #kmControls .km-tilt { left: auto; right: var(--km-er); }
+html.km-mirror #kmControls .km-actions { right: auto; left: var(--km-el); direction: rtl; }
+
+/* ---------- scheme visibility ---------- */
+#kmControls .km-steer,
+#kmControls .km-zone,
+#kmControls .km-tilt { display: none; }
+html[data-km-scheme=buttons] #kmControls .km-steer { display: flex; }
+html[data-km-scheme=slide] #kmControls .km-zone { display: block; }
+html[data-km-scheme=tilt] #kmControls .km-tilt { display: flex; }
+
+/* ---------- slide scheme: floating steer zone ---------- */
+#kmControls .km-zone {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 46%;
+  height: 64%;
+  pointer-events: auto;
+  touch-action: none;
+}
+html.km-mirror #kmControls .km-zone { left: auto; right: 0; }
+#kmControls .km-zone-hint {
+  position: absolute;
+  left: var(--km-el);
+  bottom: var(--km-eb);
+  width: calc(var(--km-steer) * 2 + var(--km-gap));
+  height: calc(var(--km-steer) * .7);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border: 3px dashed rgba(255, 255, 255, .55);
+  border-radius: 999px;
+  background: rgba(23, 19, 41, .35);
+  color: #fff;
+  opacity: var(--km-opacity, .7);
+  transition: opacity .15s;
+}
+html.km-mirror #kmControls .km-zone-hint { left: auto; right: var(--km-er); }
+#kmControls .km-zone-hint svg { width: 30px; height: 30px; filter: drop-shadow(0 2px 0 var(--navy, #171329)); }
+#kmControls .km-zone-hint i { flex: 1; height: 4px; margin: 0 8px; border-radius: 2px; background: rgba(255, 255, 255, .35); }
+#kmControls .km-zone.is-active .km-zone-hint { opacity: 0; }
+#kmControls .km-stick {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  pointer-events: none;
+}
+#kmControls .km-zone.is-active .km-stick { display: block; }
+/* Track: as wide as full lock on each side; centred on the touch-down point. */
+#kmControls .km-stick::before {
+  content: '';
+  position: absolute;
+  left: calc(-70px * var(--km-size, 1) - 30px);
+  top: -30px;
+  width: calc(140px * var(--km-size, 1) + 60px);
+  height: 60px;
+  box-sizing: border-box;
+  border: 3px solid rgba(255, 255, 255, .6);
+  border-radius: 999px;
+  background: rgba(23, 19, 41, .45);
+  box-shadow: 0 0 0 3px rgba(23, 19, 41, .5);
+}
+#kmControls .km-knob {
+  position: absolute;
+  left: -30px;
+  top: -30px;
+  width: 60px;
+  height: 60px;
+  box-sizing: border-box;
+  border: var(--bw-l, 4px) solid var(--navy, #171329);
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--yellow-2, #FFE46B), var(--yellow, #FFCB05));
+  box-shadow: 0 4px 0 var(--navy, #171329), 0 0 0 2px #fff;
+}
+
+/* ---------- tilt scheme ---------- */
+#kmControls .km-tilt .km-tilt-enable {
+  display: none;
+  grid-auto-flow: column;
+  gap: 8px;
+  width: auto;
+  height: 56px;
+  padding: 0 18px 0 12px;
+  border-radius: 16px;
+  font-size: 16px;
+  opacity: 1;
+}
+#kmControls .km-tilt .km-tilt-enable svg { width: 28px; height: 28px; }
+#kmControls[data-tilt=needs-permission] .km-tilt-enable { display: grid; }
+#kmControls .km-tilt-meter {
+  display: none;
+  position: relative;
+  width: 168px;
+  height: 18px;
+  box-sizing: border-box;
+  border: 3px solid var(--navy, #171329);
+  border-radius: 999px;
+  background: rgba(23, 19, 41, .55);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .45);
+  opacity: var(--km-opacity, .7);
+}
+#kmControls[data-tilt=on] .km-tilt-meter,
+#kmControls[data-tilt=waiting] .km-tilt-meter { display: block; }
+#kmControls .km-tilt-meter::before { content: ''; position: absolute; left: 50%; top: 2px; bottom: 2px; width: 2px; margin-left: -1px; background: rgba(255, 255, 255, .4); }
+#kmControls .km-tilt-meter i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 3px solid var(--navy, #171329);
+  border-radius: 50%;
+  background: var(--yellow, #FFCB05);
+  transform: translateX(calc(var(--km-tilt, 0) * 70px));
+}
+
+/* ---------- fullscreen toggle (top row, left of the pause button) ---------- */
+#kmControls .km-full {
+  position: absolute;
+  top: var(--km-et);
+  left: calc(50% - 120px);
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  pointer-events: auto;
+  color: #fff;
+}
+#kmControls .km-full svg { width: 26px; height: 26px; }
+#kmControls.is-fullscreen .km-full { color: var(--yellow, #FFCB05); }
+
+/* ---------- inline notice (tilt fallback, calibration) ---------- */
+#kmControls .km-note {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--km-et) + 60px);
+  max-width: min(86vw, 420px);
+  margin: 0;
+  padding: 8px 14px;
+  transform: translateX(-50%);
+  border: var(--bw, 3px) solid var(--navy, #171329);
+  border-radius: 12px;
+  background: var(--navy-2, #241d40);
+  box-shadow: 0 4px 0 var(--navy, #171329);
+  color: #fff;
+  font: 800 14px/1.3 var(--font-u, system-ui, sans-serif);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s, visibility .2s;
+}
+#kmControls .km-note.on { opacity: 1; visibility: visible; }
+
+/* ---------- HUD rearrangement ---------- */
+/* Speed: compact, bottom centre between the clusters (also in the cockpit camera). */
+html.km-on #sp,
+html.km-on #sp.cockpit-speed {
+  left: 50%;
+  right: auto;
+  bottom: var(--km-eb);
+  transform: translateX(-50%) skewX(var(--skew, -7deg));
+  min-width: 112px;
+  padding: 0 12px 4px;
+  font-size: 36px;
+  line-height: 1.15;
+}
+html.km-on #sp small { font-size: 11px; margin-top: -4px; }
+html.km-on #sp .speed-debug { display: none; }
+html.km-on #dr { bottom: calc(var(--km-eb) + var(--km-sp-h) + 10px); }
+html.km-on #rearIndicator {
+  bottom: calc(var(--km-eb) + var(--km-sp-h) + 14px);
+  grid-template-columns: repeat(2, max-content);
+  gap: 3px 8px;
+  font-size: 11px;
+}
+@media (min-width: 1000px) { html.km-on #rearIndicator { grid-template-columns: repeat(3, max-content); } }
+/* Narrow landscape: the centre gap between the clusters is only ~250px wide. */
+@media (max-width: 760px) {
+  html.km-on #rearIndicator { font-size: 10px; gap: 2px 6px; }
+  html.km-on #rearIndicator .driver-distance svg { width: 16px; height: 16px; }
+}
+/* The QTE prompt must stay above the controls. */
+html.km-on #qte { z-index: 9; }
+
+/* Top row: [fullscreen] [pause] [home] [camera]; the camera button becomes an icon. */
+html.km-on #camera,
+html.km-on #camera.cockpit-camera {
+  top: var(--km-et);
+  bottom: auto;
+  left: calc(50% + 72px);
+  right: auto;
+  width: 48px;
+  min-width: 0;
+  height: 48px;
+  padding: 0;
+  border-radius: var(--r-s, 10px);
+}
+html.km-on #camera .bt b { display: none; }
+html.km-on #camera .bt::after {
+  content: '';
+  width: 26px;
+  height: 26px;
+  margin: auto;
+  background: currentColor;
+  filter: drop-shadow(0 2px 0 var(--navy, #171329));
+  -webkit-mask: var(--km-cam-icon) center / contain no-repeat;
+  mask: var(--km-cam-icon) center / contain no-repeat;
+}
+html.km-on {
+  --km-cam-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 7.5A1.5 1.5 0 0 1 4.5 6h3l1.4-2h6.2l1.4 2h3A1.5 1.5 0 0 1 21 7.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z' fill-rule='evenodd' fill='black'/%3E%3C/svg%3E");
+}
+html.km-on #minimap { top: var(--km-map-top); width: var(--km-map); height: var(--km-map); }
+
+/* Lap/time line must not run under the top row on narrow landscape screens. */
+html.km-on #tl { max-width: calc(50% - 150px); }
+
+/* Telemetry: kept above the left cluster; scrolls instead of growing into the controls. */
+html.km-on #raceTelemetry {
+  max-width: 200px;
+  max-height: calc(100vh - 128px - var(--km-steer) - var(--km-eb) - 16px);
+  max-height: calc(100dvh - 128px - var(--km-steer) - var(--km-eb) - 16px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+/* Portrait: the clusters fill the width, so speed and the rest stack above them. */
+@media (orientation: portrait) {
+  html.km-on #sp,
+  html.km-on #sp.cockpit-speed { bottom: calc(var(--km-eb) + var(--km-stack) + 14px); }
+  html.km-on #dr { bottom: calc(var(--km-eb) + var(--km-stack) + var(--km-sp-h) + 24px); }
+  html.km-on #rearIndicator { bottom: calc(var(--km-eb) + var(--km-stack) + var(--km-sp-h) + 64px); }
+  html.km-on { --km-map-top: calc(108px + env(safe-area-inset-top, 0px)); }
+  html.km-on #tl { max-width: none; }
+  html.km-on #camera,
+  html.km-on #camera.cockpit-camera { left: auto; right: var(--km-er); top: calc(var(--km-map-top) + var(--km-map) + 14px); }
+  html.km-on #raceTelemetry { max-height: calc(100vh - 140px - var(--km-stack) - var(--km-eb) - var(--km-sp-h) - 120px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #kmControls .km-btn,
+  #kmControls .km-zone-hint,
+  #kmControls .km-note { transition: none; }
+  #kmControls .km-btn.is-down { transform: none; }
+}
+
+/* ---------- settings block (inside #settings-controls, uses the game's .pref-row) ---------- */
+#kmSettings { margin-top: 18px; }
+#kmSettings .pref-row output { margin-left: auto; font-variant-numeric: tabular-nums; opacity: .85; }
+#kmSettings .pref-row input[type=range] { flex-basis: 100%; }
+#kmSettings .km-settings-msg { margin: 8px 0 0; min-height: 1.3em; font-weight: 800; color: var(--yellow, #FFCB05); }
+#kmSettings .km-settings-msg:empty { display: none; }

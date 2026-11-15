@@ -88,9 +88,11 @@ has no analog input. If true analog steering is wanted later, this one-line chan
 const tgt=((keys.left?1:0)-(keys.right?1:0))*(ctl?1:0);
 // after
 const analog=window.KartMobile?.controls?.steer;
-const tgt=(analog?analog:(keys.left?1:0)-(keys.right?1:0))*(ctl?1:0);
+const tgt=(analog?-analog:(keys.left?1:0)-(keys.right?1:0))*(ctl?1:0);
 ```
 
-This is not applied on this branch. Check the sign convention against
-`KartMobile.controls.steer` before using it, and note that `pl.steer` is sent to other
+This is not applied on this branch and is untested. `KartMobile.controls.steer` is
+-1 for full left and +1 for full right, the opposite of the game's `tgt`, hence the
+minus sign. With the hook in place the pulse emulation in `mobile-controls.js` should be
+switched off for the same frames. Note that `pl.steer` is sent to other
 players, so test it in an online race.

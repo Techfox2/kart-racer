@@ -1,0 +1,75 @@
+/* Grand Poly mobile layer · menus. Fixes only, scoped under html.km-on (set by mobile-core on touch devices). */
+
+/* ===== Short landscape phones (844x390, 667x375): everything outside a race ===== */
+@media (orientation:landscape) and (max-height:500px){
+
+ /* Lobby: stock layout squeezes the play buttons to 12px (grid rows collapse) or, below 760px wide, hides them under a fixed nav bar.
+    Use a compact 3-column grid: nav column | hero | actions, with the shortcuts row under hero+actions. */
+ html.km-on #menu{display:grid;grid-template-columns:76px minmax(0,1fr) minmax(240px,320px);grid-template-rows:auto auto auto;
+  grid-template-areas:"head head head" "nav hero actions" "nav foot foot";gap:8px 12px;
+  padding:calc(8px + env(safe-area-inset-top,0px)) calc(12px + env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) calc(12px + env(safe-area-inset-left,0px))}
+ html.km-on .lb-head,html.km-on .lb-hero,html.km-on .lb-actions,html.km-on .lb-foot,html.km-on .lb-nav{order:0}
+ html.km-on .lb-nav{position:static;flex-direction:column;gap:6px;padding:0;background:none;border:0;align-self:stretch;justify-content:space-between}
+ html.km-on .lb-nav .tile{height:auto;flex:1 1 0;min-height:44px;gap:2px}      /* 5 tiles share the column height instead of 5x78px */
+ html.km-on .lb-nav .tile svg.ic{width:24px;height:24px}
+ html.km-on .lb-nav .tile span{font-size:10px}
+ html.km-on .lb-hero{min-height:0}                                     /* rows are auto so the play buttons are never squeezed; at 375px the menu may scroll a few px */
+ html.km-on .lb-actions{gap:6px;justify-content:flex-start;min-height:0}
+ html.km-on .lb-actions .btn{--h-primary:58px;--h-mode:46px;padding:0 12px;flex:none}   /* header, 4 buttons and shortcuts must fit in 375px */
+ html.km-on .btn-primary .bt b{font-size:34px}
+ html.km-on .btn-mode .bt b{font-size:19px}
+ html.km-on .lb-foot{flex-direction:row;gap:8px}
+ html.km-on .lb-foot .event{min-height:52px;padding:6px 10px;flex:2 1 0;gap:8px}
+ html.km-on .lb-foot .event .et b{font-size:14px}
+ html.km-on .lb-foot .event .et small{font-size:10px}
+ html.km-on .lb-foot .event .sticker{top:-10px;right:auto;left:10px;font-size:10px}   /* sticker covered the event title at 667px */
+ html.km-on .lb-foot .event>svg.ic{width:24px;height:24px}
+ html.km-on .lb-foot .short{min-height:52px;min-width:0;padding:0 6px;gap:5px;flex:1 1 0}
+ html.km-on .lb-foot .short svg.ic{width:20px;height:20px}
+ html.km-on .lb-foot .short b{font-size:11px;letter-spacing:0}               /* "BELOHNUNGEN" was clipped at 667px */
+ html.km-on .lb-foot .short{justify-content:center}
+ html.km-on .lb-head{--h-icon:44px}                                   /* header was ~100px tall; coin pill and gear stay >=40px */
+ html.km-on .profile{padding:4px 14px 4px 6px}
+ html.km-on .profile .avatar{width:40px;height:40px}
+ html.km-on .profile .avatar svg{width:34px;height:34px}
+ html.km-on .pinfo small{display:none}
+ html.km-on .pname{font-size:18px}
+ html.km-on .crown{width:24px;height:24px;top:-12px;left:14px}
+
+ /* Sheets, dialogs, settings, results: stock head/foot/padding leave only ~100px of body at 375px high. */
+ html.km-on :is(.sheet-wrap,#lobby,#panel){padding:calc(6px + env(safe-area-inset-top,0px)) calc(10px + env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) calc(10px + env(safe-area-inset-left,0px))}
+ html.km-on :is(.sheet-wrap,#lobby,#panel)>.sheet{max-height:100%}
+ html.km-on .sheet-head{padding:6px 10px 6px 14px;gap:8px}
+ html.km-on .sheet-head h2{font-size:22px}
+ html.km-on .sheet-head svg.ic{width:28px;height:28px}
+ html.km-on .sheet-foot{padding:8px 12px}
+ html.km-on .sheet-foot .btn,html.km-on .sheet-foot .btn-row .btn{height:44px}
+ html.km-on .sheet-body{padding:10px 14px 12px;gap:10px}
+ html.km-on .kr-dialog[open]{display:flex;flex-direction:column;overflow:hidden}   /* header + 65svh body exceeded 88svh and clipped the bottom */
+ html.km-on .kr-dialog .kr-body{flex:1 1 auto;min-height:0;max-height:none}
+ html.km-on .kr-dialog header{padding:8px 14px}
+}
+@media (orientation:landscape) and (max-height:500px) and (max-width:720px){
+ html.km-on .lb-foot .short svg.ic{display:none}                              /* no room for icon + label in 3 shortcuts at 667px */
+}
+
+/* ===== Touch scrolling =====
+   html,body are touch-action:none; nested scrollers still need to say they pan. */
+html.km-on :where(#menu,.sheet-body,.kr-body,.tw-panel,.tw-layout,.paddock-actions){touch-action:pan-y;overscroll-behavior:contain}
+html.km-on #settingsTabs{touch-action:pan-x;overscroll-behavior-x:contain}
+
+/* ===== Tap targets under 40px ===== */
+html.km-on #coinInfo{width:40px;height:40px}                       /* lobby "+" beside the coin counter was 32px */
+html.km-on .tw-view-tools button{min-width:44px;min-height:40px}   /* tuning workshop view buttons (+, -, camera) were 22-30px wide */
+
+/* ===== Narrow phones (<=480px wide) ===== */
+@media (max-width:480px){
+ /* Tab strips: "✓ " + label wrapped to two lines and spilled out of the pill ("1-20" in Rang-Pfad, "Meine Zeiten" in Times).
+    The game already drops the tick for race setup and shop tabs; the pressed colour still shows the state. */
+ html.km-on .seg button[aria-pressed=true]::before{content:none}
+ html.km-on .seg button{padding-inline:4px;min-width:0;font-size:15px}
+ /* Mission and Rang-Pfad rows: the claim button had flex:1 and took half the row, leaving 1-2 words per line for the text. */
+ html.km-on .rowi>.btn{flex:none}
+ /* Online room form: Runden and Modus selects were ~110px wide and cut "3 Runden" / "Luckyblock". */
+ html.km-on #lobby .two{grid-template-columns:minmax(0,1fr)}
+}

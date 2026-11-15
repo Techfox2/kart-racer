@@ -8,13 +8,15 @@ async function environment(port=13990+Math.floor(Math.random()*500)){
  return{origin:box.origin,browser,async close(){await browser.close();box.stop()}};
 }
 // Opens the logged-in game. touch:false gives a desktop context (mobile layer must stay inactive).
-async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query=''}={}){
+// setup(page,context) runs before navigation (e.g. to install page.route hooks).
+async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query='',setup=null}={}){
  const context=await env.browser.newContext({viewport,hasTouch:touch,isMobile:touch});
  const response=await context.request.post(env.origin+'/api/register',{headers:{Origin:env.origin,'X-Kart-Request':'1'},
   data:{username:'QA'+crypto.randomBytes(5).toString('hex'),password:crypto.randomBytes(24).toString('hex')}});
  if(!response.ok())throw new Error('register failed: '+response.status());
  const page=await context.newPage(),errors=[];
  page.on('pageerror',e=>errors.push(String(e.message||e)));
+ if(setup)await setup(page,context);
  await page.goto(env.origin+'/'+query);
  await page.waitForFunction(()=>!document.getElementById('bootStatus'),null,{timeout:90000});
  await page.evaluate(()=>document.querySelectorAll('dialog[open]').forEach(d=>d.close()));
@@ -22,7 +24,9 @@ async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query=''}={}){
 }
 // Starts a solo race and waits until the countdown is over and the kart accepts input.
 async function startRace(page,{track='circuit',bots=0,laps=1,category='kart'}={}){
- await page.evaluate(o=>launch(o.track,{...SAVE,laps:o.laps,category:o.category,botCount:o.bots,comp:true}),{track,bots,laps,category});
+ // updates.js may auto-open its modal (and set the game's paused flag) after open() returned;
+ // a real player could not start a race behind it, so close any open dialog first.
+ await page.evaluate(o=>{document.querySelectorAll('dialog[open]').forEach(d=>d.close());launch(o.track,{...SAVE,laps:o.laps,category:o.category,botCount:o.bots,comp:true})},{track,bots,laps,category});
  await page.waitForFunction(t=>window.kartActiveTrack===t&&window.KartRaceDebug?.current,track,{timeout:90000});
  await page.waitForFunction(()=>document.getElementById('msg')?.textContent.includes('LOS')||document.getElementById('msg')?.textContent==='',null,{timeout:90000}).catch(()=>{});
  await page.waitForTimeout(1200);
