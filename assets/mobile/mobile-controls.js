@@ -346,6 +346,7 @@
     if (settingsUI) settingsUI.message(message);
   }
 
+  const setOnce = (node, name, value) => { if (node.getAttribute(name) !== value) node.setAttribute(name, value); };
   // Pressed state and analog indicators, refreshed every frame.
   function renderFeedback() {
     const keys = lastKeys;
@@ -359,10 +360,12 @@
     el.brake.classList.toggle('is-down', !!keys.down);
     el.gas.classList.toggle('is-down', !!keys.up && !KM.get('autoGas'));
     el.item.classList.toggle('is-down', itemFrames > 0 || [...pointers.values()].some(p => p.kind === 'item'));
-    el.zone.setAttribute('aria-valuenow', String(Math.round(steerValue * 100)));
+    // Written only on change: an unchanged setAttribute still queues a DOM mutation every frame.
+    setOnce(el.zone, 'aria-valuenow', String(Math.round(steerValue * 100)));
     if (KM.get('scheme') === 'tilt') {
-      el.tiltMeter.style.setProperty('--km-tilt', tilt.value.toFixed(3));
-      el.tiltMeter.setAttribute('aria-valuenow', String(Math.round(tilt.value * 100)));
+      const v = tilt.value.toFixed(3);
+      if (el.tiltMeter.style.getPropertyValue('--km-tilt') !== v) el.tiltMeter.style.setProperty('--km-tilt', v);
+      setOnce(el.tiltMeter, 'aria-valuenow', String(Math.round(tilt.value * 100)));
     }
   }
 

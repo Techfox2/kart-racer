@@ -31,7 +31,7 @@ async function hook(page) {
         Object.defineProperty(keys, 'item', { configurable: true, enumerable: true, get: () => item, set: v => { if (v && !item) window.__itemSets++; item = v; } });
         Object.defineProperty(keys, '__kmItem', { value: true });
       }
-      window.__samples.push({ steer: pl.steer, drift: pl.drift, speed: pl.vF, up: keys.up, down: keys.down, left: keys.left, right: keys.right, state, t: performance.now() });
+      window.__samples.push({ steer: pl.steer, drift: pl.drift, speed: pl.vF, up: keys.up, down: keys.down, left: keys.left, right: keys.right, spin: pl.spin > 0 || pl.fin ? 1 : 0, state, t: performance.now() });
       if (window.__samples.length > 4000) window.__samples.splice(0, 2000);
     };
   });
@@ -41,7 +41,7 @@ const resetSamples = page => page.evaluate(() => { window.__samples = []; });
 const stats = page => page.evaluate(() => {
   const s = window.__samples, n = s.length || 1;
   const mean = k => s.reduce((a, x) => a + (+x[k] || 0), 0) / n;
-  return { n: s.length, minSpeed: Math.min(...s.map(x => x.speed)), steer: mean('steer'), up: mean('up'), down: mean('down'), drift: s.some(x => x.drift), maxSpeed: Math.max(0, ...s.map(x => x.speed)), lastSpeed: s.length ? s[s.length - 1].speed : 0 };
+  return { n: s.length, minSpeed: Math.min(...s.map(x => x.speed)), steer: mean('steer'), left: mean('left'), right: mean('right'), spin: mean('spin'), up: mean('up'), down: mean('down'), drift: s.some(x => x.drift), maxSpeed: Math.max(0, ...s.map(x => x.speed)), lastSpeed: s.length ? s[s.length - 1].speed : 0 };
 });
 const centre = async (page, selector) => {
   const r = await L.rect(page, selector);
@@ -191,7 +191,7 @@ async function driving(env, r) {
   r.ok(await page.evaluate(() => getComputedStyle(document.querySelector('#kmControls .km-stick')).display !== 'none'), 'slide: knob shown while touching');
   await resetSamples(page); await waitSamples(page, 60);
   const ss = await stats(page);
-  r.ok(ss.steer > 0.2 && ss.steer < 0.7, 'slide: mean game steer is proportional (0.2..0.7)', ss.steer.toFixed(3));
+  r.ok(ss.steer > 0.2 && ss.steer < 0.7, 'slide: mean game steer is proportional (0.2..0.7)', `${ss.steer.toFixed(3)} left ${ss.left.toFixed(2)} right ${ss.right.toFixed(2)} no-control ${ss.spin.toFixed(2)} n ${ss.n}`);
   // Drift held at this small deflection: output is pushed past the 0.3 threshold.
   await pad.down(5, drift);
   await page.waitForTimeout(100);

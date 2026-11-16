@@ -9,8 +9,9 @@ async function environment(port=13990+Math.floor(Math.random()*500)){
 }
 // Opens the logged-in game. touch:false gives a desktop context (mobile layer must stay inactive).
 // setup(page,context) runs before navigation (e.g. to install page.route hooks).
-async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query='',setup=null}={}){
- const context=await env.browser.newContext({viewport,hasTouch:touch,isMobile:touch});
+// deviceScaleFactor (optional) emulates a high-density phone screen (e.g. 3).
+async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query='',setup=null,deviceScaleFactor}={}){
+ const context=await env.browser.newContext({viewport,hasTouch:touch,isMobile:touch,...(deviceScaleFactor?{deviceScaleFactor}:{})});
  const response=await context.request.post(env.origin+'/api/register',{headers:{Origin:env.origin,'X-Kart-Request':'1'},
   data:{username:'QA'+crypto.randomBytes(5).toString('hex'),password:crypto.randomBytes(24).toString('hex')}});
  if(!response.ok())throw new Error('register failed: '+response.status());

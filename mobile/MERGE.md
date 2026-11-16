@@ -32,12 +32,12 @@ Files that change as a result, all of them build outputs or the manifest:
 
 | File | Change |
 |---|---|
-| `bundle-manifest.json` | three new entries at the end of `ui` |
+| `bundle-manifest.json` | four new entries at the end of `ui` |
 | `assets/bundles/ui.js` | rebuilt, now contains the mobile modules |
 | `kart_racer.html` | rebuilt, new version hashes in `KART_BUILD` |
 | `assets/boot.js` | rebuilt (content unchanged unless `assets.js`/`boot.js` changed) |
 
-Doing it by hand is equivalent: add the three paths from `mobile/modules.json` to the `ui`
+Doing it by hand is equivalent: add the four paths from `mobile/modules.json` to the `ui`
 array in that order, then run `node build-client.cjs`.
 
 Not handled by the script, because the repository has no generator for it:
@@ -59,6 +59,10 @@ that is where to look first:
 | ids `#raceTelemetry`, `#rearIndicator`, `#camera`, `#gear`, `#home`, `#sp`, `#minimap`, `#fx`, `#sec`, `#tl`, `#tr`, `#dr`, `#qte`, `#qk` | HUD rearrangement on phones |
 | `KartAssets.text`, `KART_BUILD.versions` | stylesheet loading with cache-busting |
 | `document.documentElement.lang` (`de`/`en`/`fr`) | add-on strings |
+| global functions `qualityRender(r, scene, camera)` and `applyQuality(r)`, the `graphicsRenderers` set, `r._kartScene`, `r._studioEnv` | performance layer: per-frame hook and render caps |
+| `THREE.WebGLRenderer` being an assignable constructor | performance layer: no MSAA on the race renderer |
+| `window.kartRaceScene`, the terrain mesh named `Road terrain`, barrier and scenery `InstancedMesh` objects, `flyBars` writing to the barrier `instanceMatrix` | performance layer: terrain tiles, culled chunks |
+| `KartAssets.script` (lazy load of `grass-high.js`), `#minimap`, `#settings-graphics`, `drawPreferences()` | performance layer: grass, minimap rate, settings block |
 
 Run the tests after merging (they copy the tree to a temp directory, integrate and serve it
 there, and need Python 3.12+ and Playwright with Chromium):
@@ -71,10 +75,16 @@ node mobile/tests/controls.cjs
 node mobile/tests/menus.cjs
 ```
 
+```bash
+node mobile/tests/perf.cjs
+```
+
 ## Turning it off
 
 - Per device: Settings → Controls → touch controls "off", or open the game with `?mobile=0`.
-- Completely: remove the three entries from `bundle-manifest.json` and rebuild. Nothing else
+- Performance layer only: Settings → Graphics → performance mode "off" (stock rendering is
+  restored exactly), or remove `mobile-perf.js` from `mobile/modules.json` before integrating.
+- Completely: remove the four entries from `bundle-manifest.json` and rebuild. Nothing else
   references the modules.
 
 ## Optional follow-up in the game itself
@@ -96,3 +106,24 @@ This is not applied on this branch and is untested. `KartMobile.controls.steer` 
 minus sign. With the hook in place the pulse emulation in `mobile-controls.js` should be
 switched off for the same frames. Note that `pl.steer` is sent to other
 players, so test it in an online race.
+
+## Performance: what the add-on cannot fix
+
+`mobile-perf.js` (plan and measurements in `mobile/PLAN-PERF.md`) reduces the per-frame
+rendering load from outside. These causes sit inside game files and are left as
+recommendations for the main repository; none is applied on this branch:
+
+- Terrain build during loading is synchronous and evaluates `terrH` per vertex. Build it
+  in slices or cache heights per track.
+- `update()` allocates every frame (`trackAt`, `botTraffic`, camera vectors). Reuse
+  scratch objects to avoid garbage-collection pauses.
+- The timestep is variable and clamped at 0.05 s, so a hitch slows the game down instead
+  of being caught up. A fixed-step accumulator would fix that.
+- The default quality for a new account is "high" on every device. A device-aware
+  default belongs in the account defaults, not in an add-on.
+- The lobby WebGL context stays alive during races. Releasing it frees GPU memory.
+- Quality presets do not change geometry (low and high differ by 1 to 5 % in triangles).
+  If the chunking and barrier simplification from `mobile-perf.js` prove themselves, they
+  are better built into the scene construction directly, which also helps desktop.
+- The performance layer was measured by workload (draw calls, triangles, pixels, shader
+  compiles) under software rendering. Frame rate on real phones was not measured.
