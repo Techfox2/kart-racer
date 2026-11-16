@@ -5,9 +5,9 @@
 (()=>{'use strict';
  if(window.KartMobile)return;
  const root=document.documentElement,KEY='kart-mobile';
- const DEFAULTS={mode:'auto',scheme:'buttons',autoGas:true,mirror:false,size:1,opacity:.7,haptics:true,tiltRange:25,hudCompact:true};
+ const DEFAULTS={mode:'auto',scheme:'buttons',autoGas:true,mirror:false,size:1,opacity:.7,haptics:true,tiltRange:25,hudCompact:true,perf:'auto',fps30:false};
  const LIMITS={size:[.7,1.4],opacity:[.25,1],tiltRange:[12,45]};
- const CHOICES={mode:['auto','on','off'],scheme:['buttons','slide','tilt']};
+ const CHOICES={mode:['auto','on','off'],scheme:['buttons','slide','tilt'],perf:['auto','quality','balanced','performance','off']};
  const settings={...DEFAULTS},listeners=new Map();
  function clean(key,value){
   if(!(key in DEFAULTS)||typeof value!==typeof DEFAULTS[key])return DEFAULTS[key];
