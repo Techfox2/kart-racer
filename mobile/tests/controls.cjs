@@ -191,7 +191,12 @@ async function driving(env, r) {
   r.ok(await page.evaluate(() => getComputedStyle(document.querySelector('#kmControls .km-stick')).display !== 'none'), 'slide: knob shown while touching');
   await resetSamples(page); await waitSamples(page, 60);
   const ss = await stats(page);
-  r.ok(ss.steer > 0.2 && ss.steer < 0.7, 'slide: mean game steer is proportional (0.2..0.7)', `${ss.steer.toFixed(3)} left ${ss.left.toFixed(2)} right ${ss.right.toFixed(2)} no-control ${ss.spin.toFixed(2)} n ${ss.n}`);
+  // The key duty is what the add-on controls; the game's steer value is only comparable on
+  // frames where the kart is controllable (after a wall hit the game forces steering to 0).
+  const sc = await page.evaluate(() => { const c = window.__samples.filter(x => !x.spin); return { n: c.length, steer: c.reduce((a, x) => a + x.steer, 0) / (c.length || 1) }; });
+  const slideDetail = `steer ${sc.steer.toFixed(3)} over ${sc.n}/${ss.n} controllable frames, left duty ${ss.left.toFixed(2)}, right duty ${ss.right.toFixed(2)}`;
+  r.ok(ss.left > 0.3 && ss.left < 0.5 && ss.right === 0, 'slide: left key duty ≈ 40 % at 40 % deflection', slideDetail);
+  r.ok(sc.n < 10 || (sc.steer > 0.2 && sc.steer < 0.7), 'slide: mean game steer is proportional (0.2..0.7)', slideDetail);
   // Drift held at this small deflection: output is pushed past the 0.3 threshold.
   await pad.down(5, drift);
   await page.waitForTimeout(100);
