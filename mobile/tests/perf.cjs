@@ -122,13 +122,18 @@ async function crash(env){
   const moved=after.chunks.filter((c,i)=>c.some((v,j)=>v!==before.chunks[i][j])).length;
   report.ok(after.fly>0,`crash breaks barrier parts (${after.fly} flying)`);
   report.ok(moved>0,`crash animation moves instances in the barrier chunks (${moved} chunk(s) changed)`);
+  // Stop driving so the kart cannot hit another barrier while the parts settle: brake to a halt, then coast.
+  await page.evaluate(()=>{window.__crashes=0;window.__drive=({pl,keys,flying})=>{window.__flyNow=flying.length;if(flying.length>(window.__lastFly||0))window.__crashes++;window.__lastFly=flying.length;
+   keys.up=0;keys.left=0;keys.right=0;keys.drift=0;keys.down=Math.abs(pl.vF||0)>1?1:0}});
   // Parts fly for 3.5 s of game time; at software-GL frame rates (dt clamped to 50 ms) that is longer in real time.
   await page.waitForFunction(()=>window.__flyNow===0,null,{timeout:120000,polling:250}).catch(()=>{});
   await page.waitForTimeout(3000);
   const end=await page.evaluate(()=>{const s=KartMobile.perf.stats();return{programs:s.programs,growth:s.programGrowth}});
   report.ok(end.programs===before.programs&&end.growth===0,`no new shader program during the race after warm-up (${before.programs} -> ${end.programs})`);
   const restored=await page.evaluate(()=>KartMobile.perf.barrierChunks().map(m=>Array.from(m.instanceMatrix.array)));
-  report.ok(restored.every((c,i)=>c.every((v,j)=>Math.abs(v-before.chunks[i][j])<1e-4)),'broken barrier parts return to their place after the animation');
+  const settle=await page.evaluate(()=>({flying:window.__flyNow,newCrashes:window.__crashes}));
+  const off=restored.map((c,i)=>c.filter((v,j)=>Math.abs(v-before.chunks[i][j])>=1e-4).length).reduce((a,b)=>a+b,0);
+  report.ok(off===0,'broken barrier parts return to their place after the animation',`${off} matrix values differ; still flying ${settle.flying}; new hits while settling ${settle.newCrashes}`);
   console.log(`   visible sprites during the run: ${after.sprites}`);
   // Settings block survives drawPreferences() rebuilding the Graphics section.
   const ui=await page.evaluate(async()=>{drawPreferences();await new Promise(r=>setTimeout(r,50));const box=document.querySelector('#settings-graphics > #kmPerfSettings');
