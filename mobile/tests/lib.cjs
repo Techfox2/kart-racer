@@ -10,7 +10,8 @@ async function environment(port=13990+Math.floor(Math.random()*500)){
 // Opens the logged-in game. touch:false gives a desktop context (mobile layer must stay inactive).
 // setup(page,context) runs before navigation (e.g. to install page.route hooks).
 // deviceScaleFactor (optional) emulates a high-density phone screen (e.g. 3).
-async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query='',setup=null,deviceScaleFactor}={}){
+// rotatePrompt:false (default) dismisses the lobby's "turn your device" prompt so menu checks see the menus.
+async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query='',setup=null,deviceScaleFactor,rotatePrompt=false}={}){
  const context=await env.browser.newContext({viewport,hasTouch:touch,isMobile:touch,...(deviceScaleFactor?{deviceScaleFactor}:{})});
  const response=await context.request.post(env.origin+'/api/register',{headers:{Origin:env.origin,'X-Kart-Request':'1'},
   data:{username:'QA'+crypto.randomBytes(5).toString('hex'),password:crypto.randomBytes(24).toString('hex')}});
@@ -21,6 +22,7 @@ async function open(env,{viewport=VIEWPORTS.landscape,touch=true,query='',setup=
  await page.goto(env.origin+'/'+query);
  await page.waitForFunction(()=>!document.getElementById('bootStatus'),null,{timeout:90000});
  await page.evaluate(()=>document.querySelectorAll('dialog[open]').forEach(d=>d.close()));
+ if(!rotatePrompt)await page.evaluate(()=>window.KartMobile?.orientation?.dismiss());
  return{page,context,errors};
 }
 // Starts a solo race and waits until the countdown is over and the kart accepts input.

@@ -4,34 +4,61 @@
 
 /* ---------- layout tokens ---------- */
 html.km-on {
-  --km-gap: 12px;
+  --km-gap: clamp(10px, 3vmin, 18px);
   --km-el: max(20px, calc(env(safe-area-inset-left, 0px) + 12px));
   --km-er: max(20px, calc(env(safe-area-inset-right, 0px) + 12px));
   --km-eb: max(14px, calc(env(safe-area-inset-bottom, 0px) + 8px));
   --km-et: calc(12px + env(safe-area-inset-top, 0px));
-  /* Sizes scale with the setting but are capped by the viewport so nothing leaves the screen. */
-  --km-steer: min(calc(80px * var(--km-size, 1)), 21vw, 25vh);
-  --km-big: min(calc(92px * var(--km-size, 1)), 23vw, 27vh);
-  --km-small: min(calc(64px * var(--km-size, 1)), 16vw, 18vh);
-  --km-pedal: min(calc(84px * var(--km-size, 1)), 21vw, 25vh);
-  /* Height of the right cluster; the minimap (landscape) and the HUD stack (portrait) keep above it. */
-  --km-stack: max(var(--km-big), calc(var(--km-small) * 2 + var(--km-gap)));
+  --km-s: var(--km-size, 1);
   --km-sp-h: 62px;
-  /* Minimap: stock size, shrunk on short landscape screens so it stays above the right cluster. */
   --km-map-top: calc(76px + env(safe-area-inset-top, 0px));
   --km-map-max: 170px;
-  --km-map: max(88px, min(var(--km-map-max), calc(100vh - var(--km-map-top) - var(--km-stack) - var(--km-eb) - 12px)));
+  --km-map-min: 64px;
+  /* Space reserved between the two clusters in landscape: the speedometer and the two-column
+     rear-car list (#rearIndicator) sit there. Three columns from 1000px, see below. */
+  --km-mid-w: min(240px, 36vw);
+  --km-mid: calc(var(--km-mid-w) + 2 * var(--km-gap));
+  /* Width one cluster may use without reaching the other cluster or the speedometer. */
+  --km-side: calc((100vw - var(--km-el) - var(--km-er) - var(--km-mid)) / 2);
+  /* Height the right cluster may use below the top row and the smallest minimap. */
+  --km-room: calc(100vh - var(--km-eb) - var(--km-map-top) - var(--km-map-min) - 12px);
+  /* Control sizes, in two steps:
+     1. preferred: a share of the short screen side times the size setting, kept between a
+        minimum that is still easy to hit and a maximum that is still comfortable;
+     2. capped by what fits, so clusters never overlap each other, the HUD or the edges.
+     On a normal phone step 1 decides; step 2 only takes over on very narrow or short screens. */
+  --km-steer-pref: clamp(52px, calc(20vmin * var(--km-s)), calc(124px * var(--km-s)));
+  --km-small-pref: clamp(46px, calc(16vmin * var(--km-s)), calc(96px * var(--km-s)));
+  --km-big-pref: clamp(58px, calc(23vmin * var(--km-s)), calc(140px * var(--km-s)));
+  --km-pedal-pref: clamp(56px, calc(21vmin * var(--km-s)), calc(128px * var(--km-s)));
+  /* Left cluster: two steer buttons side by side. Right cluster: small + big side by side,
+     two small ones stacked (see .km-actions). */
+  --km-steer-fit: min(calc((var(--km-side) - var(--km-gap)) / 2), calc(var(--km-room) * .8));
+  --km-small-fit: min(calc((var(--km-side) - var(--km-gap)) * .42), calc((var(--km-room) - var(--km-gap)) / 2));
+  --km-big-fit: min(calc((var(--km-side) - var(--km-gap)) * .58), var(--km-room));
+  --km-pedal-fit: min(calc((var(--km-side) - var(--km-gap)) / 2), var(--km-room));
+  --km-steer: min(var(--km-steer-pref), var(--km-steer-fit));
+  --km-small: min(var(--km-small-pref), var(--km-small-fit));
+  --km-big: min(var(--km-big-pref), var(--km-big-fit));
+  --km-pedal: min(var(--km-pedal-pref), var(--km-pedal-fit));
+  /* Height of the right cluster; the minimap (landscape) and the HUD stack (portrait) keep above it. */
+  --km-stack: max(var(--km-big), calc(var(--km-small) * 2 + var(--km-gap)));
+  /* Minimap: stock size, shrunk on short landscape screens so it stays above the right cluster. */
+  --km-map: max(var(--km-map-min), min(var(--km-map-max), calc(100vh - var(--km-map-top) - var(--km-stack) - var(--km-eb) - 12px)));
 }
-html.km-on[data-km-gas=pedal] { --km-stack: calc(var(--km-small) + var(--km-gap) + max(var(--km-big), var(--km-pedal))); }
+/* Gas pedal shown: the right cluster is big + pedal wide and small + max(big, pedal) high. */
+html.km-on[data-km-gas=pedal] {
+  --km-small-fit: min(calc((var(--km-side) - var(--km-gap)) * .42), calc((var(--km-room) - var(--km-gap)) * .4));
+  --km-big-fit: min(calc((var(--km-side) - var(--km-gap)) / 2), calc((var(--km-room) - var(--km-gap)) * .6));
+  --km-pedal-fit: min(calc((var(--km-side) - var(--km-gap)) / 2), calc((var(--km-room) - var(--km-gap)) * .6));
+  --km-stack: calc(var(--km-small) + var(--km-gap) + max(var(--km-big), var(--km-pedal)));
+}
 @media (max-width: 760px) { html.km-on { --km-map-max: 124px; } }
-@media (orientation: portrait) and (max-width: 480px) {
-  html.km-on {
-    --km-gap: 10px;
-    --km-steer: min(calc(80px * var(--km-size, 1)), 19vw);
-    --km-big: min(calc(92px * var(--km-size, 1)), 21vw);
-    --km-small: min(calc(64px * var(--km-size, 1)), 16vw);
-    --km-pedal: min(calc(84px * var(--km-size, 1)), 19vw);
-  }
+@media (min-width: 1000px) { html.km-on { --km-mid-w: 380px; } }
+/* Portrait: the speedometer and HUD stack above the clusters, so the clusters share the full
+   width and only need a gap between them; height is plentiful. */
+@media (orientation: portrait) {
+  html.km-on { --km-mid: var(--km-gap); --km-room: 50vh; }
 }
 
 /* ---------- the stock row stays in the DOM as the event target, but is never seen or hit ---------- */

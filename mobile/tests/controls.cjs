@@ -1,6 +1,6 @@
 // In-race touch controls: input driver, steering schemes and HUD layout.
 //   node mobile/tests/controls.cjs           (exit code = number of failures)
-//   KM_PARTS=desktop,driving,tiltFallback,layout to run a subset
+//   KM_PARTS=desktop,driving,tiltFallback,layout,rotate to run a subset
 //   KM_SHOTS=<dir> to choose where layout screenshots go (default: os tmpdir/km-shots)
 // Game internals are read only through a test-only hook that rewrites the served game.js
 // (same trick as test-race-browser.cjs); the game files themselves are untouched.
@@ -10,8 +10,11 @@ const L = require('./lib.cjs');
 const SHOTS = process.env.KM_SHOTS || path.join(os.tmpdir(), 'km-shots');
 const LAYOUT_VIEWPORTS = [
   { width: 844, height: 390 }, { width: 667, height: 375 }, { width: 932, height: 430 },
-  { width: 390, height: 844 }, { width: 360, height: 640 }, { width: 1024, height: 768 },
+  { width: 568, height: 320 }, { width: 640, height: 300 },
+  { width: 390, height: 844 }, { width: 360, height: 640 }, { width: 320, height: 568 },
+  { width: 1024, height: 768 }, { width: 1194, height: 834 },
 ];
+const MIN_CONTROL = 44; // px: smallest control that is still reliably hit by a thumb
 const HUD = ['#raceTelemetry', '#camera', '#gear', '#home', '#minimap', '#sp', '#rearIndicator', '#fx'];
 
 // Records pl/keys every game update; also counts writes of keys.item=1 (the game consumes it
@@ -80,6 +83,9 @@ async function desktop(env, r) {
   r.ok(display === 'none', '#kmControls not rendered in a desktop race', display);
   const sent = await page.evaluate(() => KartMobile.controls.sent);
   r.ok(!sent.up, 'auto-gas does not touch the keys on desktop', JSON.stringify(sent));
+  await page.setViewportSize({ width: 720, height: 1000 });
+  await page.waitForTimeout(500);
+  r.ok(await page.evaluate(() => !KartMobile.orientation.shown && getComputedStyle(document.getElementById('kmRotate')).display === 'none'), 'no rotate prompt on a portrait desktop window');
   r.ok(errors.length === 0, 'no page errors (desktop)', errors.join(' | '));
   await context.close();
 }
@@ -261,9 +267,14 @@ async function layout(env, r) {
   console.log('layout');
   fs.mkdirSync(SHOTS, { recursive: true });
   const { page, context, errors } = await L.open(env, { viewport: LAYOUT_VIEWPORTS[0] });
+  const layoutSizes = {};
   await L.startRace(page, { bots: 5 });
   await page.waitForTimeout(1500);
+  // The portrait viewports would otherwise show the rotate prompt (tested in rotate()).
+  await page.evaluate(() => KartMobile.orientation.dismiss());
   const variants = [
+    { name: 'size-min', settings: { size: 0.7 } },
+    { name: 'size-max', settings: { size: 1.4, autoGas: false } },
     { name: 'default', settings: {} },
     { name: 'pedal', settings: { autoGas: false } },
     { name: 'mirror', settings: { mirror: true, autoGas: false } },
@@ -274,7 +285,7 @@ async function layout(env, r) {
   for (const vp of LAYOUT_VIEWPORTS) {
     await page.setViewportSize(vp);
     for (const variant of variants) {
-      await page.evaluate(s => { for (const k of ['autoGas', 'mirror']) KartMobile.set(k, KartMobile.DEFAULTS[k]); for (const k in s) KartMobile.set(k, s[k]); }, variant.settings);
+      await page.evaluate(s => { for (const k of ['autoGas', 'mirror', 'size']) KartMobile.set(k, KartMobile.DEFAULTS[k]); for (const k in s) KartMobile.set(k, s[k]); }, variant.settings);
       await page.evaluate(open => { const t = document.getElementById('raceTelemetry'); if (t) t.open = open; }, !!variant.telemetryOpen);
       await page.evaluate(on => { document.getElementById('sp').classList.toggle('cockpit-speed', on); document.getElementById('camera').classList.toggle('cockpit-camera', on); }, !!variant.cockpit);
       await page.waitForTimeout(350);
@@ -293,6 +304,7 @@ async function layout(env, r) {
       for (let i = 0; i < data.controls.length; i++) for (let j = i + 1; j < data.controls.length; j++)
         if (L.overlap(data.controls[i], data.controls[j])) problems.push(`${data.controls[i].name} overlaps ${data.controls[j].name}`);
       for (const c of data.controls) for (const h of data.huds) if (L.overlap(c, h)) problems.push(`${h.name} overlaps ${c.name}`);
+      for (const c of data.controls) if (c.name !== 'km-full' && Math.min(c.w, c.h) < MIN_CONTROL - 0.5) problems.push(`${c.name} only ${Math.round(Math.min(c.w, c.h))}px`);
       const names = data.controls.map(c => c.name);
       const expected = ['km-left', 'km-right', 'km-item', 'km-brake', 'km-drift', ...(variant.settings.autoGas === false ? ['km-gas'] : [])];
       const missing = expected.filter(n => !names.includes(n));
@@ -301,10 +313,16 @@ async function layout(env, r) {
         const drift = data.controls.find(c => c.name === 'km-drift'), leftBtn = data.controls.find(c => c.name === 'km-left');
         if (!(drift && leftBtn && drift.x < leftBtn.x)) problems.push('mirror did not swap the clusters');
       }
-      r.ok(problems.length === 0, `layout ${tag}`, problems.join('; '));
-      if (variant.name === 'default' || variant.name === 'pedal') await page.screenshot({ path: path.join(SHOTS, `${vp.width}x${vp.height}-${variant.name}.png`) });
+      const sizes = Object.fromEntries(data.controls.map(c => [c.name, Math.round(Math.min(c.w, c.h))]));
+      r.ok(problems.length === 0, `layout ${tag}`, problems.join('; ') + ' ' + JSON.stringify(sizes));
+      if (variant.name === 'default') layoutSizes[`${vp.width}x${vp.height}`] = sizes;
+      if (['default', 'pedal', 'size-min', 'size-max'].includes(variant.name)) await page.screenshot({ path: path.join(SHOTS, `${vp.width}x${vp.height}-${variant.name}.png`) });
     }
   }
+  // Controls follow the screen: bigger on tablets than on phones, smaller on the smallest phones.
+  const steer = k => layoutSizes[k]?.['km-left'] ?? 0;
+  r.ok(steer('1024x768') > steer('844x390') + 20 && steer('1194x834') >= steer('1024x768'), 'controls grow on tablets', JSON.stringify({ phone: steer('844x390'), tablet: steer('1024x768'), large: steer('1194x834') }));
+  r.ok(steer('568x320') < steer('844x390') && steer('568x320') >= MIN_CONTROL, 'controls shrink on small phones but stay usable', JSON.stringify({ small: steer('568x320'), phone: steer('844x390') }));
   // Slide and the "tap to enable" tilt prompt are visual only; just check they stay inside.
   await page.evaluate(() => { KartMobile.set('mirror', false); KartMobile.set('autoGas', true); KartMobile.set('scheme', 'slide'); });
   await page.setViewportSize(LAYOUT_VIEWPORTS[1]);
@@ -312,6 +330,50 @@ async function layout(env, r) {
   await page.screenshot({ path: path.join(SHOTS, '667x375-slide.png') });
   await page.evaluate(() => KartMobile.set('scheme', 'buttons'));
   r.ok(errors.length === 0, 'no page errors (layout)', errors.join(' | '));
+  await context.close();
+}
+
+async function rotate(env, r) {
+  console.log('rotate prompt');
+  fs.mkdirSync(SHOTS, { recursive: true });
+  const portrait = { width: 390, height: 844 }, landscape = { width: 844, height: 390 };
+  const { page, context, errors } = await L.open(env, { viewport: landscape, rotatePrompt: true });
+  const view = () => page.evaluate(() => ({ dialogs: [...document.querySelectorAll('dialog[open]')].map(d => d.id || d.className), shown: KartMobile.orientation.shown, display: getComputedStyle(document.getElementById('kmRotate')).display, state: KartMobile.state, sent: KartMobile.controls.sent, text: document.querySelector('#kmRotate h2').textContent }));
+  r.ok(!(await view()).shown, 'lobby in landscape: no prompt');
+  // The "what's new" dialog can open after load; the prompt waits for open dialogs to close.
+  await page.waitForTimeout(1500);
+  await page.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close()));
+  await page.setViewportSize(portrait); await page.waitForTimeout(500);
+  let v = await view();
+  r.ok(v.shown && v.display === 'flex' && v.text.length > 0, 'lobby in portrait: prompt shown', JSON.stringify(v));
+  await page.screenshot({ path: path.join(SHOTS, 'rotate-lobby.png') });
+  await page.click('#kmRotate .km-rotate-stay'); await page.waitForTimeout(300);
+  r.ok(!(await view()).shown, 'lobby: "continue in portrait" hides it');
+  await page.setViewportSize(landscape); await page.setViewportSize(portrait); await page.waitForTimeout(400);
+  r.ok(!(await view()).shown, 'lobby: stays hidden for this visit after dismissing');
+
+  await page.setViewportSize(landscape);
+  await L.startRace(page);
+  r.ok((await view()).state === 'race' && !(await view()).shown, 'race in landscape: no prompt');
+  await page.setViewportSize(portrait); await page.waitForTimeout(900);
+  v = await view();
+  r.ok(v.shown && v.state === 'paused', 'race turned to portrait: prompt shown and race paused', JSON.stringify(v));
+  r.ok(!Object.values(v.sent).some(Boolean), 'no keys held while the prompt is up', JSON.stringify(v.sent));
+  r.ok(await page.evaluate(() => getComputedStyle(document.querySelector('#kmRotate .km-rotate-paused')).display !== 'none'), 'prompt says the race is paused');
+  await page.screenshot({ path: path.join(SHOTS, 'rotate-race.png') });
+  await page.setViewportSize(landscape); await page.waitForTimeout(600);
+  v = await view();
+  r.ok(!v.shown && v.state === 'paused', 'turned back: prompt gone, race still paused until the player resumes', JSON.stringify(v));
+  await page.click('#close'); await page.waitForTimeout(600);
+  r.ok((await view()).state === 'race', 'player resumes the race');
+  await page.setViewportSize(portrait); await page.waitForTimeout(900);
+  r.ok((await view()).state === 'paused' && (await view()).shown, 'turning to portrait again pauses again');
+  await page.click('#kmRotate .km-rotate-stay'); await page.waitForTimeout(800);
+  v = await view();
+  r.ok(!v.shown && v.state === 'race', '"continue in portrait" hides it and resumes the race', JSON.stringify(v));
+  await page.waitForTimeout(900);
+  r.ok(!(await view()).shown, 'race: stays hidden after dismissing');
+  r.ok(errors.length === 0, 'no page errors (rotate)', errors.join(' | '));
   await context.close();
 }
 
@@ -363,7 +425,7 @@ async function tiltFallback(env, r) {
   const env = await L.environment();
   try {
     const only = (process.env.KM_PARTS || '').split(',').filter(Boolean); // e.g. KM_PARTS=layout,tiltFallback
-    for (const part of [desktop, driving, tiltFallback, layout].filter(p => !only.length || only.includes(p.name))) {
+    for (const part of [desktop, driving, tiltFallback, layout, rotate].filter(p => !only.length || only.includes(p.name))) {
       try { await part(env, r); } catch (e) { r.ok(false, part.name + ' crashed', e.stack || e.message); }
     }
   } finally { await env.close(); }

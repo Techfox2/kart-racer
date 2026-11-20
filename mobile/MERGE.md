@@ -32,12 +32,12 @@ Files that change as a result, all of them build outputs or the manifest:
 
 | File | Change |
 |---|---|
-| `bundle-manifest.json` | four new entries at the end of `ui` |
+| `bundle-manifest.json` | five new entries at the end of `ui` |
 | `assets/bundles/ui.js` | rebuilt, now contains the mobile modules |
 | `kart_racer.html` | rebuilt, new version hashes in `KART_BUILD` |
 | `assets/boot.js` | rebuilt (content unchanged unless `assets.js`/`boot.js` changed) |
 
-Doing it by hand is equivalent: add the four paths from `mobile/modules.json` to the `ui`
+Doing it by hand is equivalent: add the five paths from `mobile/modules.json` to the `ui`
 array in that order, then run `node build-client.cjs`.
 
 Not handled by the script, because the repository has no generator for it:
@@ -59,6 +59,7 @@ that is where to look first:
 | ids `#raceTelemetry`, `#rearIndicator`, `#camera`, `#gear`, `#home`, `#sp`, `#minimap`, `#fx`, `#sec`, `#tl`, `#tr`, `#dr`, `#qte`, `#qk` | HUD rearrangement on phones |
 | `KartAssets.text`, `KART_BUILD.versions` | stylesheet loading with cache-busting |
 | `document.documentElement.lang` (`de`/`en`/`fr`) | add-on strings |
+| `#gear`, `#close`, `#panel.on` (pause panel) | rotate prompt: pauses the race in portrait and resumes it on "continue in portrait" |
 | global functions `qualityRender(r, scene, camera)` and `applyQuality(r)`, the `graphicsRenderers` set, `r._kartScene`, `r._studioEnv` | performance layer: per-frame hook and render caps |
 | `THREE.WebGLRenderer` being an assignable constructor | performance layer: no MSAA on the race renderer |
 | `window.kartRaceScene`, the terrain mesh named `Road terrain`, barrier and scenery `InstancedMesh` objects, `flyBars` writing to the barrier `instanceMatrix` | performance layer: terrain tiles, culled chunks |
@@ -82,9 +83,11 @@ node mobile/tests/perf.cjs
 ## Turning it off
 
 - Per device: Settings → Controls → touch controls "off", or open the game with `?mobile=0`.
+- Rotate prompt only: remove `mobile-orientation.js` from `mobile/modules.json` before
+  integrating. Nothing else depends on it.
 - Performance layer only: Settings → Graphics → performance mode "off" (stock rendering is
   restored exactly), or remove `mobile-perf.js` from `mobile/modules.json` before integrating.
-- Completely: remove the four entries from `bundle-manifest.json` and rebuild. Nothing else
+- Completely: remove the five entries from `bundle-manifest.json` and rebuild. Nothing else
   references the modules.
 
 ## Optional follow-up in the game itself

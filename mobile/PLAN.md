@@ -43,6 +43,7 @@ All runtime code lives in `assets/mobile/`; tooling, tests and docs live in `mob
 |---|---|
 | `assets/mobile/mobile-core.js` | `window.KartMobile`: activation (`html.km-on`), settings store, race state (`lobby/race/paused/results`), language helper, stylesheet loader |
 | `assets/mobile/mobile-controls.js` + `.css` | In-race touch controls, virtual key driver, steering schemes, HUD rearrangement, settings rows, fullscreen/wake lock/haptics |
+| `assets/mobile/mobile-orientation.js` + `.css` | "Turn your device" prompt in portrait: once per visit in the lobby; in a race it pauses through the game's pause button until the device is turned or the player continues in portrait |
 | `assets/mobile/mobile-menus.js` + `.css` | Lobby, sheets, dialogs and settings panel fixes for phone viewports (CSS overrides scoped to `html.km-on`) |
 | `mobile/modules.json` | Load order of the modules |
 | `mobile/tools/integrate.cjs` | The one integration step: append the modules to the `ui` list in `bundle-manifest.json`, rebuild |
@@ -74,7 +75,12 @@ globals, everything visual scoped under `html.km-on`, so desktop is unaffected.
 
 - Landscape: steering bottom-left, drift/item/brake(/gas) arc bottom-right, pause, home and
   camera along the top, speed bottom-centre, telemetry collapsed and kept clear of controls.
-- Portrait: same clusters, compacted; nothing may leave the viewport at 360 px width.
+- Portrait: same clusters, compacted; nothing may leave the viewport at 320 px width. A prompt
+  asks the player to turn the device (dismissable).
+- Control size follows the screen: a share of the short side (times the size setting), between
+  a minimum that is still easy to hit (46 to 58 px) and a comfortable maximum (96 to 140 px),
+  then capped so the clusters, the centre column (speedometer, rear-car list) and the minimap
+  never overlap. Checked from 568x320 and 640x300 up to 1194x834, at sizes 0.7, 1 and 1.4.
 - The stock `#touch` row stays in the DOM as the event target but is not rendered.
 - QTE buttons (`#qk`) stay as they are, verified reachable.
 

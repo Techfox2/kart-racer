@@ -1,0 +1,71 @@
+/* Grand Poly mobile layer · "turn your device" prompt (mobile-orientation.js).
+   Scoped under html.km-on, so desktop is unaffected. */
+#kmRotate { display: none; }
+html.km-on #kmRotate:not([hidden]) {
+  position: fixed;
+  inset: 0;
+  z-index: 60; /* above HUD, controls (7), telemetry (8) and sheets; modal dialogs sit in the top layer */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: max(24px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px));
+  background: rgba(23, 19, 41, .94);
+  color: #fff;
+  text-align: center;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+#kmRotate .km-rotate-icon { width: min(34vw, 132px); height: min(34vw, 132px); margin-bottom: 4px; }
+#kmRotate .km-rotate-phone {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 5;
+  transform-origin: 48px 45px;
+  animation: km-rotate-turn 1.3s ease-in-out .4s 2 both;
+}
+#kmRotate .km-rotate-phone circle { fill: #fff; stroke: none; }
+#kmRotate .km-rotate-arrow { fill: none; stroke: var(--yellow, #FFCB05); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+/* Plays twice and stays on the landscape pose: no endless loop. */
+@keyframes km-rotate-turn {
+  0%, 15% { transform: rotate(0deg); }
+  60%, 100% { transform: rotate(-90deg); }
+}
+#kmRotate h2 {
+  margin: 0;
+  font-family: var(--font-d, 'Lilita One', Impact, sans-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(26px, 8vw, 38px);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  text-shadow: 0 3px 0 var(--navy, #171329);
+}
+#kmRotate p { margin: 0; max-width: 30em; font: 700 16px/1.35 var(--font-u, system-ui, sans-serif); opacity: .9; }
+#kmRotate .km-rotate-paused { display: none; color: var(--yellow, #FFCB05); }
+#kmRotate.km-rotate-is-paused .km-rotate-paused { display: block; }
+#kmRotate .km-rotate-stay {
+  margin-top: 14px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: var(--bw, 3px) solid var(--navy, #171329);
+  border-radius: var(--r-s, 10px);
+  background: var(--navy-2, #241d40);
+  box-shadow: 0 4px 0 var(--navy, #171329), 0 0 0 2px rgba(255, 255, 255, .45);
+  color: #fff;
+  font: 800 15px/1 var(--font-u, system-ui, sans-serif);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform .08s ease-out, box-shadow .08s, filter .12s;
+}
+#kmRotate .km-rotate-stay:hover { filter: brightness(1.15); }
+#kmRotate .km-rotate-stay:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--navy, #171329), 0 0 0 2px #fff; }
+#kmRotate .km-rotate-stay:focus-visible { outline: 3px solid var(--yellow, #FFCB05); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  #kmRotate .km-rotate-phone { animation: none; transform: rotate(-90deg); }
+  #kmRotate .km-rotate-stay { transition: none; }
+  #kmRotate .km-rotate-stay:active { transform: none; }
+}
