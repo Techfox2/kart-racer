@@ -131,9 +131,9 @@ async function crash(env){
   const end=await page.evaluate(()=>{const s=KartMobile.perf.stats();return{programs:s.programs,growth:s.programGrowth}});
   report.ok(end.programs===before.programs&&end.growth===0,`no new shader program during the race after warm-up (${before.programs} -> ${end.programs})`);
   const restored=await page.evaluate(()=>KartMobile.perf.barrierChunks().map(m=>Array.from(m.instanceMatrix.array)));
-  const settle=await page.evaluate(()=>({flying:window.__flyNow,newCrashes:window.__crashes}));
+  const settled=await page.evaluate(()=>({flying:window.__flyNow,newCrashes:window.__crashes}));
   const off=restored.map((c,i)=>c.filter((v,j)=>Math.abs(v-before.chunks[i][j])>=1e-4).length).reduce((a,b)=>a+b,0);
-  report.ok(off===0,'broken barrier parts return to their place after the animation',`${off} matrix values differ; still flying ${settle.flying}; new hits while settling ${settle.newCrashes}`);
+  report.ok(off===0,'broken barrier parts return to their place after the animation',`${off} matrix values differ; still flying ${settled.flying}; new hits while settling ${settled.newCrashes}`);
   console.log(`   visible sprites during the run: ${after.sprites}`);
   // Settings block survives drawPreferences() rebuilding the Graphics section.
   const ui=await page.evaluate(async()=>{drawPreferences();await new Promise(r=>setTimeout(r,50));const box=document.querySelector('#settings-graphics > #kmPerfSettings');
